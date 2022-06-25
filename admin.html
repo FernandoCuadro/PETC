@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="icon" type="image/jpg" href="img/Logo.png"/>
+	<link rel="stylesheet" type="text/css" href="css/styleAdmin.css">
+	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
+
+	<!-- Fuente usada para los titulos -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">  
+
+	<!-- Fuente usada para la descripcion -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<title>Página del Administrador</title>
+</head>
+<body>
+	<a href="javascript:void(0);" id="scroll" title="Volver arriba">Top<span></span></a>
+
+	<div id="contenedor-carga">
+  			
+		<div class="spinner"></div>
+			
+  	</div>
+	<header>
+
+		<img id="img-header" src="img/banner.png">
+
+		<!-- Importante que el div tampoco aparezca cuando el usuario no está iniciado, ocupa espacio demás -->
+	    <div id="contenedor-sesion">
+
+	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin -->
+	    	<p><i class="fa-solid fa-user"></i><a href="#" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.html" id="modo-admin">Administrador</a></p>
+
+	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor -->
+	    	<!-- <p><i class="fa-solid fa-user"></i><a href="#" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p> -->
+
+	    </div>
+
+		<div id="logo-normal-size">
+	    	<h1><a href="index.html"><img src="img/Logo.png"></a></h1>
+	    </div>
+
+	    <!-- Empieza menu responsive -->
+	    <nav>
+
+	    	<div id="logo-responsive">
+	    		<h1><a href="index.html"><img src="img/Logo.png"></a></h1>
+	    	</div>
+
+	    	<div id="contenedor-burger-menu">
+	    		<div id="burger-menu">
+		    		<div id="bar1"></div>
+		    		<div id="bar2"></div>
+		    		<div id="bar3"></div>
+	    		</div>
+	    	</div>
+
+		    <div id="menu-responsive">
+		        <ul>
+		            <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+		            <li><a href="nosotros.html"><i class="fa-solid fa-users"></i>Nosotros</a></li>
+		            <li><a href="cursos.html"><i class="fa-solid fa-chalkboard"></i>Cursos</a></li>
+		            <li><a href="novedades.html"><span><i class="fa-solid fa-newspaper"></i>Novedades</span></a></li>     
+		            <li><a href="calendario.html"><i class="fa-solid fa-calendar-days"></i>Calendario</a></li>
+		            <li><a href="unidad-de-extension.html"><i class="fa-solid fa-arrow-trend-up"></i>Unidad de extensión</a></li>
+		            <li><a href="contacto.html"><i class="fa-solid fa-phone"></i>Contacto</a></li>
+		        </ul>
+		    </div>
+		    <!-- Termina el menu responsive -->
+
+		    <!-- Empieza menu normal -->
+		    <div id="menu-normal-size">
+		    	<ul>
+		            <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+		            <li><a href="nosotros.html"><i class="fa-solid fa-users"></i>Nosotros</a></li>
+		            <li><a href="cursos.html"><i class="fa-solid fa-chalkboard"></i>Cursos</a></li>
+		            <li><a href="novedades.html"><span><i class="fa-solid fa-newspaper"></i>Novedades</span></a></li>     
+		            <li><a href="calendario.html"><i class="fa-solid fa-calendar-days"></i>Calendario</a></li>
+		            <li><a href="unidad-de-extension.html"><i class="fa-solid fa-arrow-trend-up"></i>Unidad de extensión</a></li>
+		            <li><a href="contacto.html"><i class="fa-solid fa-phone"></i>Contacto</a></li>
+		        </ul>
+		    </div>
+		</nav>
+	    <!-- Termina menu -->
+  	</header>
+  	
+  	<!-- Empieza contenido de la pagina -->
+  	<main>
+
+  		<!--EMPIEZA SECCION NOVEDADES-->
+  		<section id="contenedor-novedades">
+  			
+  			<h2 id="ir-seccion-novedades">Novedades</h2>
+
+  			<div class="contenedor-novedad">
+  				
+  				<article class="novedad">
+
+  					<div class="preview">
+  						<p>ID novedad: 12<i class="fa-solid fa-angle-right"></i></p>
+
+  						<!--Dependiendo del estado de la novedad es el mensaje que se muestra-->
+  						<p class="estado-activo">Activo</p>
+  						<!-- <p class="estado-inactivo">Inactivo</p> -->
+  					</div>
+  					
+  					<div class="contenido">
+
+  						<div class="contenido-info">
+  							<h3>Titulo de la noticia</h3>
+
+	  						<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  						<div class="etiquetas">
+
+	  							<!--Cuando no hay etiquetas aparece este mensaje-->
+	  							<!-- <p class="mensaje">No hay etiquetas para esta novedad</p> -->
+
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+	  							<p href="#" class="etiqueta">Etiqueta</p>
+
+	  						</div>
+
+	  						<p class="fecha">19 de Mayo, 2022</p>
+  						</div>
+
+  						<div class="contenido-edicion">
+  							<a href="#"><i class="fa-solid fa-eye"></i></a>
+  							<a href="#"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="#"><i class="fa-solid fa-pen"></i></a>
+  							<a href="#"><i class="fa-solid fa-trash-can"></i></a>
+  						</div>
+  						
+  					</div>
+
+  				</article>
+
+
+  				<article class="novedad">
+
+  					<div class="preview">
+  						<p>ID novedad: 45<i class="fa-solid fa-angle-right"></i></p>
+
+  						<p class="estado-activo">Activo</p>
+  						<!-- <p class="estado-inactivo">Inactivo</p> -->
+  					</div>
+  					
+  					<div class="contenido">
+
+  						<div class="contenido-info">
+  							<h3>Titulo de la noticia</h3>
+
+	  						<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  						<div class="etiquetas">
+
+	  							<!--Cuando no hay etiquetas aparece este mensaje-->
+	  							<p class="mensaje">No hay etiquetas para esta novedad</p>
+
+	  						</div>
+
+	  						<p class="fecha">19 de Mayo, 2022</p>
+  						</div>
+
+  						<div class="contenido-edicion">
+  							<a href="#"><i class="fa-solid fa-eye"></i></a>
+  							<a href="#"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="#"><i class="fa-solid fa-pen"></i></a>
+  							<a href="#"><i class="fa-solid fa-trash-can"></i></a>
+  						</div>
+  						
+  					</div>
+
+  				</article>
+
+
+  				<article class="novedad">
+
+  					<div class="preview">
+  						<p>ID novedad: 45<i class="fa-solid fa-angle-right"></i></p>
+
+  						<p class="estado-activo">Activo</p>
+  						<!-- <p class="estado-inactivo">Inactivo</p> -->
+  					</div>
+  					
+  					<div class="contenido">
+
+  						<div class="contenido-info">
+  							<h3>Titulo de la noticia</h3>
+
+	  						<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  						<div class="etiquetas">
+
+	  							<!--Cuando no hay etiquetas aparece este mensaje-->
+	  							<p class="mensaje">No hay etiquetas para esta novedad</p>
+
+	  						</div>
+
+	  						<p class="fecha">19 de Mayo, 2022</p>
+  						</div>
+
+  						<div class="contenido-edicion">
+  							<a href="#"><i class="fa-solid fa-eye"></i></a>
+  							<a href="#"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="#"><i class="fa-solid fa-pen"></i></a>
+  							<a href="#"><i class="fa-solid fa-trash-can"></i></a>
+  						</div>
+  						
+  					</div>
+
+  				</article>
+
+
+  				<article class="novedad">
+
+  					<div class="preview">
+  						<p>ID novedad: 45<i class="fa-solid fa-angle-right"></i></p>
+
+  						<!-- <p class="estado-activo">Activo</p> -->
+  						<p class="estado-inactivo">Inactivo</p>
+  					</div>
+  					
+  					<div class="contenido">
+
+  						<div class="contenido-info">
+  							<h3>Titulo de la noticia</h3>
+
+	  						<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  						<div class="etiquetas">
+
+	  							<!--Cuando no hay etiquetas aparece este mensaje-->
+	  							<p class="mensaje">No hay etiquetas para esta novedad</p>
+
+	  						</div>
+
+	  						<p class="fecha">19 de Mayo, 2022</p>
+  						</div>
+
+  						<div class="contenido-edicion">
+  							<a href="#"><i class="fa-solid fa-eye"></i></a>
+  							<a href="#"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="#"><i class="fa-solid fa-pen"></i></a>
+  							<a href="#"><i class="fa-solid fa-trash-can"></i></a>
+  						</div>
+  						
+  					</div>
+
+  				</article>
+
+
+  				<article class="novedad">
+
+  					<div class="preview">
+  						<p>ID novedad: 45<i class="fa-solid fa-angle-right"></i></p>
+
+  						<!-- <p class="estado-activo">Activo</p> -->
+  						<p class="estado-inactivo">Inactivo</p>
+  					</div>
+  					
+  					<div class="contenido">
+
+  						<div class="contenido-info">
+  							<h3>Titulo de la noticia</h3>
+
+	  						<p class="descripcion">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+	  						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+	  						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+	  						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+	  						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+	  						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  						<div class="etiquetas">
+
+	  							<!--Cuando no hay etiquetas aparece este mensaje-->
+	  							<p class="mensaje">No hay etiquetas para esta novedad</p>
+
+	  						</div>
+
+	  						<p class="fecha">19 de Mayo, 2022</p>
+  						</div>
+
+  						<div class="contenido-edicion">
+  							<a href="#"><i class="fa-solid fa-eye"></i></a>
+  							<a href="#"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="#"><i class="fa-solid fa-pen"></i></a>
+  							<a href="#"><i class="fa-solid fa-trash-can"></i></a>
+  						</div>
+  						
+  					</div>
+
+  				</article>
+
+  			</div>
+
+  		</section>
+
+
+
+  		<!--EMPIEZA SECCION DE USUARIOS-->
+  		<section id="contenedor-usuarios">
+  			
+  			<article id="usuarios-agregar">
+
+  				<h2 id="ir-seccion-usuarios">Agregar nuevo usuario</h2>
+				
+				<div class="contenedor-formulario-usuarios">
+					<form class="formulario-usuarios">
+						
+						<div class="nombre">
+							<h3>Nombre</h3>
+							<input type="text" name="" placeholder="Nombre">
+						</div>
+						
+						<div class="cedula">
+							<h3>Cédula</h3>
+							<input type="number" name="" placeholder="Cédula de identidad">	
+						</div>
+
+						<div class="contraseña">
+							<h3>Contraseña</h3>
+							<input type="password" name="" placeholder="Contraseña">
+						</div>
+						
+						<div class="submit">
+							<input type="reset" name="" value="Borrar datos">
+							<input type="submit" name="" value="Crear usuario">
+						</div>
+						
+					</form>
+				</div>
+
+  			</article>
+
+
+  			<article id="usuarios-editar-eliminar">
+
+  				<h2>Editar/Eliminar usuario</h2>
+  				
+  				<div class="contenedor-formulario-usuarios">
+					<form class="formulario-usuarios">
+						
+						<div class="dato-existente">
+							<h3>Usuario existente</h3>
+							<select>
+								<option value="">Seleccione un usuario</option>
+								<option>Usuario 1</option>
+								<option>Usuario 2</option>
+								<option>Usuario 3</option>
+								<option>Usuario 4</option>
+								<option>Usuario 5</option>
+								<option>Usuario 6</option>
+							</select>
+						</div>
+						
+
+						<div class="nombre">
+							<h3>Nuevo nombre <span>(solo edición)</span></h3>
+							<input type="text" name="" placeholder="Nombre">
+						</div>
+						
+						<div class="cedula">
+							<h3>Cédula</h3>
+							<input type="number" name="" placeholder="Cédula de identidad">
+						</div>
+						
+						<div class="contraseña">
+							<h3>Contraseña</h3>
+							<input type="password" name="" placeholder="Contraseña">
+						</div>
+						
+						<div class="submit">
+							<input type="submit" name="" value="Eliminar usuario">
+							<input type="reset" name="" value="Borrar datos">
+							<input type="submit" name="" value="Editar usuario">
+						</div>
+
+						
+
+					</form>
+				</div>
+
+  			</article>
+
+  		</section>
+
+
+
+  		<!--EMPIEZA SECCION DE AREAS-->
+  		<section id="contenedor-areas">
+  			
+  			<article id="areas-agregar">
+
+  				<h2 id="ir-seccion-areas">Agregar nueva área</h2>
+				
+				<div class="contenedor-formulario-areas">
+					<form class="formulario-areas">
+						
+						<div class="nombre">
+							<h3>Nombre de área</h3>
+							<input type="text" name="" placeholder="Nombre de área">
+						</div>
+						
+						<div class="submit">
+							<input type="reset" name="" value="Borrar datos">
+							<input type="submit" name="" value="Crear área">
+						</div>
+						
+					</form>
+				</div>
+
+  			</article>
+
+
+  			<article id="areas-editar-eliminar">
+
+  				<h2>Editar/Eliminar área</h2>
+  				
+  				<div class="contenedor-formulario-areas">
+					<form class="formulario-areas">
+						
+						<div class="dato-existente">
+							<h3>Área existente</h3>
+							<select>
+								<option value="">Seleccione un área</option>
+								<option>Área 1</option>
+								<option>Área 2</option>
+								<option>Área 3</option>
+								<option>Área 4</option>
+								<option>Área 5</option>
+								<option>Área 6</option>
+							</select>
+						</div>
+						
+
+						<div class="nombre">
+							<h3>Nuevo nombre de área <span>(solo edición)</span></h3>
+							<input type="text" name="" placeholder="Nombre de área">
+						</div>
+						
+						<div class="submit">
+							<input type="submit" name="" value="Eliminar área">
+							<input type="reset" name="" value="Borrar datos">
+							<input type="submit" name="" value="Editar área">
+						</div>
+
+						
+
+					</form>
+				</div>
+
+  			</article>
+
+  		</section>
+
+
+  		<nav id="contenedor-mini-nav">
+
+  			<div id="btn-mini-nav">
+  				<i class="fa-solid fa-arrow-right-arrow-left"></i>
+  			</div>
+  			
+  			<div id="mini-nav">
+  				<a href="#ir-seccion-novedades"><i class="fa-solid fa-newspaper"></i></a>
+  				<a href="#ir-seccion-usuarios"><i class="fa-solid fa-user"></i></a>
+  				<a href="#ir-seccion-areas"><i class="fa-solid fa-graduation-cap"></i></a>				
+  			</div>		
+  		</nav>
+
+
+  		<!-- Empieza seccion de redes sociales -->
+  		<aside>
+  			<div class="share">
+			  <i class="fa fa-plus"></i>
+			</div>
+		  	<div class="one">
+		    	<a href="https://www.facebook.com/Polo-Educativo-Tecnol%C3%B3gico-Cerro-2488348534525108/" target="__blank"><i class="fa-brands fa-facebook-f"></i></a>
+		 	</div>
+
+		  	<div class="two">
+		    	<a href="https://instagram.com/educativopolo" target="__blank"><i class="fa-brands fa-instagram"></i></a>
+		  	</div>
+
+		  	<div class="three">
+		    	<a href="https://www.youtube.com/user/arqlopezviana/videos" target="__blank"><i class="fa-brands fa-youtube"></i></a>
+		  	</div>
+  		</aside>
+  		<!-- Termina seccion de redes sociales -->
+  	</main>
+
+  	<footer>
+  		<section>
+	  		<div>
+	  			<p>E-mail: <a href="https://www.gmail.com" target="__blank">poloeducativocerro@gmail.com</a></p>
+	  			<p>© 2022 Polo Educativo Tecnológico Cerro, todos los derechos reservados.</p>
+	  		</div>
+  		</section>
+
+  		<section>
+  			<div id="contenedor-creditos">
+  				<p>Diseño y desarrollo por <a href="#">2FAR™</a></p>
+  			</div>
+  		</section>
+  	</footer>
+
+
+  	<!---->
+  	<script src="js/animaciones.js"></script>
+
+  	<!-- Script necesario para que funcione el menu -->
+	<script src="js/menu.js"></script>
+	
+	<!-- Script necesario para que funcione el btn de volver arriba -->
+	<script src="js/irArriba.js"></script>
+
+	<!-- Script necesario para que funcione el btn de redes sociales -->
+	<script src="js/redesSociales.js"></script>
+
+	<!-- Script necesario para que funcione la pagina de Adminsitrador-->
+	<script src="js/adminMenu.js"></script>
+</body>
+</html>
