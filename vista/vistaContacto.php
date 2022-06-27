@@ -46,7 +46,7 @@ use PHPMailer\PHPMailer\Exception;
         }elseif($_SESSION['perfil'] == 'administrador'){
     ?>  
 	    <div id="contenedor-sesion">
-	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.html" id="modo-admin">Administrador</a></p>
+	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
 		</div>
 	<?php 	
 		}elseif($_SESSION['perfil'] == 'moderador'){

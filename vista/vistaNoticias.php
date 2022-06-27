@@ -181,10 +181,10 @@
 
 	  				<!-- Esto se oculta si no hay un usuario iniciado -->
 	  				<div class="contenedor-articulo__contenido__edicion">
-	  					<a href="eliminarNoticia.php?id=<?php echo $ColocarTodo['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
-	  					<a href="acciones/activarNoticia.php?id=<?php echo $ColocarTodo['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
+	  					<a href="eliminarNoticia.php?idInNot=<?php echo $ColocarTodo['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
+	  					<a href="acciones/activarNoticia.php?idAcNot=<?php echo $ColocarTodo['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
   						<a href="editor-noticias.php?idNot=<?php echo $ColocarTodo['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="#" class="remove"><i class="fa-solid fa-trash-can"></i></a>
+  						<a href="eliminarNoticia.php?idNotEli=<?php echo $ColocarTodo['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
 	  				</div>
 
 	  				<div class="contenedor-articulo__contenido__info">

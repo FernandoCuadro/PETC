@@ -22,10 +22,8 @@ class modeloAdmin{
         información mostrada a partir de ellas*/
         $sqlAreas = "SELECT 
         id_area as id, 
-        area, 
-        estado
-        from area
-        where estado='activo'";
+        area
+        from area";
 
         /*Se envia la consulta a la base de datos y se obtiene la información
         de todas las áreas que estén activas*/
@@ -54,14 +52,10 @@ class modeloAdmin{
         img_not as imagen,
         noticias.estado,
         area,
-        noticias.id_area as idarea,
-        nombre
+        noticias.id_area as idarea
         
-        from noticias, area, usuarios
-        where noticias.id_area = area.id_area and  
-        noticias.ci_usuario = usuarios.ci 
-        
-        
+        from noticias, area
+        where noticias.id_area = area.id_area  
         order by fecha_not desc, id_not desc";
 
         $sqlResultado = $this->conexion->query($sqlObtenerNoticia);
@@ -92,49 +86,41 @@ class modeloAdmin{
 
     }
 
-    public function agregarEtiqueta($Titulo, $Noticia, $Estado){
 
-        /*Cuando le damos a agregar articulo*/
-       
+ public function obtenerUsuarios(){
 
-            /*Chequeamos que las variables antes mencionadas no estén vacias*/
-            if($Titulo !== "" and $Noticia !== "" and $Estado !== ""){
-                
-                //Se define la consulta a ejecutar
-                /*Se inserta la información antes especificada*/
-                $sqlAgregarEtiqueta = "INSERT INTO  etiquetas values (0, '$Titulo', '$Noticia', '$Estado')";
+        $sqlObtenerUsuarios = "SELECT 
+        ci, 
+        nombre
+         from usuarios";
 
-                /*Se envia la consulta a la base de datos agrega 
-                el nuevo articulo*/
-                $sqlResultado = $this->conexion->query($sqlAgregarEtiqueta);
+        $sqlResultadoUsu = $this->conexion->query($sqlObtenerUsuarios);
 
-                //Redirecciona al usuario a la página de inicio
-                print "<script>alert(\"Agregado exitosamente.\");window.location='admin.php';</script>";
-                //header("location:index.php");
-
-            }else{
-
-                /*En caso de que los campos no hayan sido rellenados, se
-                mostrará un mensaje de error*/
-                echo "<script>window.alert('Los campos no pueden quedar vacíos, rellene todos los campos');</script>";
-            }
-
-        
-
-    }
-    
-    public function editarEtiqueta($ID, $Titulo, $Estado){
-        if($ID !== "" and $Titulo !== "" and $Estado !== ""){
-            $sqlEditarEtiqueta = "UPDATE etiquetas set etiquetasnombre = '$Titulo', estado = '$Estado' where idetiquetas = '$ID'";
-
-            $SqlResultado = $this->conexion->query($sqlEditarEtiqueta);
-
-            print "<script>alert(\"Editado exitosamente.\");window.location='admin.php';</script>";
-    
-        }else{
-            echo "<script>window.alert('Los campos no pueden quedar vacíos, rellene todos los campos');</script>";
+         while($filas=$sqlResultadoUsu->fetch_assoc()){
+             $this->admin[]=$filas;
         }
+            return $this->admin;    
+
     }
+
+    //AGREGAR EDITAR USUARIOS
+    public function crearUsuario($nombreUsu, $cedulaUsu, $contraseñaUsu, $rolUsuario){
+
+        $sqlAgregarUsuarios = "INSERT INTO  usuarios values ($cedulaUsu, '$nombreUsu', '$contraseñaUsu', '$rolUsuario', 'activo')";
+
+        $sqlAgregarUsuario = $this->conexion->query($sqlAgregarUsuarios);
+
+          echo "<script>window.alert('Usuario agregado de forma exitosa');window.location='admin.php';</script>";
+      
+}
+
+public function editarUsuario($ciUsuario, $nombreUsuario, $contrUsuario, $rolUsuario){
+
+    $sqlEditarUsuarios = "UPDATE usuarios SET nombre = '$nombreUsuario', contraseña = '$contrUsuario', rol = '$rolUsuario' WHERE (ci = '$ciUsuario');";
+
+    $sqlEditarUsuario = $this->conexion->query($sqlEditarUsuarios);
+
+    echo "<script>window.alert('Usuario modificado de forma exitosa');window.location='admin.php';</script>";}
 
 }
 
