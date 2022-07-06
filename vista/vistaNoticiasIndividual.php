@@ -1,9 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>	
+
+	<!--Meta tags-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/styleArticulosIndividual.css">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
+
+	<meta name="description" content="Conocé las novedades del Polo Educativo Tecnológico Cerro en todas sus áreas, Informática, Diseño, Construcción, y más.
+	Enterate de todo lo que pasa en el Polo Educativo Cerro.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
+
+	<!--Link a icono y hojas de estilo-->
+	<link rel="icon" type="image/jpg" href="img/Logo.png">
+	<link rel="stylesheet" type="text/css" href="css/styleArticulosIndividual2.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css"> 
 
 	<!-- Fuente usada para los titulos -->
@@ -17,7 +31,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<title>Empieza 2022 y ¡también las clases! | Novedades</title>
+	<title>Titulo de la noticia | Novedades</title>
 </head>
 <body>
 	<a href="javascript:void(0);" id="scroll" title="Volver arriba">Top<span></span></a>
@@ -141,7 +155,7 @@
 					
 						imegen 2-->
 					<div class="contenido">
-						<a href="<?php echo $ColocarNot['enlace'] ?>"><?php echo $ColocarNot['enlace'] ?></a>
+						<a href="<?php echo $ColocarNot['enlace'] ?>" target="__blank"><?php echo $ColocarNot['enlace'] ?> </a>
 					</div>
 					<div id="fecha">
 						<p>Noticia publicada <?php echo $ColocarNot['fecha']?></p>

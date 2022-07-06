@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>
+
+	<?php //<!--Meta tags--> ?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
+
+	<meta name="description" content="Conocé todo sobre el Polo Educativo Tecnológico Cerro, novedades, fechas importantes, los distintos cursos, su historia, integrantes y más.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
 
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
 	<link rel="stylesheet" type="text/css" href="css/styleIndex.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
     
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
@@ -17,7 +27,7 @@
 
 
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -47,14 +57,14 @@
     	?>  
 	    <div id="contenedor-sesion">
 
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin -->
+	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin --> ?>
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
 		</div>
 		<?php
 		}elseif($_SESSION['perfil'] == 'moderador'){	
 		?>	
 		<div id="contenedor-sesion">	
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor -->
+	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor --> ?>
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
 
 	    </div>
@@ -64,7 +74,7 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <!-- Empieza menu responsive -->
+	    <?php //<!-- Empieza menu responsive --> ?>
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -90,9 +100,9 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <!-- Termina el menu responsive -->
+		    <?php //<!-- Termina el menu responsive --> ?>
 
-		    <!-- Empieza menu normal -->
+		    <?php //<!-- Empieza menu normal --> ?>
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -105,20 +115,20 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <!-- Termina menu -->
+	   <?php //<!-- Termina menu --> ?>
   	</header>
   	
-  	<!-- Empieza contenido de la pagina -->
+  	<?php //<!-- Empieza contenido de la pagina --> ?>
   	<main>
 
-  		<!--Seccion acceso a novedades-->
+  		<?php //<!--Seccion acceso a novedades--> ?>
 		<section>
 
 		    <div class="slider-frame">
 		    	
 		    	<div id="articulo-se-mueve">
 					<?php foreach($datosNoticias as $ColocarNoticias){ ?>
-		    		<!--Esto es lo que se repite por articulo-->
+		    		<?php //<!--Esto es lo que se repite por articulo--> ?>
 		    		<article class="ultimas-noticias">
 
 				    	<div id="ultimas-noticias-contenido">
@@ -155,21 +165,21 @@
 		</section>
 
 
-		<!--Seccion acceso a cursos-->
+		<?php //Seccion acceso a cursos ?>
 		<section>
 			<article id="contenedor-cursos">
 			
 		<?php	foreach($datosNiveles as $PonerNivel){
-				foreach($datosAreas as $PonerAreas){ 
-				if($PonerNivel['numero'] == $PonerAreas['nivelnum'] ){			
+				//foreach($datosAreas as $PonerAreas){ 
+				//if($PonerNivel['numero'] == $PonerAreas['nivelnum'] ){			
 		?>
 				<a href="cursos.php#<?php echo $PonerNivel['numero'] ?>"><div class="acceso-curso">
-					<h3><?php echo $PonerAreas['area'] ?></h3>
+					<h3><?php echo $PonerNivel['nombre'] ?></h3>
 				</div></a>
 		<?php 
 			} 
-			}
-			}	
+			//}
+			//}	
 		?>
 
 			</article>
@@ -197,7 +207,7 @@
 
 
 
-		<!--Seccion acceso a calendario-->
+		<?php //<!--Seccion acceso a calendario--> ?>
 		<section>
 			<article id="contenedor-calendario">
 				<img src="img/home-calendario.jpg">
@@ -216,7 +226,7 @@
 
 		<section>
 			<article id="contenedor-novedades">
-				<a href="novedades.php"><h3>Acceso a Novedades<i class="fa-solid fa-arrow-right"></i></h3></a>
+				<a href="nosotros.php"><h3>Acceso a Novedades<i class="fa-solid fa-arrow-right"></i></h3></a>
 			</article>
 		</section>
 
@@ -258,13 +268,13 @@
 
   	<script src="js/animaciones.js"></script>
 
-  	<!-- Script necesario para que funcione el menu -->
+  	<?php //<!-- Script necesario para que funcione el menu --> ?>
 	<script src="js/menu.js"></script>
 	
-	<!-- Script necesario para que funcione el btn de volver arriba -->
+	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
 	<script src="js/irArriba.js"></script>
 
-	<!-- Script necesario para que funcione el btn de redes sociales -->
+	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

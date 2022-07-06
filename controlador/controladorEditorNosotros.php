@@ -1,11 +1,13 @@
 <?php 
+error_reporting(0);
 require_once("modelo/modeloNosotros.php");    
 $imagen = new modeloNosotros();
 $integrantes = new modeloNosotros();    
-    
+$integrantesEdit = new modeloNosotros();    
     
 $PonerImagen = $imagen->imagenes();
 $PonerIntegrantes = $integrantes->integrantes();
+$MostrarEditar = $integrantesEdit->MostrarDatos($_GET['idInt']);
 
 require("vista/vistaEditorNosotros.php");
 if(isset($_POST['agregarimagenes'])){
@@ -205,5 +207,15 @@ if(is_dir($directorio) && is_uploaded_file($imagen)){
     );
 
 }
+}
+
+if(isset($_POST['eliminarintegrante'])){
+  if($_POST['idint'] == ""){
+    echo "<script>window.alert('Seleccione un integrante');window.location='editor-nosotros.php#seccion-integrantes';</script>";
+  }else{  
+  $eliminarInt = $integrantes->eliminarIntegrante(
+      $idINT = $_POST['idint']
+  );
+  }
 }
 ?>

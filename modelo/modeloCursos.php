@@ -1,6 +1,6 @@
 <?php
 
-class modeloCursos{
+class modeloCursos{ 
 
     private $conexion;
     private $cursos;
@@ -66,12 +66,19 @@ class modeloCursos{
 
 public function agregarNivel($nombrenivel, $ordennivel){
 
-        $sqlAgregarNiveles = "INSERT INTO  niveles values (0, '$nombrenivel', '$ordennivel')";
+        $sqlAgregarNiveles = "INSERT INTO  niveles values (0, '$nombrenivel', '$ordennivel');";
+
+        $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
+        $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
+        if(mysqli_num_rows($sqlVerificaNums) > 0){
+          echo "<script>window.alert('Ya existe ese orden ingrese otro');window.location='editor-cursos.php#CrearNivel';</script>";
+          exit();
+        }
 
         $sqlAgregarNivel = $this->conexion->query($sqlAgregarNiveles);
 
-          echo "<script>window.alert('Nivel agregado de forma exitosa');window.location='editor-cursos.php';</script>";
-      
+        echo "<script>window.alert('Nivel añadido de forma exitosa');window.location='editor-cursos.php';</script>";
+
 }
 
 
@@ -79,6 +86,13 @@ public function agregarNivel($nombrenivel, $ordennivel){
 public function editarNivel($idnivel, $nombrenivel, $ordennivel){
 
         $sqlEditarNiveles = "UPDATE niveles SET nivelnombre = '$nombrenivel', nivelnumero = '$ordennivel' WHERE (`idnivel` = '$idnivel');";
+
+        $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
+        $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
+        if(mysqli_num_rows($sqlVerificaNums) > 1){
+          echo "<script>window.alert('Ya existe ese orden ingrese otro');window.location='editor-cursos.php#CrearNivel';</script>";
+          exit();
+        }
 
         $sqlEditarNivel = $this->conexion->query($sqlEditarNiveles);
 
@@ -112,14 +126,100 @@ public function agregarCursos($nombreCurso, $nivelCurso, $imagenCurso, $enlaceCu
 
 
 public function editarCursos($idCurso, $nombreCurso, $nivelCurso, $imagenCurso, $enlaceCurso){
-
-    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
-
+if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
+    
+  $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso' WHERE (`id_area` = '$idCurso');";
     $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-
       echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}elseif($nivelCurso == "" & $imagenCurso == "" & $enlaceCurso == ""){
+   
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+      
+}elseif($nombreCurso == "" & $nivelCurso == "" & $enlaceCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}elseif($nombreCurso == "" & $nivelCurso == "" & $imagenCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+          
+
+
+  }elseif($imagenCurso == "" & $enlaceCurso == ""){
+
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+
+  }elseif($nivelCurso == "" & $enlaceCurso == ""){
+
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+  }elseif($nivelCurso == "" & $imagenCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>"; 
   
+  }elseif($nombreCurso == "" & $enlaceCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+   
+  }elseif($nombreCurso == "" & $imagenCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+   
+  
+}elseif($nombreCurso == "" & $nivelCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+
+}elseif($nombreCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}elseif($nivelCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}elseif($imagenCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}elseif($enlaceCurso == ""){
+    
+    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
+      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+}else{
+  
+  $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
+    $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+      echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
+
+} 
+
+
+
+
+
 }
+
 
 
 public function eliminarCursos($idCurso){

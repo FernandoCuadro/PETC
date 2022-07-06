@@ -29,7 +29,7 @@
 	$datosAgregarNoticia = $agregarNoticia->agregarNoticias();
 	$PonerEtiqueta = $etiquetas->obtenerEtiquetas();
 
-	$ID = $_GET['idNot'];
+	//$ID = $_GET['idNot'];
 	$datosMostrarDatos = $Mostrar->MostrarDatos($_GET['idNot']);
 
 	require_once("vista/vistaEditorNoticias.php");

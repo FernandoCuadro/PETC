@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-	<link rel="stylesheet" type="text/css" href="css/styleEditores.css">
+	<link rel="stylesheet" type="text/css" href="css/styleEditores2.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->
@@ -46,7 +46,7 @@
 					$(parent).remove();
 				});
 			});
-		</script>
+	</script>
 	<title>Editor | Novedades</title>
 </head>
 <body>
@@ -163,8 +163,7 @@
 					<div class="contenedor-titulos-cajas">
 						<h3>Descripción</h3>
 						<textarea placeholder="Ingrese una descripción breve para la noticia" maxlength="500" minlength="20" name="descripcion" required="yes"><?php echo $MostrarNoticia['descripcion']; ?></textarea>
-						<!-- <div id="editor1"> -->
-		  				
+						<!-- <div id="editor1"> -->		
 					</div>
 	  				
 					<div class="contenedor-titulos-cajas">
@@ -176,9 +175,7 @@
 						<h3>Contenido 1</h3>
 						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido1" required="yes"><?php echo $MostrarNoticia['contenido1'];?></textarea>  
 	  					</div>
-					</div>
 	  				
-
 					<div class="contenedor-titulos-cajas">
 						<h3>Imagen 1</h3>
 	  					<input type="file" name="archivo1">
@@ -187,9 +184,7 @@
 
 					<div class="contenedor-titulos-cajas">
 						<h3>Contenido 2</h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>  
-
-	  					
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>  			
 					</div>
 	  				
 
@@ -201,9 +196,7 @@
 	  				
 					<div class="contenedor-titulos-cajas">
 						<h3>Contenido 3</h3>
-		  				<div id="editor4">
-
-		  				</div>
+		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
 					</div>
 	  				
 					<div class="contenedor-titulos-cajas">
@@ -213,7 +206,7 @@
 	  				
 					<div class="contenedor-titulos-cajas">
 						<h3>Contenido 4</h3>
-	  					
+	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
 					</div>
 	  				
 					<div class="contenedor-titulos-cajas">
@@ -223,7 +216,7 @@
 					
 					<div class="contenedor-titulos-cajas">
 						<h3>Contenido 5</h3>
-	  					
+	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
 					</div>
 					
 					<div class="contenedor-titulos-cajas">
@@ -263,34 +256,36 @@
 							<option value="inactivo">Inactivo</option>
 						</select>
 						<?php } ?>
-					</div>	  				  
+					</div>
+
+					</div>	
+					<input type="submit" name="" value="Eliminar">
+					<input type="reset" value="aaaa">  				  
 					<input type="submit" name="editarNoticias" value="Editar artículo">				
 				</div>
 				<?php 
 					}else{ 
-				?>		
+				?>	
 				<div class="wrapper-container">
 					<div class="contenedor-titulos-cajas">
 						<h3>Título</h3>
 	  					<input type="text" name="titulo" placeholder="Ingrese un titulo" required="yes">
 					</div>	  			
 				
-				<div class="contenedor-titulos-cajas">
+					<div class="contenedor-titulos-cajas">
 						<h3>Área</h3>
 						<select name="area">
-										<?php
-										foreach($datosArea as $datoArea){
-										?>
-											<option value="<?php echo $datoArea['id']; ?>"><?php echo $datoArea['area']; ?></option>
-										<?php }	?>										
-		  				</select>
-				</div>	
+							<?php
+								foreach($datosArea as $datoArea){
+							?>
+							<option value="<?php echo $datoArea['id']; ?>"><?php echo $datoArea['area']; ?></option>
+								<?php }	?>										
+			  				</select>
+					</div>	
 				
-				<div class="contenedor-titulos-cajas">
+					<div class="contenedor-titulos-cajas">
 						<h3>Descripción</h3>
 						<textarea placeholder="Ingrese una descripción breve para la noticia" maxlength="500" minlength="20" name="descripcion" required="yes"></textarea>
-						<!-- <div id="editor1"> -->
-		  				</div>
 				</div>
 
 				<div class="contenedor-titulos-cajas">
@@ -322,7 +317,7 @@
 	  				
 				<div class="contenedor-titulos-cajas">
 						<h3>Contenido 3</h3>
-		  				
+		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>
 				</div>
 	  				
 				<div class="contenedor-titulos-cajas">
@@ -331,7 +326,8 @@
 				</div>
 	  				
 				<div class="contenedor-titulos-cajas">
-						<h3>Contenido 4</h3>		
+						<h3>Contenido 4</h3>
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>		
 				</div>
 	  				
 				<div class="contenedor-titulos-cajas">
@@ -340,7 +336,8 @@
 				</div>
 					
 				<div class="contenedor-titulos-cajas">
-						<h3>Contenido 5</h3>	  
+						<h3>Contenido 5</h3>	
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>  
 				</div>
 					
 				<div class="contenedor-titulos-cajas">
@@ -384,11 +381,11 @@
 							</tr>
 						</table>
 						<button id="adicional" name="adicional" type="button" class="btn btn-warning">Más +</button>
-					</div>
-					
-					<input type="submit" name="agregarNoticias" value="Agregar artículo">						
+					</div>						
 				
 				</div>
+
+				<input type="submit" name="agregarNoticias" value="Agregar artículo">
 				
 				<?php } ?>				
 

@@ -2,7 +2,7 @@
 
     class modeloNosotros{
 
-        private $conexion;
+        private $conexion;  
         private $nosotros;
 
       
@@ -169,6 +169,28 @@
 
 
                 //AGREGAR EDITAR INTEGRANTES
+
+
+                public function MostrarDatos($idInt){
+                    
+                    $sqlMostrarInt = "SELECT 
+                    idintegrantes as id, nombreint, cargoint, fotoint 
+                    from integrantes
+                    where 
+                    idintegrantes = '$idInt'";
+                  
+                    $sqlMostrarInts = $this->conexion->query($sqlMostrarInt);
+                    while($filas= $sqlMostrarInts->fetch_assoc()){
+                    $this->nosotros[]=$filas;
+                    }
+                  
+                    //Liberamos la variable
+                    return $this->nosotros;
+                  
+                  }
+
+
+
     public function agregarIntegrantes($nombreint, $cargoint, $fotoint){
 
         $sqlAgregarIntegrantes = "INSERT INTO integrantes values (0, '$nombreint', '$cargoint', '$fotoint')";
@@ -190,8 +212,15 @@
 
         }    
 
+        public function eliminarIntegrante($idINT){
+
+            $sqlEliminarIntegrantes = "DELETE FROM integrantes WHERE (`idintegrantes` = '$idINT')";
+            $sqlEliminarIntegrante= $this->conexion->multi_query($sqlEliminarIntegrantes);
+                                  
+             echo "<script>window.alert('Integrante eliminado de forma exitosa');window.location='editor-nosotros.php';</script>";
+                                  
+             }              
 
 
-    
 
     }   

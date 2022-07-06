@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html>	
+<html lang="spanish">	
 <head>
+	
+	<!--Meta tags-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
 
+	<meta name="description" content="Conocé las novedades del Polo Educativo Tecnológico Cerro en todas sus áreas, Informática, Diseño, Construcción, y más.
+	Enterate de todo lo que pasa en el Polo Educativo Cerro.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
+
+	<!--Link a icono y hojas de estilo-->
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-	<link rel="stylesheet" type="text/css" href="css/styleArticulos.css">
+	<link rel="stylesheet" type="text/css" href="css/styleArticulos4.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Fuente usada para la introduccion sobre la imagen -->
@@ -115,15 +127,6 @@
 				}elseif($_SESSION['perfil'] == 'administrador'){
 		?>		  
   			<a href="editor-noticias.php">Agregar artículo</a>
-  			<form>
-  				<select>
-  					<option value="">Más recientes</option>
-  					<option>Más antiguos</option>
-  					<option>Visibles</option>
-  					<option>No visibles</option>
-  				</select>
-  				<input type="submit" name="" value="Ver">
-  			</form>
 			<?php } ?>
   		</div>
 
@@ -191,6 +194,10 @@
 	  					<!-- El ID solo se muestra al admin -->
 	  					<p class="articulo-id"><?php echo $ColocarTodo['id'] ?></p>
 	  					<p class="articulo-area"><?php echo $ColocarTodo['area'] ?></p>
+
+	  					<!-- 
+						Boton hecho en caso de que se pueda filtrar por area
+	  					<a href="#" class="articulo-area-btn"><?php echo $ColocarTodo['area'] ?></a> -->
 	  					<h2><?php echo $ColocarTodo['titulo'] ?></h2>
 	  					<p class="articulo-descripcion"><?php echo nl2br($ColocarTodo['descripcion']) ?></p>
 	  					<p class="articulo-fecha"><?php echo $ColocarTodo['fecha'] ?></p>

@@ -1,38 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<link rel="icon" type="image/jpg" href="img/Logo.png"/>
-	<link rel="stylesheet" type="text/css" href="css/styleCalendario.css">
-	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 	
-  	<!-- Calendario -->
-    <link rel="stylesheet" href="">
+  <!--Meta tags-->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; utf-8">
+
+  <meta name="description" content="Conocé todas las fechas importantes con respecto al PETC. Enterate de exámenes, feriados y más.">
+
+  <meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+  <meta name="DateCreated" content="Tue, 28 June 2022 17:00:00 GMT-3">
+  <meta name="Revisit-after" content="7 days">
+  <meta name="robots" content="all">
+	
+  <!-- Calendario -->
+  <link rel="stylesheet" href="">
 	<link rel="stylesheet" type="text/css" href="css/fullcalendar.min2.css">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="css/home2.css">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">  
-
-
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> 
-
-
-
-
-	<!-- Fuente usada para los titulos -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
-
+  <!--Link a icono y hojas de estilo-->
+  <link rel="icon" type="image/jpg" href="img/Logo.png"/>
+  <link rel="stylesheet" type="text/css" href="css/styleCalendario6.css">
+  <link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Fuente usada para la descripcion -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +45,8 @@
 			
   	</div>
 	<header>
+    <img id="img-header" src="img/banner.png">
+
 	<?php   
         session_start();
         if(empty($_SESSION['usuario'])){       			
@@ -405,35 +401,37 @@ $(document).ready(function() {
 </article>
 
   		<aside>
-  			<div class="share">
-			  <i class="fa fa-plus"></i>
-			</div>
-		  	<div class="one">
-		    	<a href="https://facebook.com" target="__blank"><i class="fa-brands fa-facebook-f"></i></a>
-		 	</div>
-		  	<div class="two">
-		    	<a href="https://twitter.com" target="__blank"><i class="fa-brands fa-twitter"></i></a>
-		  	</div>
-		  	<div class="three">
-		    	<a href="https://instagram.com" target="__blank"><i class="fa-brands fa-instagram"></i></a>
-		  	</div>
-  		</aside>
+        <div class="share">
+        <i class="fa fa-plus"></i>
+      </div>
+        <div class="one">
+          <a href="https://www.facebook.com/Polo-Educativo-Tecnol%C3%B3gico-Cerro-2488348534525108/" target="__blank"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+
+        <div class="two">
+          <a href="https://instagram.com/educativopolo" target="__blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+
+        <div class="three">
+          <a href="https://www.youtube.com/user/arqlopezviana/videos" target="__blank"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </aside>
   	</main>
 
   	<footer>
-  		<section>
-	  		<div>
-	  			<p>E-mail: <a href="https://www.gmail.com" target="__blank">unidadextensionptmontevideo@gmail.com</a></p>
-	  			<p>© 2022 Unidad de Extensión, todos los derechos reservados.</p>
-	  		</div>
-  		</section>
+      <section>
+        <div>
+          <p>E-mail: <a href="https://www.gmail.com" target="__blank">poloeducativocerro@gmail.com</a></p>
+          <p>© 2022 Polo Educativo Tecnológico Cerro, todos los derechos reservados.</p>
+        </div>
+      </section>
 
-  		<section>
-  			<div id="contenedor-creditos">
-  				<p>This site was created by <a href="#">2FAR™</a></p>
-  			</div>
-  		</section>
-  	</footer>
+      <section>
+        <div id="contenedor-creditos">
+          <p>Diseño y desarrollo por <a href="#">2FAR™</a></p>
+        </div>
+      </section>
+    </footer>
 
   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 

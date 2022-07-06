@@ -4,7 +4,7 @@
 class modeloLogin{
 
     private $conexion;
-    private $usuarios;
+    private $usuarios;  
 
     // Iniciamos las variables
     public function __construct(){
@@ -52,7 +52,7 @@ class modeloLogin{
               //      header('location:index.php'); 
         echo"<script language='javascript'>window.location='index.php'</script>";
                 }elseif($datosUsuario['rol'] == "moderador"){
-                    header('location:index.php');
+                    echo"<script language='javascript'>window.location='index.php'</script>";
                 }
       
             }elseif($datosUsuario['estado'] == "Inactivo"){

@@ -4,10 +4,20 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>
+
+	<!--Meta tags-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
+
+	<meta name="description" content="Contactate con el Polo Educativo Tecnológico Cerro.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
 
 	<link rel="icon" type="image/jpg" href="img/Logo.png"/>
 	<link rel="stylesheet" type="text/css" href="css/styleContacto.css">
@@ -134,7 +144,7 @@ use PHPMailer\PHPMailer\Exception;
 
 	  					<a href="https://goo.gl/maps/brBY468PRzrsXS5S9" target="__blank"><i class="fa-solid fa-location-dot"></i>Haíti 1590, Cerro, Montevideo</a>
 
-	  					<a id="btn-email" href="#formulario-contacto"><i class="fa-solid fa-envelope"></i>poloeducativo@gmail.com</a>
+	  					<a id="btn-email" href="#formulario-contacto"><i class="fa-solid fa-envelope"></i>poloeducativocerro@gmail.com</a>
 
 	  					<a href="tel:22889812"><i class="fa-solid fa-phone"></i>(+598) 2288 9812</a>
 	  				</div>
@@ -210,10 +220,10 @@ use PHPMailer\PHPMailer\Exception;
 						$mail->setFrom('DudasPoloEducativoCerro@gmail.com', 'Email Contacto PETC');
 						$mail->addAddress('fernandocuadro134@gmail.com','Correo Contacto');
 						$mail->isHTML(true);
-						$mail->Subject = 'Se ah contactado con usted: '.$correo;
+						$mail->Subject = 'Se ha contactado con usted: '.$correo;
 						$mail->Body = 'Nombre: '.$nombre. ' '.$apellido.'<br> Mensaje:'.$mensaje;
 						$mail->send(); 
-						echo "<script>window.alert('El mensaje se ah enviado correctamente!');</script>";
+						echo "<script>window.alert('El mensaje se ha enviado correctamente!');</script>";
 
 					}catch(Exception $e){
 					echo 'Error al enviar el mensaje'.$mail->ErrorInfo;	
@@ -240,7 +250,7 @@ use PHPMailer\PHPMailer\Exception;
 					</div>
 					
 					<div id="ubicacion-texto">						
-						<p>En caso de que lo prefieras podes encontrarnos en Haití 1590, 12800 Montevideo, Departamento de Montevideo</p>
+						<p>En caso de que lo prefieras podes encontrarnos en Haití 1590, Cerro, Montevideo</p>
 					</div>
 
 					<div id="ubicacion-btn">

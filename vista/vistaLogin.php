@@ -8,12 +8,12 @@
 	<link rel="stylesheet" type="text/css" href="css/styleLogin.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -50,7 +50,7 @@
 
 	</main>
 
-	<!--Script necesario para pantalla de carga-->
+	<?php //<!--Script necesario para pantalla de carga--> ?>
 	<script src="js/animaciones.js"></script>
 </body>
 </html>

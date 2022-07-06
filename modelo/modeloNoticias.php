@@ -681,7 +681,7 @@ public function MostrarDatos($idNot){
   titulo_not as titulo, 
   descripcion_not as descripcion, 
   contenido_not as contenido1, 
-  contenido_not2 as contenido2,
+  contenido_not2 as contenido2, 
   enlace,  
   min_not as miniatura,
   img_not as imagen,

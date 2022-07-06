@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+	<?php //<!--Meta tags--> ?>
+	<meta charset="utf-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
+
+	<meta name="description" content="Conocé al Polo Esucativo Tecnológico Cerro en todos sus aspectos, desde su hisotria, su infraestructura y equipo.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
+
+	<?php //<!--Link a icono y hojas de estilo--> ?>
 	<link rel="icon" type="image/jpg" href="img/Logo.png"/>
 	<link rel="stylesheet" type="text/css" href="css/styleSliderIntegrantes.css">
 	<link rel="stylesheet" type="text/css" href="css/styleNosotros.css">
@@ -14,15 +25,15 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">  
 
-	<!-- Link usado para el Slider galeria de fotos-->
+	<?php //<!-- Link usado para el Slider galeria de fotos--> ?>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -64,7 +75,7 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <!-- Empieza menu responsive -->
+	    <?php //<!-- Empieza menu responsive --> ?>
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -90,9 +101,9 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <!-- Termina el menu responsive -->
+		    <?php //<!-- Termina el menu responsive --> ?>
 
-		    <!-- Empieza menu normal -->
+		    <?php //<!-- Empieza menu normal --> ?>
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -105,10 +116,10 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <!-- Termina menu -->
+	    <?php //<!-- Termina menu --> ?>
   	</header>
   	
-  	<!-- Empieza contenido de la pagina -->
+  	<?php //<!-- Empieza contenido de la pagina --> ?>
   	<main>
 
   		<!-- <div id="bienvenidos">
@@ -122,28 +133,13 @@
 
   		</section>
   		
-		<section>
-			<!-- Esto solo lo ve el editor o el admin -->
-  		<!-- <div id="contenedor-agregar-ver-articulo">
-  			<a href="editorInicio.html">Agregar artículo</a>
-  			<form>
-  				<select>
-  					<option value="">Más recientes</option>
-  					<option>Más antiguos</option>
-  					<option>Visibles</option>
-  					<option>No visibles</option>
-  				</select>
-  				<input type="submit" name="" value="Ver">
-  			</form>
-  		</div> -->
-		</section>
 		
-		<!--Empieza sección descripcion institucional-->
+		<?php //<!--Empieza sección descripcion institucional--> ?>
 		<section id="institucion-descripcion">
 
 			<div id="contenedor-mision-vision">
 				
-				<!--Articulo misión-->
+				<?php //<!--Articulo misión--> ?>
 				<article id="institucion-descripcion__mision">
 					<h2>Misión</h2>
 
@@ -151,7 +147,7 @@
 				</article>
 
 
-				<!--Articulo visión-->
+				<?php //<!--Articulo visión--> ?>
 				<article id="institucion-descripcion__vision">
 					<h2>Visión</h2>
 
@@ -161,7 +157,7 @@
 			</div>
 
 
-			<!--Articulo historia-->
+			<?php //<!--Articulo historia--> ?>
 			<article id="institucion-descripcion__historia">
 				<h2>Historia</h2>
 
@@ -193,10 +189,10 @@
 			</article>
 			
 		</section>
-		<!--Termina sección descripcion institucional-->
+		<?php //<!--Termina sección descripcion institucional--> ?>
 
 
-		<!-- Empieza sección para fotos del instituto -->
+		<?php //<!-- Empieza sección para fotos del instituto --> ?>
 		<section id="institucion-slider">
 
 			<div id="slider">
@@ -208,7 +204,7 @@
 						if(empty($_SESSION['usuario'])){
         				}elseif($_SESSION['perfil'] == 'administrador'){
     				?> 
-				  	<!-- Esto lo ve solo el admin o quien corresponda -->
+				  	<?php //<!-- Esto lo ve solo el admin o quien corresponda --> ?>
 				  	<div id="slider-edicion-agregar-eliminar">
 
 						<a href="editor-nosotros.php#seccion-imagenes"><i class="fa-solid fa-plus"></i></a>
@@ -220,14 +216,14 @@
 						<div class="carousel-item active">
         			<img src="img/banner.png" class="d-block w-100" alt="...">
      				</div>
-				    <!-- Esto es lo que se repite cada vez que se suma una nueva imagen al slider -->
+				    <?php //<!-- Esto es lo que se repite cada vez que se suma una nueva imagen al slider --> ?>
 					<?php foreach($MostrarImagen as $Ponerimagen){ ?>
 				    <div class="carousel-item">
 				      <img src="<?php echo $Ponerimagen['imagen'] ?>" class="d-block w-100" alt="...">
 				    </div>
 					<?php } ?>	
 
-				    <!-- Tiene que existir una condicion que, en caso de que no haya alguna imagen de las que se colocaron, vuelva a mostrar la primer imagen -->
+				    <?php //<!-- Tiene que existir una condicion que, en caso de que no haya alguna imagen de las que se colocaron, vuelva a mostrar la primer imagen --> ?>
 
 				  </div>
 
@@ -254,11 +250,11 @@
 			
 
 		</section>
-		<!-- Termina sección para fotos del instituto -->
+		<?php //<!-- Termina sección para fotos del instituto --> ?>
 		
 
 
-		<!--Empieza sección integrantes de la institución-->
+		<?php //<!--Empieza sección integrantes de la institución--> ?>
 		<section id="institucion-integrantes">
 
 			<div id="fondo-integrantes">
@@ -271,7 +267,7 @@
 
 						<div class="swiper-wrapper">
 							<?php foreach($MostrarIntegrantes as $PonerIntegrantes){ ?>
-							<!-- Es lo que se repite por cada persona -->
+							<?php //<!-- Es lo que se repite por cada persona --> ?>
 							<div class="swiper-slide">
 
 								<div class="integrante">
@@ -286,7 +282,7 @@
 										<!--<i class="btn-opciones fa-solid fa-ellipsis"></i>-->
 
 										<ul class="integrante-edicion-menu">
-											<li><a href="editor-nosotros.php#seccion-integrantes"><i class="fa-solid fa-pencil"></i></a></li>
+											<li><a href="editor-nosotros.php?idInt=<?php echo $PonerIntegrantes['id'] ?>#seccion-integrantes"><i class="fa-solid fa-pencil"></i></a></li>
 											<!-- <li><a href="#"><i class="fa-solid fa-eye-slash"></i></a></li>
 											<li><a href="#"><i class="fa-solid fa-eye"></i></a></li> -->
 											<li><a href="eliminarIntegrante.php?idint=<?php echo $PonerIntegrantes['id']?>"><i class="fa-solid fa-trash-can"></i></a></li>
@@ -356,19 +352,19 @@
 
   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-  	<!-- Script necesario para pantalla de carga -->
+  <?php //	<!-- Script necesario para pantalla de carga --> ?>
   	<script src="js/animaciones.js"></script>
 
-  	<!-- Script necesario para que funcione el menu -->
+  	<?php //<!-- Script necesario para que funcione el menu --> ?>
 	<script src="js/menu.js"></script>
 	
-	<!-- Script necesario para que funcione el btn de volver arriba -->
+	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
 	<script src="js/irArriba.js"></script>
 
-	<!-- Script necesario para que funcione el btn de redes sociales -->
+	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
 	<script src="js/redesSociales.js"></script>
 
-	<!-- Script necesario para slider -->
+	<?php //<!-- Script necesario para slider --> ?>
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>

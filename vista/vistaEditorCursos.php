@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html>	
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styleEditores.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
-	<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->
+	<?php //<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->  ?>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
@@ -16,17 +16,17 @@
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 
-	<!-- Fuente usada para la introduccion sobre la imagen -->
+	<?php //<!-- Fuente usada para la introduccion sobre la imagen --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion -->?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -54,17 +54,14 @@
     	<?php
         	}elseif($_SESSION['perfil'] == 'administrador'){
     	?>  
-		<!-- Importante que el div tampoco aparezca cuando el usuario no está iniciado, ocupa espacio demás -->
 	    <div id="contenedor-sesion">
 
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin -->
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
 		</div>
 		<?php
 		}elseif($_SESSION['perfil'] == 'moderador'){	
 		?>	
 		<div id="contenedor-sesion">	
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor -->
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
 
 	    </div>
@@ -74,7 +71,6 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <!-- Empieza menu responsive -->
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -100,9 +96,7 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <!-- Termina el menu responsive -->
 
-		    <!-- Empieza menu normal -->
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -115,10 +109,8 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <!-- Termina menu -->
   	</header>
   	
-  	<!-- Empieza contenido de la pagina -->
   	<main>
 
 
@@ -190,7 +182,7 @@
 						<select name="nivelcurso" required="yes">
 							<option value="">Seleccione un nivel</option>
 							<?php foreach($vernivel as $Ponernivelcombo){ ?>
-							<option value="<?php echo $Ponernivelcombo['id'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
+							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
 							<?php } ?>
 						</select>
 
@@ -231,7 +223,7 @@
 						<select name="nivelcursoedit">
 							<option value="">Seleccione un nivel</option>
 							<?php foreach($vernivel as $Ponernivelcombo){ ?>
-							<option value="<?php echo $Ponernivelcombo['id'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
+							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
 							<?php } ?>
 						</select>
 
@@ -325,13 +317,10 @@
 
 	<script src="js/animaciones.js"></script>
 
-  	<!-- Script necesario para que funcione el menu -->
 	<script src="js/menu.js"></script>
 	
-	<!-- Script necesario para que funcione el btn de volver arriba -->
 	<script src="js/irArriba.js"></script>
 
-	<!-- Script necesario para que funcione el btn de redes sociales -->
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

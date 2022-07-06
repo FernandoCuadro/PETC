@@ -7,8 +7,8 @@
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
 	<link rel="stylesheet" type="text/css" href="css/styleEditores.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
-
-	<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->
+ 
+	<?php //<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script --> ?>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
@@ -16,17 +16,17 @@
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 	<script type="text/javascript" src="js/ckeditor.js"></script>
 
-	<!-- Fuente usada para la introduccion sobre la imagen -->
+	<?php //<!-- Fuente usada para la introduccion sobre la imagen --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -54,17 +54,17 @@
     	<?php
         	}elseif($_SESSION['perfil'] == 'administrador'){
     	?>  
-		<!-- Importante que el div tampoco aparezca cuando el usuario no está iniciado, ocupa espacio demás -->
+		<?php //<!-- Importante que el div tampoco aparezca cuando el usuario no está iniciado, ocupa espacio demás --> ?>
 	    <div id="contenedor-sesion">
 
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin -->
+	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin --> ?>
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
 		</div>
 		<?php
 		}elseif($_SESSION['perfil'] == 'moderador'){	
 		?>	
 		<div id="contenedor-sesion">	
-	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor -->
+	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor --> ?>
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
 
 	    </div>
@@ -74,7 +74,7 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <!-- Empieza menu responsive -->
+	    <?php //<!-- Empieza menu responsive --> ?>
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -100,9 +100,9 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <!-- Termina el menu responsive -->
+		   <?php // <!-- Termina el menu responsive --> ?>
 
-		    <!-- Empieza menu normal -->
+		    <?php //<!-- Empieza menu normal --> ?>
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -115,10 +115,10 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <!-- Termina menu -->
+	   <?php // <!-- Termina menu --> ?>
   	</header>
   	
-  	<!-- Empieza contenido de la pagina -->
+  	<?php //<!-- Empieza contenido de la pagina --> ?>
   	<main>
 
 
@@ -134,7 +134,7 @@
 							<?php foreach($PonerImagen as $ColocarImagen){ 
 								if($rowcount = 0){
 								?>
-	  						<!--Esto aparece en caso de que no haya imágenes cargadas-->
+	  						<?php //<!--Esto aparece en caso de que no haya imágenes cargadas--> ?>
 	  						
 							<div id="sin-imagen">
 	  							<p>No hay imágenes cargadas. 
@@ -170,8 +170,8 @@
 			  					<input type="submit" name="agregarimagenes" value="Agregar seleccionadas">
 			  				</div>			  			
 						</div>
-
-
+		</form>
+		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">						
 						<div class="contenedor-titulos-cajas">
 							<h3>Eliminar imágenes</h3>						
 			  				<select name="idimagen1">
@@ -214,67 +214,107 @@
 			  					<input type="submit" name="eliminarintegrantes" value="Eliminar seleccionadas">
 			  				</div>			  				
 						</div>
-
+		</form>
 					</div>  
-
-
+		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">
+							
 					<div class="wrapper-container">
 						
 						<div class="contenedor-titulos-cajas" id="seccion-integrantes">
 							<h3 class="integrante-titulo">Crear integrante</h3>
 
 							<h3>Nombre</h3>
-							<input type="text" name="nombreint" placeholder="Ingrese un Nombre">
+							<input type="text" name="nombreint" placeholder="Ingrese un Nombre" required="yes">
 
 							<h3>Rol</h3>
-							<input type="text" name="cargoint" placeholder="Ingrese un Rol">
+							<input type="text" name="cargoint" placeholder="Ingrese un Rol" required="yes">
 
 							<h3>Foto de perfil</h3>
-							<input type="file" name="fotoint">
+							<input type="file" name="fotoint" required="yes">
 
 							<input type="submit" name="crearintegrante" value="Crear integrante">
 
 						</div>
-
-
-
+		</form>
+		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">
+								
+				<?php	
+					$idInt = $_GET['idInt'];
+					//echo "<input type='text' class='esconder' name='idNot' value='".$idInt."'>";
+					if($idInt != 0){
+						foreach($MostrarEditar as $ColocarCampo){
+							if($idInt == $ColocarCampo['id']){	 	
+				?>			
 						<div class="contenedor-titulos-cajas">
 							<h3 class="integrante-titulo">Editar/eliminar integrante</h3>
-
 							<h3>ID integrante</h3>
+							
 							<select name="idint">
-								<option>Seleccione un integrante</option>
-								<?php foreach($PonerIntegrantes as $ColocarIntegrante){ ?>
-								<option value="<?php echo $ColocarIntegrante['id']?>"><?php echo $ColocarIntegrante['nombreint']?></option>
-								<?php } ?>
+								<option value="<?php echo $ColocarCampo['id']?>"><?php echo "ID: ".$ColocarCampo['id']." || ".$ColocarCampo['nombreint']?></option>		
 							</select>
 
+							<h3>Nombre</h3>
+							<input type="text" name="nombreintedit" value="<?php echo $ColocarCampo['nombreint']?>" placeholder="Ingrese Nombre">	
+							
+							<h3>Rol</h3>
+							<input type="text" name="cargointedit" value="<?php echo $ColocarCampo['cargoint']?>" placeholder="Ingrese Rol">
+								
+							<h3>Foto de perfil</h3>
+							<input type="file" name="fotointedit">
+
+							<div class="btns-submit">
+								<input type="submit" name="eliminarintegrante" value="Eliminar">
+			  					<input type="reset" name="" value="Cancelar">
+			  					<input type="submit" name="editarintegrante" value="Editar integrante">
+			  				</div>
+						</div>	
+				<?php //}else{ 
+					//echo "<script>window.alert('No puede editar integrantes que no existen');window.location='editor-nosotros.php#seccion-integrantes';</script>";
+			
+				
+						}
+					}	 
+				?>
+						</div>
+						<?php  
+							}else{
+						?>
+						<div class="contenedor-titulos-cajas">
+							<h3 class="integrante-titulo">Editar/eliminar integrante</h3>
+							<h3>ID integrante</h3>
+							<select name="idint" required="yes">
+								<option value="">Seleccione un integrante</option>
+								<?php foreach($PonerIntegrantes as $ColocarIntegrante){ ?>
+								<option value="<?php echo $ColocarIntegrante['id']?>"><?php echo "ID: ".$ColocarIntegrante['id']." || ".$ColocarIntegrante['nombreint']?></option>
+								<?php } ?>
+							</select>
+									
 							<h3>Nombre</h3>
 							<input type="text" name="nombreintedit" placeholder="Ingrese Nombre">
 
 							<h3>Rol</h3>
 							<input type="text" name="cargointedit" placeholder="Ingrese Rol">
-
+								
 							<h3>Foto de perfil</h3>
 							<input type="file" name="fotointedit">
-
+										
 							<div class="btns-submit">
-								<input type="submit" name="" value="Eliminar">
+								<input type="submit" name="eliminarintegrante" value="Eliminar">
 			  					<input type="reset" name="" value="Cancelar">
 			  					<input type="submit" name="editarintegrante" value="Editar integrante">
 			  				</div>
 
 						</div>
-
-
+						<?php } ?>			
+		</form>				
 					</div>
 	  				
 					
 
-  				<!--Dependiendo de si se va a editar o no el articulo-->
+  				<?php //<!--Dependiendo de si se va a editar o no el articulo--> ?>
   				<!-- <input type="submit" name="" value="Editar artículo"> -->
 
-  			</form>
+  			
   		</div>
 
 
@@ -354,13 +394,13 @@
 
 	<script src="js/animaciones.js"></script>
 
-  	<!-- Script necesario para que funcione el menu -->
+  	<?php //<!-- Script necesario para que funcione el menu --> ?>
 	<script src="js/menu.js"></script>
 	
-	<!-- Script necesario para que funcione el btn de volver arriba -->
+	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
 	<script src="js/irArriba.js"></script>
 
-	<!-- Script necesario para que funcione el btn de redes sociales -->
+	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

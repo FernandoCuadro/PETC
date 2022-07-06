@@ -1,7 +1,7 @@
 <?php
 require_once("modelo/modeloNosotros.php");
 $slide = new modeloNosotros();
-$integrantes = new modeloNosotros();
+$integrantes = new modeloNosotros();    
 
 $MostrarImagen = $slide->imagenes();
 

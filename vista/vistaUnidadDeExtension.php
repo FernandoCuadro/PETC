@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!--Meta tags-->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
 
+	<meta name="description" content="El Polo Educativo Tecnológico Cerro cuenta con una Unidad de Extensión, conocé qué es y cuales son sus objetivos.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
+
+	<!--Link a icono y hojas de estilo-->
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
 	<link rel="stylesheet" type="text/css" href="css/styleUE.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">

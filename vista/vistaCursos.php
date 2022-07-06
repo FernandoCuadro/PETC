@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="spanish">
 <head>	
+
+	 <?php //<!--Meta tags--> ?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; utf-8">
 
+	<meta name="description" content="Enterate de todos los cursos y carreras que podes seguir en el Polo Educativo Tecnológico Cerro. Conocé los requisitos para la inscripción.">
+
+	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
+
+	<meta name="Revisit-after" content="7 days">
+	<meta name="robots" content="all">
+
+	<?php //<!--Link a icono y hojas de estilo--> ?>
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-	<link rel="stylesheet" type="text/css" href="css/styleCursos.css">
+	<link rel="stylesheet" type="text/css" href="css/styleCursos2.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css"> 
 
-	<!-- Fuente usada para los titulos -->
+	<?php //<!-- Fuente usada para los titulos --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
 
-	<!-- Fuente usada para la descripcion -->
+	<?php //<!-- Fuente usada para la descripcion --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
@@ -55,7 +66,7 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <!-- Empieza menu responsive -->
+	    <?php //<!-- Empieza menu responsive --> ?>
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -81,9 +92,9 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <!-- Termina el menu responsive -->
+		    <?php //<!-- Termina el menu responsive --> ?>
 
-		    <!-- Empieza menu normal -->
+		    <?php //<!-- Empieza menu normal --> ?>
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -96,10 +107,10 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <!-- Termina menu -->
+	    <?php //<!-- Termina menu --> ?>
   	</header>
   	
-  	<!-- Empieza contenido de la pagina -->
+  	<?php //<!-- Empieza contenido de la pagina --> ?>
   	<main>
 
   		<section id="cursos">
@@ -124,7 +135,7 @@
   			
   			</div>
 
-  			<!--Estos son los botones que llevan al editor-->
+  			<?php //<!--Estos son los botones que llevan al editor--> ?>
 			  <?php   
         		
         		if(empty($_SESSION['usuario'])){       			
@@ -140,7 +151,7 @@
 				//session_start(); 
 				$_SESSION['niv'] = $PonerNiveles['numero'];   
 			?>
-  			<!--Todo esto se repite si se trata de otro nivel de cursos-->
+  			<?php //<!--Todo esto se repite si se trata de otro nivel de cursos--> ?>
   			<section>
 	  			<div class="cursos-por-nivel">
 	  				
@@ -152,10 +163,13 @@
 
 							}else{	
 						?>
-	  					<!--Esto es lo que se repite por cada nuevo curso-->
+	  					<?php //<!--Esto es lo que se repite por cada nuevo curso--> ?>
 	  					<a class="curso-enlace" href="<?php echo $PonerAreas['enlace'] ?>" target="__blank">
 	  						<article>
-	  						<?php //echo'<p class="curso-id"></p>' ?>
+	  						
+
+	  							
+	  							<p class="curso-nivel"><?php echo $PonerNiveles['numero'];?></p>
 
 	  							<img src="<?php echo $PonerAreas['imagen'] ?>">
 	  							<p class="curso-titulo"><?php echo $PonerAreas['area'] ?></p>
@@ -208,19 +222,19 @@
 
   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-  	<!-- Script necesario para pantalla de carga -->
+  	
   	<script src="js/animaciones.js"></script>
 
-  	<!-- Script necesario para que funcione el menu -->
+  	
 	<script src="js/menu.js"></script>
 	
-	<!-- Script necesario para que funcione el btn de volver arriba -->
+	
 	<script src="js/irArriba.js"></script>
 
-	<!-- Script necesario para que funcione el btn de redes sociales -->
+	
 	<script src="js/redesSociales.js"></script>
 
-	<!-- Script necesario para slider -->
+	
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 </body>

@@ -99,18 +99,19 @@ if(isset($_POST['crearcurso'])){
 }
 
 if(isset($_POST['editarCurso'])){
-    if($_POST['nomcursoedit'] == ""){
-        echo "<script>window.alert('El Nombre esta vácio');window.location='editor-cursos.php#CrearCurso';</script>";
-    }elseif($_POST['nivelcursoedit'] == ""){
-        echo "<script>window.alert('Debe seleccionar un nivel');window.location='editor-cursos.php#CrearCurso';</script>";
-    }elseif($_POST['enlacecursoedit'] == ""){
-        echo "<script>window.alert('Debe ingresar un enlace');window.location='editor-cursos.php#CrearCurso';</script>";
-    }elseif($_FILES['imagencursoedit']['name'] == ""){
-        echo "<script>window.alert('Debe ingresar una imagen');window.location='editor-cursos.php#CrearCurso';</script>";    
-    }else{  
-
-$directorio = 'img/cursos';     
-$archivo = $_FILES['imagencursoedit']['tmp_name'];	
+    if($_POST['idCurso'] == ""){
+        echo "<script>window.alert('Seleccione un curso');window.location='editor-cursos.php#CrearCurso';</script>";
+    }elseif($_FILES['imagencursoedit']['name'] == ""){  
+        $editarCurso = $cursos->editarCursos(
+            $idCurso = $_POST['idCurso'],
+            $nombreCurso = $_POST['nomcursoedit'],
+            $nivelCurso = $_POST['nivelcursoedit'],
+            $imagenCurso = "",
+            $enlaceCurso = $_POST['enlacecursoedit']
+        );
+    }else{    
+        $directorio = 'img/cursos';     
+        $archivo = $_FILES['imagencursoedit']['tmp_name'];	
 
     if(is_dir($directorio) && is_uploaded_file($archivo)){
 
