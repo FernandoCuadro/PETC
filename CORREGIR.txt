@@ -1,0 +1,122 @@
+
+*** NOSOTROS ***
+
+- Si le damos a editar o eliminar en la seccion de integrantes, 
+debería llevarnos al editor y ya colocarnos la info de ese integrante (PROG)(HECHO)
+
+****************
+
+
+
+
+
+*** EDITOR NOSOTROS ***
+
+- En ID integrante va el número en vez del nombre, en caso de que se repitan los
+nombres podría haber confusión (PROG)(HECHO)
+
+****************
+
+
+
+
+*** CURSOS ***
+
+- En cada curso se debe mostrar el nivel que está ocupando (DISEÑO, PROG) ///**DISEÑO HECHO**///(HECHO)
+- Al crear un nuevo nivel y borrarlo, hay cursos que se auto agregan al nuevo
+nivel y también se borran con el cuando es borrado (PROG, BD)
+
+************** 
+
+
+
+*** EDITOR CURSOS ***
+
+- Si al editar un curso no se le coloca un nuevo nombre, debe permanecer el que
+ya tiene (PROG)(HECHO)
+
+- Al editar un curso, si solo se cambia un dato, el resto debe de
+permanecer (PROG)(Hecho)
+
+
+*********************
+
+
+
+
+
+
+*** NOVEDADES ***
+
+- Las imagenes no son todas iguales (DISEÑO) ///** HECHO ***///
+- La descripción de la noticia solo debe tener scroll hacia abajo ///** HECHO **///
+- Aparece fecha y hora de la publicacion, deberia aparecer solo fecha (PROG)
+- Falta paginación (PROG)
+- Se va a poder filtrar por area? (PROG)
+
+*****************
+
+
+
+
+*** NOVEDADES INDIVIDUAL ***
+
+- Colores incorrectos (DISEÑO) ////** HECHO **//
+- Colocar descripcion en una de las meta tags, meta name="description" content=" "
+  solo hasta 140 caracteres, de no ser posible no colocar nada (PROG)
+- En la etiqueta <title> colocar el titulo de la noticia (PROG)
+
+****************************
+
+
+
+*** EDITOR NOVEDADES ***
+
+- No aparecen las cajas de contenido (DISEÑO) ///** HECHO **///
+- Cajas de contenido sin estilo aplicado (DISEÑO) ///** HECHO **///
+- Al agregar un nuevo articulo, si eliminamos todas las etiquetas, luego no deja 
+  poner nueva etiquetas (PROG)
+- Al editar una noticia, nos muestra los ID de las etiquetas (PROG)
+- Al editar una noticia, no podemos añadir o quitar etiquetas (PROG)
+- Colocar titulo de la pestaña con el nombre de la noticia (PROG)
+- Sólo se puede agregar un sólo enlace (PROG)
+- Validar cantidad de caracteres mediante PHP y si se excede mostrar un mensaje (PROG)
+- Al editar una novedad, si ocurre un error luego de mostrar el mensaje
+  nos redirije al editor pero ya no tenemos la novedad que estabamos editando (PROG)
+- Al editar una novedad se nos muestra el ID de la noticia (PROG)
+
+************************
+
+
+
+
+*** CALENDARIO ***
+
+- Los colores no están bien (DISEÑO) ///** HECHO **///
+- El footer es incorrecto (DISEÑO) ///** HECHO **///
+
+******************
+
+
+
+*** CONTACTO ***
+
+- El formulario funciona? (PROG) ///** HECHO **///
+
+****************
+
+
+
+*** ADMIN ***
+
+- Se puede ingresar a la pagina de admin sin estar logueado (PROG)
+
+*************
+
+
+*** UNA VEZ QUE FUNCIONE TODO ***
+
+- Verificar los mensajes que se muestran en caso de error, personalizarlos o 
+  mejorarlos (GENERAL)
+
+*********************************

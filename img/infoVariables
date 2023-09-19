@@ -1,0 +1,28 @@
+    Varibles
+Es ub espacio en memoria, en js se escribe el nombre de la variale y el contenido
+    reciepiente = "papel"
+
+    Tipos de datos
+        String, Number, booleano - "cadena de texo", 20, true
+
+        Casos especiales - Undefined, Null, Nan            
+            -undefined - La variable existe pero esta sin definir
+            -null - A diferencia de undefined  esta si es un valor solo que no tiene nada
+            -nan - Not an Number cuando no hay un numero en la operacion de variables
+
+ Para declarar las variables es var, let o const
+    var - es una variable global
+    let - es una variable de la msima planilla, si se crea dentro de un esa 
+            variable queda dentro del if y sus bloques       
+    const - Es una variable constante, cuando se le asigna un valor siempre va a ser ese valor,
+                no se puede cambiar        
+    
+    a los alcances de let y var se les llama, scope
+
+ Para declarar una variable es asi -
+        let numero = 20;
+ Para declarar multiples variables -
+        let numero1 = 2, numero2 = 5;
+
+        let numero1 = 2;
+        netnumero2 = 5;                      

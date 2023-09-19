@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/styleEditores.css">
+	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
+
+	<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+	<script type="text/javascript" src="js/ckeditor.js"></script>
+
+	<!-- Fuente usada para la introduccion sobre la imagen -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet"> 
+
+	<!-- Fuente usada para los titulos -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet"> 
+
+	<!-- Fuente usada para la descripcion -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<title>EDITOR INNOVACION | Laboratorio de Innovación en Turismo</title>
+</head>
+<body>
+	<a href="javascript:void(0);" id="scroll" title="Volver arriba">Top<span></span></a>
+	<header>
+
+	    <div id="contenedor-sesion">
+	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin -->
+	    	<p><i class="fa-solid fa-user"></i><a href="#" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.html" id="modo-admin">Administrador</a></p>
+
+	    	<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor -->
+	    	<!-- <p><i class="fa-solid fa-user"></i><a href="#" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p> -->
+	    </div>
+
+		<div id="logo">
+	    	<h1><a href="index.html"><img src="img/logo-pti.png"></a></h1>
+	    </div>
+
+	    <!-- Empieza menu responsive -->
+	    <nav>
+		    <div id="burger-menu">
+		        <span></span>
+			</div>
+
+		    <div id="menu-responsive">
+		        <ul>
+		            <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+		            <li><a id="btn-noticias" href="#"><span><i class="fa-solid fa-newspaper"></i>Noticias<i class="fa-solid fa-angle-right"></i></span></a>
+		            	<ul id="sub-menu-noticias">
+		            		<li><a href="noticias.html"><i class="fa-solid fa-list"></i>General</a></li>
+		            		<li><a href="#"><i class="fa-solid fa-laptop-code"></i>Informática</a></li>
+		            		<li><a href="#"><i class="fa-solid fa-plane-departure"></i>Turismo</a></li>
+		            		<li><a href="#"><i class="fa-solid fa-dumbbell"></i>Deporte</a></li>
+		            	</ul>
+		            </li>
+		            <!-- <li><a href="innovacion.html"><i class="fa-solid fa-lightbulb"></i>Innovación</a></li>
+		            <li><a href="tecnologia.html"><i class="fa-solid fa-microchip"></i>Tecnología</a></li> -->
+		            <li><a href="sobre-nosotros.html"><i class="fa-solid fa-users"></i>Sobre nosotros</a></li>
+		            <li><a href="calendario.html"><i class="fa-solid fa-calendar-days"></i>Calendario</a></li>
+		            <li><a href="recursos.html"><i class="fa-solid fa-box-archive"></i>Recursos</a></li>
+		        </ul>
+		    </div>
+		    <!-- Termina el menu responsive -->
+
+		    <!-- Empieza menu normal -->
+		    <div id="menu-normal-size">
+		    	<ul>
+		            <li><a href="index.html"><i class="fa-solid fa-house"></i>Home</a></li>
+		            <li><a id="btn-noticias-normal-size" href="#"><span><i class="fa-solid fa-newspaper"></i>Noticias<i class="fa-solid fa-angle-right"></i></span></a>
+		            	<ul id="sub-menu-noticias-normal-size">
+		            		<a href="noticias.html"><li><i class="fa-solid fa-list"></i>General</li></a>
+		            		<a href="#"><li><i class="fa-solid fa-laptop-code"></i>Informática</li></a>
+		            		<a href="#"><li><i class="fa-solid fa-plane-departure"></i>Turismo</li></a>
+		            		<a href="#"><li><i class="fa-solid fa-dumbbell"></i>Deporte</li></a>
+		            	</ul>
+		            </li>
+		            <!-- <li><a href="innovacion.html"><i class="fa-solid fa-lightbulb"></i>Innovación</a></li> -->
+		            <li><a href="sobre-nosotros.html"><i class="fa-solid fa-users"></i>Sobre nosotros</a></li>
+		            <li><a href="calendario.html"><i class="fa-solid fa-calendar-days"></i>Calendario</a></li>
+		            <li><a href="recursos.html"><i class="fa-solid fa-box-archive"></i>Recursos</a></li>
+		        </ul>
+		    </div>
+		</nav>
+	    <!-- Termina menu -->
+  	</header>
+  	
+  	<!-- Empieza contenido de la pagina -->
+  	<main>
+  		<article>
+  			<div id="bienvenida">
+  				<img src="img/inspiracion.jpg">
+  			</div>
+  		</article>
+
+  		<div id="contenedor">
+	  		<div id="contenedor__contenido">
+	  			<form>
+		  			<div class="contenedor__contenido__titulo">
+		  				<h2>Título</h2>
+		  				<input type="text" name="">
+		  			</div>
+
+		  			<!-- Los articulos de innovacion no se categorizan por area -->
+		  			<!-- <div class="contenedor__contenido__area">
+		  				<h2>Área</h2>
+		  				<select>
+		  					<option value="">Seleccione un área</option>
+		  					<option>Informática</option>
+		  					<option>Turismo</option>
+		  					<option>Deporte</option>
+		  				</select>
+		  			</div> -->
+
+		  			<div class="contenedor__contenido__descripcion">
+		  				<h2>Descripción</h2>
+		  				<!-- Al escribir en estas cajas de edicion lo que estamos haciendo al personalizar lo que escribimos es transformar todo esto en html y css, por lo que al guardar en BD deberia guardarse eso, luego la variable se debería soltar "sola" en la pagina ya que van a estar todas las etiquetas necesarias con sus estilos respectivos -->
+		  				<div id="editor1"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__miniatura">
+		  				<h2>Miniatura</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__recursos">
+		  				<h2>Recurso 1</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__contenido">
+		  				<h2>Contenido 1</h2>
+		  				<div id="editor2"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__recursos">
+		  				<h2>Recurso 2</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__contenido">
+		  				<h2>Contenido 2</h2>
+		  				<div id="editor3"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__recursos">
+		  				<h2>Recurso 3</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__contenido">
+		  				<h2>Contenido 3</h2>
+		  				<div id="editor4"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__recursos">
+		  				<h2>Recurso 4</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__contenido">
+		  				<h2>Contenido 4</h2>
+		  				<div id="editor5"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__recursos">
+		  				<h2>Recurso 5</h2>
+		  				<input type="file" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__contenido">
+		  				<h2>Contenido 5</h2>
+		  				<div id="editor6"></div>
+		  			</div>
+
+		  			<div class="contenedor__contenido__fecha">
+		  				<h2>Fecha</h2>
+		  				<input type="date" name="">
+		  			</div>
+
+		  			<div class="contenedor__contenido__estado">
+		  				<h2>Estado</h2>
+		  				<select value="">
+		  					<option>Seleccione estado</option>
+		  					<option value="Habilitada">Habilitada</option>
+		  					<option value="Deshabilitada">Deshabilitada</option>
+		  				</select>
+		  			</div>
+
+		  			<div class="contenedor__contenido__usuario">
+		  				<h2>Usuario</h2>
+		  				<select>
+		  					<option value="">Seleccione usuario</option>
+		  					<option>Pepe</option>
+		  					<option>Jorge</option>
+		  					<option>Andrea</option>
+		  				</select>
+		  			</div>
+
+		  			<div id="contenedor__contenido__btns">
+		  				<a href="#">Cancelar</a>
+		  				<a href="#">¡Hecho!</a>
+		  			</div>
+	  			</form>
+	  		</div>
+	  		
+  		</div>
+
+
+  		<aside>
+  			<div class="share">
+			  <i class="fa fa-plus"></i>
+			</div>
+		  	<div class="one">
+		    	<a href="https://facebook.com" target="__blank"><i class="fa-brands fa-facebook-f"></i></a>
+		 	</div>
+		  	<div class="two">
+		    	<a href="https://twitter.com" target="__blank"><i class="fa-brands fa-twitter"></i></a>
+		  	</div>
+		  	<div class="three">
+		    	<a href="https://instagram.com" target="__blank"><i class="fa-brands fa-instagram"></i></a>
+		  	</div>
+  		</aside>
+  	</main>
+
+  	<footer>
+  		<section>
+	  		<div>
+	  			<p>E-mail: <a href="https://www.gmail.com" target="__blank">unidadextensionptmontevideo@gmail.com</a></p>
+	  			<p>© 2022 Unidad de Extensión, todos los derechos reservados.</p>
+	  		</div>
+  		</section>
+
+  		<section>
+  			<div id="contenedor-creditos">
+  				<p>This site was created by <a href="#">2FAR™</a></p>
+  			</div>
+  		</section>
+  	</footer>
+
+  	<script>
+	    BalloonEditor
+	        .create( document.querySelector( '#editor1' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+
+	    BalloonEditor
+	        .create( document.querySelector( '#editor2' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+
+        BalloonEditor
+	        .create( document.querySelector( '#editor3' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+
+        BalloonEditor
+	        .create( document.querySelector( '#editor4' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+
+	    BalloonEditor
+	        .create( document.querySelector( '#editor5' ) )
+	        .catch( error => {
+	            console.error( error );
+	        } );
+
+	    BalloonEditor
+			.create( document.querySelector( '#editor6' ) )
+			.catch( error => {
+			    console.error( error );
+			} );
+	</script>
+
+
+  	<!-- Script necesario para que funcione el menu -->
+	<script src="js/menu.js"></script>
+	
+	<!-- Script necesario para que funcione el btn de volver arriba -->
+	<script src="js/irArriba.js"></script>
+
+	<!-- Script necesario para que funcione el btn de redes sociales -->
+	<script src="js/redesSociales.js"></script>
+</body>
+</html>

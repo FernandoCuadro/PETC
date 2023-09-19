@@ -1,0 +1,61 @@
+NOSOTROS
+	[Realizadas]
+	-Se redujo el codigo de agregar imagenes al poner un solo input:file con el multiple y un array que recoja
+		los nombres.
+	
+	-Se implemento avisos personalizados con Js, lo que permite eliminar las clases avisos
+	
+	-Funcion eliminar imegen como el de noticias, osea en cada noticia tiene su propio eliminar
+
+	--Vadilaciones en torno al file multiple de las imagenes
+
+	---Reducir codigo validaciones, que solo quede una imagen
+
+
+
+
+	[Ideas a realizar]
+	-Se podria cambiar el agregar imagenes para arriba de las fotos y darle mas espacio al select de imagenes
+	
+
+
+
+	[Errores]
+	-Falta colocar mas en el medio el agregar imagenes
+	
+	-Deja agregar cualquier archivo que no sea imagen---arreglado
+	
+	-eliminarintegrante y eliminarimagen tiene que tener un if que detecte si esta logueado---arreglado
+
+
+CURSOS
+	[Reealizadas]
+	-Se usa el js para los avisos
+	-Mostrar el numero de nivel al lado del nombre
+	
+	[Ideas a realizar]
+	
+
+	[Errores]
+	-Se puede agregar cualquier tipo de archivo que no sea imagen --- arreglado
+
+
+NOTICIAS
+	[Realizadas]
+	-Se usa js en los avisos
+	
+	[Ideas a realizar]
+	-Buscador por nombre, mes, año
+	
+	[Errores]
+	Deja cargar archivos que no son imagenes, el if que controla las imagenes solo sirve en el controlador
+
+LOGIN
+	[Realizadas]
+	-Cambiar las alertas a js
+	-Enlace para volver al lobby
+	-Si esta logueado no puede entrar al login
+
+	[Ideas a Realizar]
+	-Sistema de recordar contraseña, poddria ser con un email
+	
