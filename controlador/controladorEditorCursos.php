@@ -31,7 +31,7 @@ if(isset($_POST['crearnivel'])){
            text:'Inserte un orden al nivel',
            icon:'error'
            })</script>";    
-    }elseif($_POST['idnivel'] !== "" and $_POST['nomnivel'] !== "" and $_POST['ordernivel'] !==""){
+    }elseif($_POST['nomnivel'] !== "" and $_POST['ordernivel'] !==""){
         if($_POST['ordernivel'] <= 0){
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
             echo "<script>
@@ -183,13 +183,6 @@ if(isset($_POST['crearcurso'])){
 
 if(isset($_POST['editarCurso'])){
     if($_POST['idCurso'] == ""){
-<<<<<<< HEAD
-        echo "<script>window.alert('Seleccione un curso');window.location='editor-cursos.php#CrearCurso';</script>";
-    }elseif($_FILES['imagencursoedit']['name'] == ""){  
-        $editarCurso = $cursos->editarCursos(
-            $idCurso = $_POST['idCurso'],
-            $nombreCurso = $_POST['nomcursoedit'],
-=======
         echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
         echo "<script>
            swal({
@@ -201,7 +194,6 @@ if(isset($_POST['editarCurso'])){
         $editarCurso = $cursos->editarCursos(
             $idCurso = $_POST['idCurso'],
             $nombreCurso = ucfirst($_POST['nomcursoedit']),
->>>>>>> b958538 (Hasta Cursos arreglado)
             $nivelCurso = $_POST['nivelcursoedit'],
             $imagenCurso = "",
             $enlaceCurso = $_POST['enlacecursoedit']

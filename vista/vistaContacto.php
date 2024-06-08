@@ -62,7 +62,7 @@ use PHPMailer\PHPMailer\Exception;
 		}elseif($_SESSION['perfil'] == 'moderador'){
 	?>	
 		<div id="contenedor-sesion">			
-	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 		</div>
 	<?php } ?>	
 
@@ -247,11 +247,15 @@ use PHPMailer\PHPMailer\Exception;
 						$mail->Subject = 'Se ha contactado con usted: '.$correo;
 						$mail->Body = 'Nombre: '.$nombre. ' '.$apellido.'<br> Mensaje:'.$mensaje;
 						$mail->send(); 
-<<<<<<< HEAD
-						echo "<script>window.alert('El mensaje se ha enviado correctamente!');</script>";
-=======
-						echo "<script>window.location='AvisoContacto.php';</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
+						echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+						echo "<script>
+								swal({
+								title:'Contacto',
+								text:'Se ah enviado correctamente!!',
+								icon:'success'
+								
+								})
+								</script>";
 
 					}catch(Exception $e){
 					echo 'Error al enviar el mensaje'.$mail->ErrorInfo;	

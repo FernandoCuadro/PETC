@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("America/Montevideo");
 
     class modeloCalendario{
 
@@ -52,6 +53,11 @@
                 '" .$color_evento. "'
             )";
           $resultadoNuevoEvento = $this->conexion->query($InsertNuevoEvento);
+          $fecha_actual = date("Y-m-d H:i:s");
+          $ci = $_SESSION['ci'];
+          $nombreusuario = $_SESSION['usuario'];
+          $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a agregado un evento: $evento', '$fecha_actual')";
+          $sqlauditoria = $this->conexion->query($consauditoria);   
           echo"<script language='javascript'>window.location='calendario.php?e=1'</script>";
           //header("Location:calendario.php?e=1");
 
@@ -67,6 +73,11 @@
                 color_evento ='$color_evento'
             WHERE id='".$idEvento."' ");
         $result = $this->conexion->query($UpdateProd);
+        $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un evento: $evento', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);   
           echo"<script language='javascript'>window.location='calendario.php?ea=1'</script>";
           //header("Location:calendario.php?e=1");
 

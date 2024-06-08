@@ -6,11 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-<<<<<<< HEAD
-	<link rel="stylesheet" type="text/css" href="css/styleEditores2.css">
-=======
 	<link rel="stylesheet" type="text/css" href="css/styleEditores34.css">
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Fuente usada para la introduccion sobre la imagen -->
@@ -29,25 +25,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<<<<<<< HEAD
-	<script>
-			
-    		$(function(){
-				// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
-				$("#adicional").on('click', function(){
-					$("#tabla tbody tr:eq(0)").clone().removeClass('fila-fija').appendTo("#tabla");
-				});
-			 
-				// Evento que selecciona la fila y la elimina 
-				$(document).on("click","#td-menos",function(){
-					var parent = $(this).parents().get(0);
-					$(parent).remove();
-				});
-			});
-	</script>
-=======
-	<script type="text/javascript" src="js/EtiAgrNot"></script>
-	<script type="text/javascript" src="js/EnlAgrNot"></script>
+	
 
 <?php
 	if(!empty($_GET['idNot'])){
@@ -58,7 +36,6 @@
 	}	
 	}else{	
 ?>	
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<title>Editor | Novedades</title>
 <?php } ?>		
 </head>
@@ -83,7 +60,7 @@
 			}elseif($_SESSION['perfil'] == 'moderador'){
 		?>
 		<div id="contenedor-sesion">			
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 		</div>
 		<?php } ?>		
 		<div id="logo-normal-size">
@@ -172,45 +149,6 @@
 
 					</div>	  				
 	  				
-<<<<<<< HEAD
-					<div class="contenedor-titulos-cajas">
-						<h3>Área</h3>
-		  				<select name="area">
-						  <option value="<?php echo $MostrarNoticia['id_area']; ?>"><?php echo $MostrarNoticia['area']; ?></option>
-										<?php
-										foreach($datosArea as $datoArea){
-										?>
-											<option value="<?php echo $datoArea['id']; ?>"><?php echo $datoArea['area']; ?></option>
-										<?php }	?>					
-		  				</select>
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Descripción</h3>
-						<textarea placeholder="Ingrese una descripción breve para la noticia" maxlength="500" minlength="20" name="descripcion" required="yes"><?php echo $MostrarNoticia['descripcion']; ?></textarea>
-						<!-- <div id="editor1"> -->		
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Miniatura</h3>
-	  					<input type="file" name="miniatura">
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Contenido 1</h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido1" required="yes"><?php echo $MostrarNoticia['contenido1'];?></textarea>  
-	  					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Imagen 1</h3>
-	  					<input type="file" name="archivo1">
-					</div>  				
-	  				
-
-					<div class="contenedor-titulos-cajas">
-						<h3>Contenido 2</h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>  			
-=======
 					<div class="contenedor-titulos-cajas grupo__area">
 						<h3>Área<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
 
@@ -244,7 +182,7 @@
 	  				
 					<div class="contenedor-titulos-cajas grupo__miniatura">
 						<h3>Miniatura<i class="fa-solid fa-triangle-exclamation advertencia"></i></h3>
-	  					<input type="file" name="miniatura" id="inputMiniatura">
+	  					<input accept="image/png,image/jpeg" type="file" name="miniatura" id="inputMiniatura">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -268,7 +206,7 @@
 					<div class="contenedor-titulos-cajas grupo__imagen1">
 						<h3>Imagen 1<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-	  					<input type="file" name="archivo1" id="inputImagen1">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo1" id="inputImagen1">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -280,7 +218,7 @@
 					<div class="contenedor-titulos-cajas grupo__contenido2">
 						<h3>Contenido 2<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
 
 						<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
@@ -288,7 +226,6 @@
 			  				<p class="textoLimite">.</p> 
 		  				</div>
 
->>>>>>> b958538 (Hasta Cursos arreglado)
 					</div>
 	  				
 
@@ -296,53 +233,17 @@
 					<div class="contenedor-titulos-cajas grupo__imagen2">
 						<h3>Imagen 2<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-	  					<input type="file" name="archivo2" id="inputImagen2">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo2" id="inputImagen2">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>
 					</div>
 	  				
-<<<<<<< HEAD
-					<div class="contenedor-titulos-cajas">
-						<h3>Contenido 3</h3>
-		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Imagen 3</h3>
-	  					<input type="file" name="archivo3">
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Contenido 4</h3>
-	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
-					</div>
-	  				
-					<div class="contenedor-titulos-cajas">
-						<h3>Imagen 4</h3>
-						<input type="file" name="archivo 4">
-					</div>
-					
-					<div class="contenedor-titulos-cajas">
-						<h3>Contenido 5</h3>
-	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"><?php echo $MostrarNoticia['contenido2']; ?></textarea>
-					</div>
-					
-					<div class="contenedor-titulos-cajas">
-						<h3>Imagen 5</h3>
-						<input type="file" name="archivo 5">
-					</div>
-					
-					<div class="contenedor-titulos-cajas">
-						<h3>Fecha</h3>
-						<input type="datetime-local" name="fecha" value="<?php echo date('Y-m-d\TH:i', strtotime($MostrarNoticia['fecha'])); ?>"required=yes>
-					</div>
-=======
 					<div class="contenedor-titulos-cajas grupo__contenido3">
 						<h3>Contenido 3<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido3"><?php echo $MostrarNoticia['contenido3']; ?></textarea>
+		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido3"><?php echo $MostrarNoticia['contenido3']; ?></textarea>
 
 		  				<div class="contenedor-informacion">
 			  				<p class="textoInfo">Este campo está vacío</p>
@@ -355,7 +256,7 @@
 					<div class="contenedor-titulos-cajas grupo__imagen3">
 						<h3>Imagen 3<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-	  					<input type="file" name="archivo3" id="inputImagen3">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo3" id="inputImagen3">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -365,7 +266,7 @@
 					<div class="contenedor-titulos-cajas grupo__contenido4">
 						<h3>Contenido 4<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido4"><?php echo $MostrarNoticia['contenido4']; ?></textarea>
+	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido4"><?php echo $MostrarNoticia['contenido4']; ?></textarea>
 
 	  					<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
@@ -376,9 +277,8 @@
 	  				
 					<div class="contenedor-titulos-cajas grupo__imagen4">
 						<h3>Imagen 4<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
->>>>>>> b958538 (Hasta Cursos arreglado)
 
-						<input type="file" name="archivo4" id="inputImagen4">
+						<input type="file" accept="image/png,image/jpeg" name="archivo4" id="inputImagen4">
 
 						<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -388,7 +288,7 @@
 					<div class="contenedor-titulos-cajas grupo__contenido5">
 						<h3>Contenido 5<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido5"><?php echo $MostrarNoticia['contenido5']; ?></textarea>
+	  					<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido5"><?php echo $MostrarNoticia['contenido5']; ?></textarea>
 
 	  					<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
@@ -400,7 +300,7 @@
 					<div class="contenedor-titulos-cajas grupo__imagen5">
 						<h3>Imagen 5<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-						<input type="file" name="archivo5" id="inputImagen5">
+						<input type="file" accept="image/png,image/jpeg" name="archivo5" id="inputImagen5">
 
 						<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -432,9 +332,11 @@
 
 		  			</div>
 					
-					  <div class="contenedor-titulos-cajas">
+					  <div class="contenedor-titulos-cajas grupo__enlacess">
 					  <h3> Agregar enlaces<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+					<div class="contenedor-informacion">
 					<p class="textoInfo">Los enlaces deben empezar con https://</p>
+					</div>			
 					  <table class="tabla1"  id="tabla1">
 							<tr class="fila-fija1">
 								<td id="td-enlace"><input type="text" name="urlagr[]" placeholder="Ingrese un enlace"></td>
@@ -446,15 +348,22 @@
 						
 		  			</div> 	
 					  
+
 					<div class="contenedor-titulos-cajas grupo__enlaces">
 					<h3> Editar enlaces<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+					<div class="contenedor-informacion">
 					<p class="textoInfo">Los enlaces deben empezar con https://</p>
+					</div>
+						<table class="tabla1"  id="tabla1">
+							
 						<?php foreach($PonerEnlaces as $ColocarEnlace){ 
 							if($ColocarEnlace['nombre'] != ''){
 							?>
-						<input type="text" name="idurl[]" class="esconder" value = "<?php echo $ColocarEnlace['id']?>">				
-		  				<input type="text" name="url[]" placeholder="https://ejemplo-enlace.com" value="<?php echo $ColocarEnlace['nombre']; ?>">
-								
+
+						<input type="text" name="idurl[]" class="esconder" value = "<?php echo $ColocarEnlace['id']?>">
+						<tr class="fila-fija1">					
+		  				<td id="td-enlace">	<input type="text" name="url[]" placeholder="https://ejemplo-enlace.com" value="<?php echo $ColocarEnlace['nombre']; ?>"></td>
+						</tr>		
 							<?php }else{ ?>	
 					 	<div class="contenedor-informacion">
 							<p class="textoInfo">Ningún enlace fue colocado</p>
@@ -462,35 +371,16 @@
 						<?php 
 						}
 						}
+						
 						?>	
+					</table>
 		  			</div>					
 					  
 					  <?php } ?>
 
 					<div class="contenedor-titulos-cajas">
-<<<<<<< HEAD
-						<h3>Etiquetas</h3>
-						<?php }
-						  foreach($PonerEtiqueta as $ColocarEtiqueta){ 
-						 ?>
-						 <input type="text" name="a" value = "<?php echo $ColocarEtiqueta['id']?>">
-	  					<input type="text" name="nombreEtiqueta" placeholder="Ingrese un etiqueta" value="<?php echo $ColocarEtiqueta['nombre']?>">
-						  <select name="estadoEtiqueta">
-							<option value="<?php echo $ColocarEtiqueta['estado']; ?>"><?php echo $ColocarEtiqueta['estado']; ?></option>
-							<option value="activo">Activo</option>
-							<option value="inactivo">Inactivo</option>
-						</select>
-						<?php } ?>
-					</div>
 
-					</div>	
-					<input type="submit" name="" value="Eliminar">
-					<input type="reset" value="aaaa">  				  
-					<input type="submit" name="editarNoticias" value="Editar artículo">				
-				</div>
-=======
-
-					<h3> Agregar etiquetas<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+					<h3> Agregar etiquetas</h3>
 
 						<table class="table bg-info"  id="tabla">
 							<tr class="fila-fija">
@@ -506,7 +396,7 @@
 					</div>					
 
 					  <div class="contenedor-titulos-cajas grupo__enlaces">	
-					  <h3> Editar etiquetas<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+					  <h3> Editar etiquetas</h3>
 					<?php
 					//Puede causar error ? se vera
 					foreach($PonerEtiqueta as $ifeti){}	 
@@ -540,7 +430,6 @@
 				<input class="submit cursorInactivo" type="submit" name="editarNoticias" value="Editar artículo" title="Complete el formulario para habilitar esta acción" disabled>
 
 				
->>>>>>> b958538 (Hasta Cursos arreglado)
 				<?php 
 					}else{ 
 				?>	
@@ -557,29 +446,15 @@
 
 					</div>	  			
 				
-<<<<<<< HEAD
-					<div class="contenedor-titulos-cajas">
-						<h3>Área</h3>
-						<select name="area">
-=======
 					<div class="contenedor-titulos-cajas grupo__area">	
 						<h3>Área<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
 						<select name="area" required>
 							<option value="">Seleccione un área</option>
->>>>>>> b958538 (Hasta Cursos arreglado)
 							<?php
 								foreach($datosArea as $datoArea){
 							?>
 							<option value="<?php echo $datoArea['id']; ?>"><?php echo $datoArea['area']; ?></option>
 								<?php }	?>										
-<<<<<<< HEAD
-			  				</select>
-					</div>	
-				
-					<div class="contenedor-titulos-cajas">
-						<h3>Descripción</h3>
-						<textarea placeholder="Ingrese una descripción breve para la noticia" maxlength="500" minlength="20" name="descripcion" required="yes"></textarea>
-=======
 			  			</select>
 
 			  			<div class="contenedor-informacion">
@@ -597,12 +472,11 @@
 		  					<p class="cantCaracteres">0/490</p>
 		  					<p class="textoLimite">.</p>	  					
 	  					</div>
->>>>>>> b958538 (Hasta Cursos arreglado)
 				</div>
 
 				<div class="contenedor-titulos-cajas grupo__miniatura">
 						<h3>Miniatura<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-	  					<input type="file" name="miniatura" id="inputMiniatura">
+	  					<input type="file" accept="image/png,image/jpeg" name="miniatura" id="inputMiniatura">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -623,7 +497,7 @@
 					
 				<div class="contenedor-titulos-cajas grupo__imagen1">
 						<h3>Imagen 1<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-	  					<input type="file" name="archivo1" id="inputImagen1">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo1" id="inputImagen1">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -633,7 +507,7 @@
 
 				<div class="contenedor-titulos-cajas grupo__contenido2">
 						<h3>Contenido 2<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido2"></textarea>
 
 						<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
@@ -644,85 +518,67 @@
 
 				<div class="contenedor-titulos-cajas grupo__imagen2">
 						<h3>Imagen 2<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-	  					<input type="file" name="archivo2" id="inputImagen2">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo2" id="inputImagen2">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>
 				</div>
 	  				
-<<<<<<< HEAD
-				<div class="contenedor-titulos-cajas">
-						<h3>Contenido 3</h3>
-		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>
-=======
 				<div class="contenedor-titulos-cajas grupo__contenido3">
 						<h3>Contenido 3<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido3"></textarea>
+		  				<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido3"></textarea>
 
 		  				<div class="contenedor-informacion">
 			  				<p class="textoInfo">Este campo está vacío</p>
 		  					<p class="cantCaracteres">0/3000</p>
 			  				<p class="textoLimite">.</p> 
 		  				</div>
->>>>>>> b958538 (Hasta Cursos arreglado)
 				</div>
 	  				
 				<div class="contenedor-titulos-cajas grupo__imagen3">
 						<h3>Imagen 3<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-	  					<input type="file" name="archivo3" id="inputImagen3">
+	  					<input type="file" accept="image/png,image/jpeg" name="archivo3" id="inputImagen3">
 
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>
 				</div>
 	  				
-<<<<<<< HEAD
-				<div class="contenedor-titulos-cajas">
-						<h3>Contenido 4</h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>		
-=======
 				<div class="contenedor-titulos-cajas grupo__contenido4">
 						<h3>Contenido 4<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido4"></textarea>
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido4"></textarea>
 
 						<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
 		  					<p class="cantCaracteres">0/3000</p>
 			  				<p class="textoLimite">.</p> 	
 		  				</div>
->>>>>>> b958538 (Hasta Cursos arreglado)
 				</div>
 	  				
 				<div class="contenedor-titulos-cajas grupo__imagen4">
 						<h3>Imagen 4<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-						<input type="file" name="archivo4" id="inputImagen4">
+						<input type="file" accept="image/png,image/jpeg" name="archivo4" id="inputImagen4">
 
 						<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>
 				</div>
 					
-<<<<<<< HEAD
-				<div class="contenedor-titulos-cajas">
-						<h3>Contenido 5</h3>	
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido2"></textarea>  
-=======
 				<div class="contenedor-titulos-cajas grupo__contenido5">
 						<h3>Contenido 5<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>	
-						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" minlength="100" name="contenido5"></textarea>
+						<textarea placeholder="Ingrese un contenido para la noticia" maxlength="3000" name="contenido5"></textarea>
 
 						<div class="contenedor-informacion">
 							<p class="textoInfo">Este campo está vacío</p>
 		  					<p class="cantCaracteres">0/3000</p>
 			  				<p class="textoLimite">.</p>  
 		  				</div>
->>>>>>> b958538 (Hasta Cursos arreglado)
 				</div>
 					
 				<div class="contenedor-titulos-cajas grupo__imagen5">
 						<h3>Imagen 5<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-						<input type="file" name="archivo5" id="inputImagen5">
+						<input type="file" accept="image/png,image/jpeg" name="archivo5" id="inputImagen5">
 
 						<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -752,10 +608,12 @@
 						</div>
 		  		</div>  
 				  
-				<div class="contenedor-titulos-cajas">
-					  <h3> Agregar enlaces<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+				<div class="contenedor-titulos-cajas grupo__enlaces">					  
+					<h3> Agregar enlaces<i class="fa-solid fa-triangle-exclamation advertencia" title="Campos vacíos"></i></h3>
+
+					<div class="contenedor-informacion">
 					  <p class="textoInfo">Los enlaces deben empezar con https://</p>
-			
+					</div>
 					  <table class="tabla1"  id="tabla1">
 							<tr class="fila-fija1">
 								<td id="td-enlace"><input type="text" name="url[]" placeholder="Ingrese un enlace"></td>
@@ -792,11 +650,7 @@
 				
 				</div>
 
-<<<<<<< HEAD
-				<input type="submit" name="agregarNoticias" value="Agregar artículo">
-=======
 				<input class="submit cursorInactivo" type="submit" name="agregarNoticias" value="Agregar novedad" title="Complete el formulario para habilitar esta acción" disabled>
->>>>>>> b958538 (Hasta Cursos arreglado)
 				
 				<?php } ?>				
 
@@ -836,7 +690,8 @@
   			</div>
   		</section>
   	</footer>
-
+	  <script type="text/javascript" src="js/EtiAgrNot.js"></script>
+	<script type="text/javascript" src="js/EnlAgrNot.js"></script>								
 	<script src="js/validaciones.js"></script>
 	<script src="js/loaderScreen.js"></script>
 	<script src="js/menu.js"></script>

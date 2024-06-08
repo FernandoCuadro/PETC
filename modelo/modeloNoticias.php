@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("America/Montevideo");
 class modeloNoticias{ 
 
     private $conexion;
@@ -42,9 +42,9 @@ class modeloNoticias{
  
 
 
-    /*Función usada para mostrar todas las noticias 
+ /*Función usada para mostrar todas las noticias 
     que estén activas*/
-    public function obtenerNoticias(){
+    public function obtenerNoticiasnoAdmin(){
 
       if(!empty($_GET['idEti'])){
         $etiqueta = $_GET['idEti'];
@@ -121,13 +121,17 @@ class modeloNoticias{
             $this->admin[]=$lista;
           }
         session_start();
-            $_SESSION['TPag'] = $totalPaginas;
-            $_SESSION['Pag'] = $pagina;
+            $_SESSION['TPagEti'] = $totalPaginas;
+            $_SESSION['PagEti'] = $pagina;
 
           return $this->admin;
       
+      }else{
+        session_start();
+        $_SESSION['TPagEti'] = 1;
+        $_SESSION['NotNot'] = "No se encontraron novedades";
+        
       }
-
 
 
       }elseif(!empty($_GET['idarea'])){
@@ -146,6 +150,7 @@ class modeloNoticias{
             noticias.id_area as idarea
             from noticias, area 
             where noticias.id_area = area.id_area and 
+            noticias.estado = 'activo'and
             fecha_not <= now() and 
             area.id_area = '$area'
             order by fecha_not desc, id_not desc";
@@ -187,7 +192,8 @@ class modeloNoticias{
             area,
             noticias.id_area as idarea
             from noticias, area
-            where noticias.id_area = area.id_area and  
+            where noticias.id_area = area.id_area and
+            noticias.estado = 'activo' and  
             fecha_not <= now() and 
             area.id_area = '$area'
             order by fecha_not desc, id_not desc 
@@ -201,11 +207,16 @@ class modeloNoticias{
               $this->admin[]=$lista;
             }
           session_start();
-              $_SESSION['TPag'] = $totalPaginas;
-              $_SESSION['Pag'] = $pagina;
+              
+              $_SESSION['TPagAre'] = $totalPaginas;
+              $_SESSION['PagAre'] = $pagina;
       
             return $this->admin;
         
+        }else{
+          session_start();
+          $_SESSION['TPagAre'] = 1;
+          $_SESSION['NotNot'] = "No se encontraron novedades";
         }
       
       }else{
@@ -282,273 +293,279 @@ class modeloNoticias{
             $this->admin[]=$lista;
           }
         session_start();
-            $_SESSION['TPag'] = $totalPaginas;
-            $_SESSION['Pag'] = $pagina;
+            $_SESSION['TPagNov'] = $totalPaginas;
+            $_SESSION['PagNov'] = $pagina;
 
           return $this->admin;
       
+      }else{
+        session_start();
+        $_SESSION['TPagNov'] = 1;
+        $_SESSION['NotNot'] = "No se encontraron novedades";
       }
 
     }
   }
 
 
-//NOTICIAS QUE VE EL ADMIN
 
-public function obtenerNoticiasAdmin(){
+    /*Función usada para mostrar todas las noticias 
+    que estén activas*/
+    public function obtenerNoticias(){
 
-  if(!empty($_GET['idEti'])){
-    $etiqueta = $_GET['idEti'];
+      if(!empty($_GET['idEti'])){
+        $etiqueta = $_GET['idEti'];
 
-    $sqlObtenerNoticias = "SELECT id_not as id,
-    fecha_not as fecha, 
-    titulo_not as titulo, 
-    descripcion_not as descripcion, 
-    contenido_not as contenido1, 
-    contenido_not2 as contenido2, 
-    min_not as miniatura,
-    img_not as imagen,
-    noticias.estado,
-    area,
-    noticias.id_area as idarea
-    from noticias, area, etiquetas
-    where noticias.id_area = area.id_area and  
-    noticias.estado = 'activo' and 
-    fecha_not <= now() and
-    noticias.id_not = etiquetas.idnoticia and
-    etiquetas.etiquetasnombre = '$etiqueta'
-    order by fecha_not desc, id_not desc";
+        $sqlObtenerNoticias = "SELECT id_not as id,
+        fecha_not as fecha, 
+        titulo_not as titulo, 
+        descripcion_not as descripcion, 
+        contenido_not as contenido1, 
+        contenido_not2 as contenido2,  
+        min_not as miniatura,
+        img_not as imagen,
+        noticias.estado,
+        area,
+        noticias.id_area as idarea
+        from noticias, area, etiquetas
+        where noticias.id_area = area.id_area and  
+        fecha_not <= now() and
+        noticias.id_not = etiquetas.idnoticia and
+        etiquetas.etiquetasnombre = '$etiqueta'
+        order by fecha_not desc, id_not desc";
 
-      /* Se envia la consulta a la base de datos y se obtiene la información
-  de todos los articulos que existen hasta el momento
-  en el apartado Noticias*/
-  $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
-  $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
+          /* Se envia la consulta a la base de datos y se obtiene la información
+      de todos los articulos que existen hasta el momento
+      en el apartado Noticias*/
+      $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
+      $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
 
-  if($Totalconsulta > 0){
+      if($Totalconsulta > 0){
 
-    // Cantidad de articulos que se mostrarán por pagina
-    $RegXPag = 6;
-    $pagina = false;
+        // Cantidad de articulos que se mostrarán por pagina
+        $RegXPag = 6;
+        $pagina = false;
 
-    if (isset($_GET["pagina"])){
-      $pagina = $_GET["pagina"];
-    }
+        if (isset($_GET["pagina"])){
+          $pagina = $_GET["pagina"];
+        }
 
-    if (!$pagina){
-      $inicio = 0;
-      $pagina = 1;
-    }else{
-      $inicio = ($pagina - 1) * $RegXPag;
-    }
-    
-    $totalPaginas = ceil($Totalconsulta / $RegXPag);
+        if (!$pagina){
+          $inicio = 0;
+          $pagina = 1;  
+        }else{
+          $inicio = ($pagina - 1) * $RegXPag;
+        }
+        
+        $totalPaginas = ceil($Totalconsulta / $RegXPag);
 
-      $sqlObtenerNoticias2 = "SELECT id_not as id,
-      fecha_not as fecha, 
-      titulo_not as titulo, 
-      descripcion_not as descripcion, 
-      contenido_not as contenido1, 
-      contenido_not2 as contenido2,
-      min_not as miniatura,
-      img_not as imagen,
-      noticias.estado,
-      area,
-      noticias.id_area as idarea
-      from noticias, area, etiquetas 
-      where noticias.id_area = area.id_area and  
-      noticias.estado = 'activo' and 
-      fecha_not <= now() and 
-      noticias.id_not = etiquetas.idnoticia and
-      etiquetas.etiquetasnombre = '$etiqueta'
-      order by fecha_not desc, id_not desc 
-      LIMIT $inicio,$RegXPag";
+          $sqlObtenerNoticias2 = "SELECT id_not as id,
+          fecha_not as fecha, 
+          titulo_not as titulo, 
+          descripcion_not as descripcion, 
+          contenido_not as contenido1, 
+          contenido_not2 as contenido2,
+          min_not as miniatura,
+          img_not as imagen,
+          noticias.estado,
+          area,
+          noticias.id_area as idarea
+          from noticias, area, etiquetas 
+          where noticias.id_area = area.id_area and  
+          fecha_not <= now() and 
+          noticias.id_not = etiquetas.idnoticia and
+          etiquetas.etiquetasnombre = '$etiqueta'
+          order by fecha_not desc, id_not desc 
+          LIMIT $inicio,$RegXPag";
 
-      $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
+          $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
 
-      /*Generamos un array con el resultado obtenido
-      de la consulta realizada a la base de datos*/
-      while($lista=$sqlObtenerNoticias2->fetch_assoc()){
-        $this->admin[]=$lista;
-      }
-    session_start();
-        $_SESSION['TPag'] = $totalPaginas;
-        $_SESSION['Pag'] = $pagina;
+          /*Generamos un array con el resultado obtenido
+          de la consulta realizada a la base de datos*/
+          while($lista=$sqlObtenerNoticias2->fetch_assoc()){
+            $this->admin[]=$lista;
+          }
+        session_start();
+            $_SESSION['TPagEtiAdmin'] = $totalPaginas;
+            $_SESSION['PagEtiAdmin'] = $pagina;
 
-      return $this->admin;
-  
-  }
-
-
-
-  }elseif(!empty($_GET['idarea'])){
-    $area = $_GET['idarea'];
-
-    $sqlObtenerNoticias = "SELECT id_not as id,
-      fecha_not as fecha, 
-      titulo_not as titulo, 
-      descripcion_not as descripcion, 
-      contenido_not as contenido1, 
-      contenido_not2 as contenido2,
-      min_not as miniatura,
-      img_not as imagen,
-      noticias.estado,
-      area,
-      noticias.id_area as idarea
-      from noticias, area 
-      where noticias.id_area = area.id_area and  
-      fecha_not <= now() and 
-      area.id_area = '$area'
-      order by fecha_not desc, id_not desc";
-
-      /* Se envia la consulta a la base de datos y se obtiene la información
-  de todos los articulos que existen hasta el momento
-  en el apartado Noticias*/
-  $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
-  $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
-
-  if($Totalconsulta > 0){
-
-    // Cantidad de articulos que se mostrarán por pagina
-    $RegXPag = 6;
-    $pagina = false;
-
-    if (isset($_GET["pagina"])){
-      $pagina = $_GET["pagina"];
-    }
-
-    if (!$pagina){
-      $inicio = 0;
-      $pagina = 1;
-    }else{
-      $inicio = ($pagina - 1) * $RegXPag;
-    }
-    
-    $totalPaginas = ceil($Totalconsulta / $RegXPag);
-
-      $sqlObtenerNoticias2 = "SELECT id_not as id,
-      fecha_not as fecha, 
-      titulo_not as titulo, 
-      descripcion_not as descripcion, 
-      contenido_not as contenido1, 
-      contenido_not2 as contenido2,  
-      min_not as miniatura,
-      img_not as imagen,
-      noticias.estado,
-      area,
-      noticias.id_area as idarea
-      from noticias, area, usuarios 
-      where noticias.id_area = area.id_area and   
-      fecha_not <= now() and 
-      area.id_area = '$area'
-      order by fecha_not desc, id_not desc 
-      LIMIT $inicio,$RegXPag";
-
-      $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
-
-      /*Generamos un array con el resultado obtenido
-      de la consulta realizada a la base de datos*/
-      while($lista=$sqlObtenerNoticias2->fetch_assoc()){
-        $this->admin[]=$lista;
-      }
-    session_start();
-        $_SESSION['TPag'] = $totalPaginas;
-        $_SESSION['Pag'] = $pagina;
-
-      return $this->admin;
-  
-  }
-
-
-
-  }else{
-
-  //Se define la consulta a ejecutar
-  /*Se busca obtener toda la información de todas 
-  las noticias que estén activas*/
-  $sqlObtenerNoticias = "SELECT id_not as id,
-      fecha_not as fecha, 
-      titulo_not as titulo, 
-      descripcion_not as descripcion, 
-      contenido_not as contenido1, 
-      contenido_not2 as contenido2,  
-      min_not as miniatura,
-      img_not as imagen,
-      noticias.estado,
-      area,
-      noticias.id_area as idarea
-      from noticias, area
-      where noticias.id_area = area.id_area and  
-      fecha_not <= now()
-      order by fecha_not desc, id_not desc";
-
-  /* Se envia la consulta a la base de datos y se obtiene la información
-  de todos los articulos que existen hasta el momento
-  en el apartado Noticias*/
-  $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
-  $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
-
-  if($Totalconsulta > 0){
-
-    // Cantidad de articulos que se mostrarán por pagina
-    $RegXPag = 6;
-    $pagina = false;
-
-    if (isset($_GET["pagina"])){
-      $pagina = $_GET["pagina"];
-    }
-
-    if (!$pagina){
-      $inicio = 0;
-      $pagina = 1;
-    }else{
-      $inicio = ($pagina - 1) * $RegXPag;
-    }
-    
-    $totalPaginas = ceil($Totalconsulta / $RegXPag);
-
-      $sqlObtenerNoticias2 = "SELECT id_not as id,
-      fecha_not as fecha, 
-      titulo_not as titulo, 
-      descripcion_not as descripcion, 
-      contenido_not as contenido1, 
-      contenido_not2 as contenido2,  
-      min_not as miniatura,
-      img_not as imagen,
-      noticias.estado,
-      area,
-      noticias.id_area as idarea
-      from noticias, area
-      where noticias.id_area = area.id_area and  
-      fecha_not <= now()
-      order by fecha_not desc, id_not desc 
-      LIMIT $inicio,$RegXPag";
-
-      $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
+          return $this->admin;
       
-
-      /*Generamos un array con el resultado obtenido
-      de la consulta realizada a la base de datos*/
-      while($lista=$sqlObtenerNoticias2->fetch_assoc()){
-        $this->admin[]=$lista;
+      }else{
+        session_start();
+        $_SESSION['TPagEtiAdmin'] = 1;
+        $_SESSION['NotNotEtiAdmin'] = "No se encontraron novedades";
+        
       }
-    session_start();
-        $_SESSION['TPag'] = $totalPaginas;
-        $_SESSION['Pag'] = $pagina;
 
-      return $this->admin;
-  
+
+      }elseif(!empty($_GET['idarea'])){
+          $area = $_GET['idarea'];
+      
+          $sqlObtenerNoticias = "SELECT id_not as id,
+            fecha_not as fecha, 
+            titulo_not as titulo, 
+            descripcion_not as descripcion, 
+            contenido_not as contenido1, 
+            contenido_not2 as contenido2, 
+            min_not as miniatura,
+            img_not as imagen,
+            noticias.estado,
+            area,
+            noticias.id_area as idarea
+            from noticias, area 
+            where noticias.id_area = area.id_area and 
+            fecha_not <= now() and 
+            area.id_area = '$area'
+            order by fecha_not desc, id_not desc";
+      
+            /* Se envia la consulta a la base de datos y se obtiene la información
+        de todos los articulos que existen hasta el momento
+        en el apartado Noticias*/
+        $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
+        $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
+      
+        if($Totalconsulta > 0){
+      
+          // Cantidad de articulos que se mostrarán por pagina
+          $RegXPag = 6;
+          $pagina = false;
+      
+          if (isset($_GET["pagina"])){
+            $pagina = $_GET["pagina"];
+          }
+      
+          if (!$pagina){
+            $inicio = 0;
+            $pagina = 1;
+          }else{
+            $inicio = ($pagina - 1) * $RegXPag;
+          }
+          
+          $totalPaginas = ceil($Totalconsulta / $RegXPag);
+      
+            $sqlObtenerNoticias2 = "SELECT id_not as id,
+            fecha_not as fecha, 
+            titulo_not as titulo, 
+            descripcion_not as descripcion, 
+            contenido_not as contenido1, 
+            contenido_not2 as contenido2,  
+            min_not as miniatura,
+            img_not as imagen,
+            noticias.estado,
+            area,
+            noticias.id_area as idarea
+            from noticias, area
+            where noticias.id_area = area.id_area and  
+            fecha_not <= now() and 
+            area.id_area = '$area'
+            order by fecha_not desc, id_not desc 
+            LIMIT $inicio,$RegXPag";
+      
+            $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
+      
+            /*Generamos un array con el resultado obtenido
+            de la consulta realizada a la base de datos*/
+            while($lista=$sqlObtenerNoticias2->fetch_assoc()){
+              $this->admin[]=$lista;
+            }
+          session_start();
+              
+              $_SESSION['TPagAreAdmin'] = $totalPaginas;
+              $_SESSION['PagAreAdmin'] = $pagina;
+      
+            return $this->admin;
+        
+        }else{
+          session_start();
+          $_SESSION['TPagAreAdmin'] = 1;
+          $_SESSION['NotNotAreAdmin'] = "No se encontraron novedades";
+        }
+      
+      }else{
+
+
+      //Se define la consulta a ejecutar
+      /*Se busca obtener toda la información de todas 
+      las noticias que estén activas*/
+      $sqlObtenerNoticias = "SELECT id_not as id,
+          fecha_not as fecha, 
+          titulo_not as titulo, 
+          descripcion_not as descripcion, 
+          min_not as miniatura,
+          estado,
+          area,
+          noticias.id_area as idarea
+          from noticias, area 
+          where noticias.id_area = area.id_area and   
+          fecha_not <= now()
+          order by fecha_not desc";
+
+      /* Se envia la consulta a la base de datos y se obtiene la información
+      de todos los articulos que existen hasta el momento
+      en el apartado Noticias*/
+      $sqlObtenerNoticias = $this->conexion->query($sqlObtenerNoticias);
+      $Totalconsulta = mysqli_num_rows($sqlObtenerNoticias);
+
+      if($Totalconsulta > 0){
+
+        // Cantidad de articulos que se mostrarán por pagina
+        $RegXPag = 6;
+        $pagina = false;
+
+        if (isset($_GET["pagina"])){
+          $pagina = $_GET["pagina"];
+        }
+
+        if (!$pagina){
+          $inicio = 0;
+          $pagina = 1;
+        }else{
+          $inicio = ($pagina - 1) * $RegXPag;
+        }
+        
+        $totalPaginas = ceil($Totalconsulta / $RegXPag);
+
+          $sqlObtenerNoticias2 = "SELECT id_not as id,
+          fecha_not as fecha, 
+          titulo_not as titulo, 
+          descripcion_not as descripcion, 
+          min_not as miniatura,
+          estado,
+          area,
+          noticias.id_area as idarea
+          from noticias, area 
+          where noticias.id_area = area.id_area and  
+          fecha_not <= now()
+          order by fecha_not desc
+          LIMIT $inicio,$RegXPag";
+
+          $sqlObtenerNoticias2 = $this->conexion->query($sqlObtenerNoticias2);
+
+          /*Generamos un array con el resultado obtenido
+          de la consulta realizada a la base de datos*/
+          while($lista=$sqlObtenerNoticias2->fetch_assoc()){
+            $this->admin[]=$lista;
+          }
+        session_start();
+            $_SESSION['TPagNovAdmin'] = $totalPaginas;
+            $_SESSION['PagAdmin'] = $pagina;
+
+          return $this->admin;
+      
+      }else{
+        session_start();
+        $_SESSION['TPagNovAdmin'] = 1;
+        $_SESSION['NotNot'] = "No se encontraron novedades";
+      }
+
+    }
   }
 
-}
-}
+
 
 public function listaVer(){
 
-
-
-
- 
   if($_GET['lista2'] == "novisible"){
     
     $sqlVer = "SELECT 
@@ -557,7 +574,7 @@ public function listaVer(){
     titulo_not as titulo,
     descripcion_not as descripcion,
     min_not as miniatura,
-    noticias.id_area as idArea,
+    noticias.id_area as idarea,
     area,
     estado
      FROM noticias, area
@@ -595,7 +612,7 @@ public function listaVer(){
         titulo_not as titulo,
         descripcion_not as descripcion,
         min_not as miniatura,
-        noticias.id_area as idArea,
+        noticias.id_area as idarea,
         area,
         estado
          FROM noticias, area
@@ -613,14 +630,17 @@ public function listaVer(){
           $this->admin[]=$lista;
         }
       session_start();
-          $_SESSION['TPag'] = $totalPaginas;
+          $_SESSION['TPagVer'] = $totalPaginas;
           $_SESSION['Pag'] = $pagina;
     
         return $this->admin;
     
-    }
+    }else{
 
-  
+        session_start();
+        $_SESSION['TPagVer'] = 1;
+        $_SESSION['NoNot'] = "No se encontraron novedades";
+    }
 
   }elseif($_GET['lista2'] == "visible"){
     
@@ -630,7 +650,7 @@ public function listaVer(){
     titulo_not as titulo,
     descripcion_not as descripcion,
     min_not as miniatura,
-    noticias.id_area as idArea,
+    noticias.id_area as idarea,
     area,
     estado
      FROM noticias, area
@@ -668,7 +688,7 @@ if($Totalconsulta > 0){
     titulo_not as titulo,
     descripcion_not as descripcion,
     min_not as miniatura,
-    noticias.id_area as idArea,
+    noticias.id_area as idarea,
     area,
     estado
      FROM noticias, area
@@ -686,12 +706,92 @@ if($Totalconsulta > 0){
       $this->admin[]=$lista;
     }
   session_start();
-      $_SESSION['TPag'] = $totalPaginas;
+      $_SESSION['TPagVer'] = $totalPaginas;
       $_SESSION['Pag'] = $pagina;
 
     return $this->admin;
 
+}else{
+  session_start();
+        $_SESSION['TPagVer'] = 1;
+        $_SESSION['NoNot'] = "No se encontraron novedades";
 }
+
+}elseif($_GET['lista2'] == ""){
+    
+  $sqlVer = "SELECT 
+  id_not as id,
+  fecha_not as fecha,		
+  titulo_not as titulo,
+  descripcion_not as descripcion,
+  min_not as miniatura,
+  noticias.id_area as idarea,
+  area,
+  estado
+   FROM noticias, area
+   where noticias.id_area = area.id_area and
+   estado = 'activo' and
+   fecha_not <= now() 
+   order by fecha_not desc
+   ";
+ 
+  $sqlVers = $this->conexion->query($sqlVer);
+  $Totalconsulta = mysqli_num_rows($sqlVers);
+
+if($Totalconsulta > 0){
+
+// Cantidad de articulos que se mostrarán por pagina
+$RegXPag = 6;
+$pagina = false;
+
+if (isset($_GET["pagina"])){
+  $pagina = $_GET["pagina"];
+}
+
+if (!$pagina){
+  $inicio = 0;
+  $pagina = 1;
+}else{
+  $inicio = ($pagina - 1) * $RegXPag;
+}
+
+$totalPaginas = ceil($Totalconsulta / $RegXPag);
+
+  $sqlVer2 = "SELECT 
+  id_not as id,
+  fecha_not as fecha,		
+  titulo_not as titulo,
+  descripcion_not as descripcion,
+  min_not as miniatura,
+  noticias.id_area as idarea,
+  area,
+  estado
+   FROM noticias, area
+   where noticias.id_area = area.id_area and
+   estado = 'activo' and
+   fecha_not <= now() 
+   order by fecha_not desc
+  LIMIT $inicio,$RegXPag";
+
+  $sqlVers2 = $this->conexion->query($sqlVer2);
+
+  /*Generamos un array con el resultado obtenido
+  de la consulta realizada a la base de datos*/
+  while($lista=$sqlVers2->fetch_assoc()){
+    $this->admin[]=$lista;
+  }
+session_start();
+    $_SESSION['TPagVer'] = $totalPaginas;
+    $_SESSION['Pag'] = $pagina;
+
+  return $this->admin;
+
+}else{
+  session_start();
+        $_SESSION['TPagVer'] = 1;
+        $_SESSION['NoNot'] = "No se encontraron novedades";
+}
+
 
   
   }elseif($_GET['lista2'] == "antiguo"){
@@ -703,7 +803,7 @@ if($Totalconsulta > 0){
     titulo_not as titulo,
     descripcion_not as descripcion,
     min_not as miniatura,
-    noticias.id_area as idArea,
+    noticias.id_area as idarea,
     area,
     estado
      FROM noticias, area
@@ -740,7 +840,7 @@ if($Totalconsulta > 0){
         titulo_not as titulo,
         descripcion_not as descripcion,
         min_not as miniatura,
-        noticias.id_area as idArea,
+        noticias.id_area as idarea,
         area,
         estado
          FROM noticias, area
@@ -758,11 +858,15 @@ if($Totalconsulta > 0){
           $this->admin[]=$lista;
         }
       session_start();
-          $_SESSION['TPag'] = $totalPaginas;
+          $_SESSION['TPagVer'] = $totalPaginas;
           $_SESSION['Pag'] = $pagina;
     
         return $this->admin;
     
+    }else{
+      session_start();
+        $_SESSION['TPagVer'] = 1;
+        $_SESSION['NoNot'] = "No se encontraron novedades";
     }
 
   }elseif($_GET['lista2'] == "reciente"){
@@ -774,14 +878,13 @@ if($Totalconsulta > 0){
     titulo_not as titulo,
     descripcion_not as descripcion,
     min_not as miniatura,
-    noticias.id_area as idArea,
+    noticias.id_area as idarea,
     area,
     estado
      FROM noticias, area
      where noticias.id_area = area.id_area and
      fecha_not <= now()
-     order by fecha_not desc
-     ";
+     order by fecha_not desc";
    
     $sqlVers = $this->conexion->query($sqlVer);
     $Totalconsulta = mysqli_num_rows($sqlVers);
@@ -810,7 +913,7 @@ if($Totalconsulta > 0){
         titulo_not as titulo,
         descripcion_not as descripcion,
         min_not as miniatura,
-        noticias.id_area as idArea,
+        noticias.id_area as idarea,
         area,
         estado
          FROM noticias, area
@@ -827,240 +930,20 @@ if($Totalconsulta > 0){
           $this->admin[]=$lista;
         }
       session_start();
-          $_SESSION['TPag'] = $totalPaginas;
+          $_SESSION['TPagVer'] = $totalPaginas;
           $_SESSION['Pag'] = $pagina;
     
         return $this->admin;
     
-    }
-  }
-
-
-if(!empty($_GET['idEti'])){
-  $etiqueta = $_GET['idEti'];
-
-  $sqlVer = "SELECT 
-  id_not as id,
-  fecha_not as fecha,		
-  titulo_not as titulo,
-  descripcion_not as descripcion,
-  min_not as miniatura,
-  noticias.id_area as idArea,
-  area,
-  noticias.estado
-   FROM noticias, area, etiquetas
-   where noticias.id_area = area.id_area and
-   fecha_not <= now() and
-  noticias.id_not = etiquetas.idnoticia and
-  etiquetas.etiquetasnombre = '$etiqueta'
-  order by fecha_not desc";
-
-
-$sqlVers = $this->conexion->query($sqlVer);
-$Totalconsulta = mysqli_num_rows($sqlVers);
-
-if($Totalconsulta > 0){
-
-  // Cantidad de articulos que se mostrarán por pagina
-  $RegXPag = 6;
-  $pagina = false;
-
-  if (isset($_GET["pagina"])){
-    $pagina = $_GET["pagina"];
-  }
-
-  if (!$pagina){
-    $inicio = 0;
-    $pagina = 1;
-  }else{
-    $inicio = ($pagina - 1) * $RegXPag;
-  }
-  
-  $totalPaginas = ceil($Totalconsulta / $RegXPag);
-
-    $sqlVer2 = "SELECT 
-    id_not as id,
-    fecha_not as fecha,		
-    titulo_not as titulo,
-    descripcion_not as descripcion,
-    min_not as miniatura,
-    noticias.id_area as idArea,
-    area,
-    noticias.estado
-     FROM noticias, area, etiquetas
-     where noticias.id_area = area.id_area and
-     fecha_not <= now() and
-    noticias.id_not = etiquetas.idnoticia and
-    etiquetas.etiquetasnombre = '$etiqueta'
-    order by fecha_not desc 
-    LIMIT $inicio,$RegXPag";
-
-    $sqlVers2 = $this->conexion->query($sqlVer2);
-
-    /*Generamos un array con el resultado obtenido
-    de la consulta realizada a la base de datos*/
-    while($lista=$sqlVers2->fetch_assoc()){
-      $this->admin[]=$lista;
-    }
-  session_start();
-      $_SESSION['TPag'] = $totalPaginas;
-      $_SESSION['Pag'] = $pagina;
-
-    return $this->admin;
-
-}
-
-
-
-}elseif(!empty($_GET['idarea'])){
-  $area = $_GET['idarea'];
-
-  $sqlVer = "SELECT 
-  id_not as id,
-  fecha_not as fecha,		
-  titulo_not as titulo,
-  descripcion_not as descripcion,
-  min_not as miniatura,
-  noticias.id_area as idArea,
-  area,
-  estado
-   FROM noticias, area
-   where noticias.id_area = area.id_area and
-   fecha_not <= now() and
-   area.id_area = $area
-   order by fecha_not desc
-   ";
-
-   
-$sqlVers = $this->conexion->query($sqlVer);
-$Totalconsulta = mysqli_num_rows($sqlVers);
-
-if($Totalconsulta > 0){
-
-  // Cantidad de articulos que se mostrarán por pagina
-  $RegXPag = 6;
-  $pagina = false;
-
-  if (isset($_GET["pagina"])){
-    $pagina = $_GET["pagina"];
-  }
-
-  if (!$pagina){
-    $inicio = 0;
-    $pagina = 1;
-  }else{
-    $inicio = ($pagina - 1) * $RegXPag;
-  }
-  
-  $totalPaginas = ceil($Totalconsulta / $RegXPag);
-
-    $sqlVer2 = "SELECT 
-    id_not as id,
-    fecha_not as fecha,		
-    titulo_not as titulo, 
-    descripcion_not as descripcion,
-    min_not as miniatura,
-    noticias.id_area as idArea,
-    area,
-    estado
-     FROM noticias, area
-     where noticias.id_area = area.id_area and
-     fecha_not <= now() and
-     area.id_area = $area
-     order by fecha_not desc
-    LIMIT $inicio,$RegXPag";
-
-    $sqlVers2 = $this->conexion->query($sqlVer2);
-
-    /*Generamos un array con el resultado obtenido
-    de la consulta realizada a la base de datos*/
-    while($lista=$sqlVers2->fetch_assoc()){
-      $this->admin[]=$lista;
-    }
-  session_start();
-      $_SESSION['TPag'] = $totalPaginas;
-      $_SESSION['Pag'] = $pagina;
-
-    return $this->admin;
-
-}
-
-
-
-}else{
-
-
-
-
-    $sqlVer = "SELECT 
-    id_not as id,
-    fecha_not as fecha,		
-    titulo_not as titulo,
-    descripcion_not as descripcion,
-    min_not as miniatura,
-    noticias.id_area as idArea,
-    area,
-    estado
-     FROM noticias, area
-     where noticias.id_area = area.id_area and
-     fecha_not <= now() 
-     order by fecha_not desc
-     ";
-    
-    $sqlVers = $this->conexion->query($sqlVer);
-    $Totalconsulta = mysqli_num_rows($sqlVers);
-    
-    if($Totalconsulta > 0){
-    
-      // Cantidad de articulos que se mostrarán por pagina
-      $RegXPag = 6;
-      $pagina = false;
-    
-      if (isset($_GET["pagina"])){
-        $pagina = $_GET["pagina"];
-      }
-    
-      if (!$pagina){
-        $inicio = 0;
-        $pagina = 1;
-      }else{
-        $inicio = ($pagina - 1) * $RegXPag;
-      }
-      
-      $totalPaginas = ceil($Totalconsulta / $RegXPag);
-    
-        $sqlVers2 = "SELECT 
-        id_not as id,
-        fecha_not as fecha,		
-        titulo_not as titulo,
-        descripcion_not as descripcion,
-        min_not as miniatura,
-        noticias.id_area as idArea,
-        area,
-        estado
-         FROM noticias, area
-         where noticias.id_area = area.id_area and
-         fecha_not <= now() 
-         order by fecha_not desc  
-        LIMIT $inicio,$RegXPag";
-    
-        $sqlVers2 = $this->conexion->query($sqlVers2);
-        
-    
-        /*Generamos un array con el resultado obtenido
-        de la consulta realizada a la base de datos*/
-      while($filas=$sqlVers2->fetch_assoc()){
-        $this->admin[]=$filas;
-      }
-    
+    }else{
       session_start();
-          $_SESSION['TPag'] = $totalPaginas;
-          $_SESSION['Pag'] = $pagina;
-    
-        return $this->admin;
-    
+        $_SESSION['TPagVer'] = 1;
+        $_SESSION['NoNot'] = "No se encontraron novedades";
     }
   }
+
+
+
 
 }
 
@@ -1168,15 +1051,10 @@ public function MostrarDatos($idNot){
   titulo_not as titulo, 
   descripcion_not as descripcion, 
   contenido_not as contenido1, 
-<<<<<<< HEAD
-  contenido_not2 as contenido2, 
-  enlace,  
-=======
   contenido_not2 as contenido2,
   contenido_not3 as contenido3,
   contenido_not4 as contenido4,
   contenido_not5 as contenido5,    
->>>>>>> b958538 (Hasta Cursos arreglado)
   min_not as miniatura,
   img_not as imagen,
   img_not2 as imagen2,
@@ -1210,136 +1088,32 @@ public function MostrarDatos($idNot){
 
 //Función usada para editar un articulo del apartado Noticias
 //Función usada para editar un articulo del apartado Noticias
-public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido1, $Contenido2, $Contenido3, $Contenido4, $Contenido5, $Estado, $Area, $idEtiqueta, $nombreEtiqueta, $nombreEtiquetaagr, $idurl, $url, $urlagr){
+public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido1, $Contenido2, $Contenido3, $Contenido4, $Contenido5, $Estado, $Area, $idEtiqueta, $nombreEtiqueta, $nombreEtiquetaagr, $idurl, $url, $urlagr, $miniatura, $imagen1, $imagen2, $imagen3, $imagen4, $imagen5){
   
 
-if($_FILES['miniatura']['error'] > 0){
-    $ruta = 'img/pti.jpg';
-}else{
-    $directorio = 'img';
-      
-      $archivo = $_FILES['miniatura']['tmp_name'];
-
-    if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['miniatura']['name'];
-        $tipo_archivo = $_FILES['miniatura']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta = $directorio . '/' . $nom_archivo;
-        } 
-    }           
-}
-
-if($_FILES['archivo1']['error'] > 0){
-    $ruta1 = '';
-}else{
-    $directorio = 'img';
-      
-      $archivo = $_FILES['archivo1']['tmp_name'];
-
-    if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['archivo1']['name'];
-        $tipo_archivo = $_FILES['archivo1']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta1 = $directorio . '/' . $nom_archivo;
-    
-        }
-    }
-}
-
-if($_FILES['archivo2']['error'] > 0){      
-      $ruta2='';
-}else{
-    $directorio = 'img';
-      
-      $archivo = $_FILES['archivo2']['tmp_name'];
-
-      if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['archivo2']['name'];
-        $tipo_archivo = $_FILES['archivo2']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta2 = $directorio . '/' . $nom_archivo;
-      
-        }
-    }
-}
-
-if($_FILES['archivo3']['error'] > 0){    
-      $ruta3='';
-}else{
-
-    $directorio = 'img';
-      
-      $archivo = $_FILES['archivo3']['tmp_name'];
-
-    if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['archivo3']['name'];
-        $tipo_archivo = $_FILES['archivo3']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta3 = $directorio . '/' . $nom_archivo;
-        }
-    }
-}
-
-if($_FILES['archivo4']['error'] > 0){    
-      $ruta4='';
-}else{
-
-    $directorio = 'img';
-      
-      $archivo = $_FILES['archivo4']['tmp_name'];
-
-    if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['archivo4']['name'];
-        $tipo_archivo = $_FILES['archivo4']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta4 = $directorio . '/' . $nom_archivo;
-        }
-    }
-}
-
-if($_FILES['archivo5']['error'] > 0){     
-      $ruta5='';
-}else{
-
-    $directorio = 'img';
-      
-      $archivo = $_FILES['archivo5']['tmp_name'];
-
-    if(is_dir($directorio) && is_uploaded_file($archivo)){
-
-        $nom_archivo = $_FILES['archivo5']['name'];
-        $tipo_archivo = $_FILES['archivo5']['type'];
-
-        if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-          move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-            $ruta5 = $directorio . '/' . $nom_archivo;
-        }
-    }
-}   
+            if(!empty($miniatura)){
             //Se define la consulta a ejecutar
                 /*Se inserta la información antes especificada*/
             $sqlActualizarNoticia = "UPDATE noticias set fecha_not = '$Fecha', titulo_not = '$Titulo', descripcion_not = '$Descripcion',
             contenido_not = '$Contenido1', contenido_not2 = '$Contenido2', contenido_not3 = '$Contenido3', contenido_not4 = '$Contenido4', 
-            contenido_not5 = '$Contenido5', min_not = '$ruta', img_not = '$ruta1', img_not2 = '$ruta2', 
-            img_not3 = '$ruta3', img_not4 = '$ruta4', img_not5 = '$ruta5', estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
+            contenido_not5 = '$Contenido5', min_not = '$miniatura', img_not = '$imagen1', img_not2 = '$imagen2', 
+            img_not3 = '$imagen3', img_not4 = '$imagen4', img_not5 = '$imagen5', estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
 
             /*Se envia la consulta a la base de datos agrega el nuevo articulo*/
             $sqlActualizarNoticias = $this->conexion->query($sqlActualizarNoticia);
+
+            }else{
+                //Se define la consulta a ejecutar
+                /*Se inserta la información antes especificada*/
+                $sqlActualizarNoticia = "UPDATE noticias set fecha_not = '$Fecha', titulo_not = '$Titulo', descripcion_not = '$Descripcion',
+                contenido_not = '$Contenido1', contenido_not2 = '$Contenido2', contenido_not3 = '$Contenido3', contenido_not4 = '$Contenido4', 
+                contenido_not5 = '$Contenido5', img_not = '$imagen1', img_not2 = '$imagen2', 
+                img_not3 = '$imagen3', img_not4 = '$imagen4', img_not5 = '$imagen5', estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
+    
+                /*Se envia la consulta a la base de datos agrega el nuevo articulo*/
+                $sqlActualizarNoticias = $this->conexion->query($sqlActualizarNoticia);
+    
+            } 
             //Redirecciona al usuario a la página de noticias
             if($sqlActualizarNoticias){
 
@@ -1447,7 +1221,12 @@ if($_FILES['archivo5']['error'] > 0){
 
             $borradoEnlace = "DELETE FROM enlaces WHERE nombreEnlace = '' or nombreEnlace = ', &nbsp;';";
             $borradosEnlaces = $this->conexion->query($borradoEnlace);
-           }     
+           }
+           $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado una noticia: $idNot', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);     
            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
            echo "<script>
               swal({
@@ -1482,134 +1261,11 @@ if($_FILES['archivo5']['error'] > 0){
 
 
 //Función para agregar un nuevo articulo en el apartado inicio
-public function agregarNoticias($Titulo, $Descripcion, $Contenido1, $Contenido2, $Contenido3, $Contenido4, $Contenido5, $Fecha, $Estado, $IDArea, $url, $nombreEtiqueta, $estadoEtiqueta){
-
-
-
-  if($_FILES['miniatura']['error'] > 0){
-         
-         $ruta='img/pti.jpg';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['miniatura']['tmp_name'];	
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['miniatura']['name'];
-           $tipo_archivo = $_FILES['miniatura']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-            move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta = $directorio . '/' . $nom_archivo;
-           }
-         }
-  }
- 
-  if($_FILES['archivo1']['error'] > 0){     
-         $ruta1='';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['archivo1']['tmp_name'];
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['archivo1']['name'];
-           $tipo_archivo = $_FILES['archivo1']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-             move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta1 = $directorio . '/' . $nom_archivo;
-           }
-         }
-  }
- 
-  if($_FILES['archivo2']['error'] > 0){       
-         $ruta2='';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['archivo2']['tmp_name'];
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['archivo2']['name'];
-           $tipo_archivo = $_FILES['archivo2']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-             move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta2 = $directorio . '/' . $nom_archivo;
-           }
-         }  
-  }
- 
-  if($_FILES['archivo3']['error'] > 0){       
-         $ruta3='';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['archivo3']['tmp_name'];
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['archivo3']['name'];
-           $tipo_archivo = $_FILES['archivo3']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-             move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta3 = $directorio . '/' . $nom_archivo;
-           }
-         }
-  }
- 
-  if($_FILES['archivo4']['error'] > 0){       
-         $ruta4='';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['archivo4']['tmp_name'];
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['archivo4']['name'];
-           $tipo_archivo = $_FILES['archivo4']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-             move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta4 = $directorio . '/' . $nom_archivo;
-           }
-         }
-  }
- 
-  if($_FILES['archivo5']['error'] > 0){       
-         $ruta5='';
-  }else{
- 
-     $directorio = 'img';
-         
-         $archivo = $_FILES['archivo5']['tmp_name'];
- 
-         if(is_dir($directorio) && is_uploaded_file($archivo)){
- 
-           $nom_archivo = $_FILES['archivo5']['name'];
-           $tipo_archivo = $_FILES['archivo5']['type'];
- 
-           if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
-             move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
-               $ruta5 = $directorio . '/' . $nom_archivo;
-             }
-         }
-  }
- 
+public function agregarNoticias
+($Titulo, $Descripcion, $Contenido1, $Contenido2, $Contenido3, $Contenido4, $Contenido5, $Fecha, $Estado, $IDArea, $url, $nombreEtiqueta, $estadoEtiqueta, $miniatura, $imagen1, $imagen2, $imagen3, $imagen4, $imagen5){
   //Se define la consulta a ejecutar
                      /*Se inserta la información antes especificada*/
-               $sqlAgregarNoticia = "INSERT INTO noticias values (0, '$Fecha', '$Titulo', '$Descripcion', '$Contenido1', '$Contenido2', '$Contenido3', '$Contenido4', '$Contenido5', '$ruta', '$ruta1', '$ruta2', '$ruta3', '$ruta4', '$ruta5', '$Estado', '$IDArea')";
+               $sqlAgregarNoticia = "INSERT INTO noticias values (0, '$Fecha', '$Titulo', '$Descripcion', '$Contenido1', '$Contenido2', '$Contenido3', '$Contenido4', '$Contenido5', '$miniatura', '$imagen1', '$imagen2', '$imagen3', '$imagen4', '$imagen5', '$Estado', '$IDArea')";
  
                /*Se envia la consulta a la base de datos agrega el nuevo articulo*/
                $sqlAgregarNoticias = $this->conexion->query($sqlAgregarNoticia);
@@ -1684,7 +1340,12 @@ public function agregarNoticias($Titulo, $Descripcion, $Contenido1, $Contenido2,
 
                $borradoEnlace = "DELETE FROM enlaces WHERE nombreEnlace = '' or nombreEnlace = ', &nbsp;';";
                $borradosEnlaces = $this->conexion->query($borradoEnlace);
-              }               
+              }  
+              $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a agregado una noticia: $idNot', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);             
               echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
               echo "<script>
                  swal({

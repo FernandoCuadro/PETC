@@ -674,6 +674,9 @@ nav{
     border-radius: 20px;
 }
 
+
+
+
 .etiqueta:hover{
     /*background: #666;*/
     background: var(--main__novedad-etiquetaBackgroundHover);

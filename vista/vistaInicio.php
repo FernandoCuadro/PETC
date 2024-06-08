@@ -65,7 +65,7 @@
 		?>	
 		<div id="contenedor-sesion">	
 	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor --> ?>
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 
 	    </div>
 		<?php } ?>
@@ -122,19 +122,14 @@
   	<main>
 
   		<?php //<!--Seccion acceso a novedades--> ?>
-<<<<<<< HEAD
 		<section>
 
 		    <div class="slider-frame">
 		    	
 		    	<div id="articulo-se-mueve">
-					<?php foreach($datosNoticias as $ColocarNoticias){ ?>
-		    		<?php //<!--Esto es lo que se repite por articulo--> ?>
 		    		<article class="ultimas-noticias">
-=======
 
   		<!-- Aplica para cuando no hay noticias cargadas-->
->>>>>>> b958538 (Hasta Cursos arreglado)
 
   		<!-- <section>
   				
@@ -234,7 +229,13 @@
 
   		</section> -->
 
+<?php 
+	
+				if(count($datosNoticias) < 3){
 
+				}else{
+				
+				?>
   		<!-- Aplica para cuando hayan 3 novedades cargadas -->
   		<section>
   				
@@ -244,7 +245,10 @@
 
   				<div class="slides-container">
 
-  					<?php foreach($datosNoticias as $ColocarNoticias){ ?>
+  					<?php foreach($datosNoticias as $ColocarNoticias){ 
+						
+						
+						?>
 
 	  					<article class="content">
 
@@ -252,7 +256,8 @@
 
 					    		<div class="content__last-news-title-description">
 					    			
-					    			<div class="last-news-title">										<h2><?php echo $ColocarNoticias['titulo'] ?></h2>			
+					    			<div class="last-news-title">						
+										<h2><?php echo $ColocarNoticias['titulo'] ?></h2>			
 					    			</div>
 					    		
 
@@ -272,9 +277,11 @@
 					    		
 					    			
 					    	</div>
-
+						<?php if(empty($ColocarNoticias['miniatura'])){?>
+							<img src="img/pti.jpg">
+						<?php }else{ ?>	
 						<img src="<?php echo $ColocarNoticias['miniatura']?>">
-
+						<?php } ?>	
 		    		</article>
 
 	  				<?php } ?>
@@ -287,12 +294,7 @@
 
   		</section>
 
-
-<<<<<<< HEAD
-=======
-
->>>>>>> b958538 (Hasta Cursos arreglado)
-		<?php //Seccion acceso a cursos ?>
+<?php } ?>
 		<section>
 			<article id="contenedor-cursos">
 			
@@ -320,12 +322,7 @@
 				<div id="nosotros-contenido">
 					<h3>Nuestra historia</h3>
 
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>El Polo Educativo Tecnológico del Cerro (PETC) de la Dirección General de Educación Técnico Profesional (DGETP) nace en el año 2018 como Centro Educativo con una oferta de educación terciaria y media superior con un fuerte vínculo con la extensión, con el sector productivo y con experiencias en prácticas curriculares en ámbitos laborales (proyectos de egreso, proyectos de investigación, pasantías, etc).</p>
 
 					<a href="nosotros.php">¡Conócenos!</a>
 				</div>
@@ -353,11 +350,7 @@
 
 		<section>
 			<article id="contenedor-novedades">
-<<<<<<< HEAD
-				<a href="nosotros.php"><h3>Acceso a Novedades<i class="fa-solid fa-arrow-right"></i></h3></a>
-=======
 				<a href="noticias.php"><h3>Acceso a Novedades<i class="fa-solid fa-arrow-right"></i></h3></a>
->>>>>>> b958538 (Hasta Cursos arreglado)
 			</article>
 		</section>
 
@@ -397,22 +390,10 @@
   		</section>
   	</footer>
 
-<<<<<<< HEAD
-  	<script src="js/animaciones.js"></script>
-
-  	<?php //<!-- Script necesario para que funcione el menu --> ?>
-	<script src="js/menu.js"></script>
-	
-	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
-	<script src="js/irArriba.js"></script>
-
-	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
-=======
   	<script src="js/sliderInicio.js"></script>
   	<script src="js/loaderScreen.js"></script>
 	<script src="js/menu.js"></script>
 	<script src="js/irArriba.js"></script>
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

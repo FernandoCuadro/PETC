@@ -15,13 +15,14 @@ NOSOTROS
 
 
 	[Ideas a realizar]
-	-Se podria cambiar el agregar imagenes para arriba de las fotos y darle mas espacio al select de imagenes
+	-Se podria cambiar el agregar imagenes para arriba de las fotos y darle mas espacio al select de imagenes -- Echo
+	-al editar los integrantes si no cambias foto mantener la anterior, de momento no podria causar otros bugs
 	
 
 
 
 	[Errores]
-	-Falta colocar mas en el medio el agregar imagenes
+	-Falta colocar mas en el medio el agregar imagenes---agregado
 	
 	-Deja agregar cualquier archivo que no sea imagen---arreglado
 	
@@ -40,15 +41,17 @@ CURSOS
 	-Se puede agregar cualquier tipo de archivo que no sea imagen --- arreglado
 
 
+
 NOTICIAS
 	[Realizadas]
 	-Se usa js en los avisos
 	
 	[Ideas a realizar]
-	-Buscador por nombre, mes, año
+	-Buscador por nombre, mes, año, comentarios en las noticias individuales
 	
 	[Errores]
-	Deja cargar archivos que no son imagenes, el if que controla las imagenes solo sirve en el controlador
+	-Deja cargar archivos que no son imagenes, el if que controla las imagenes solo sirve en el controlador, no sirvio
+	-Al poner archivo no se ve la imagen en el inicio, tapado con un if
 
 LOGIN
 	[Realizadas]
@@ -57,5 +60,11 @@ LOGIN
 	-Si esta logueado no puede entrar al login
 
 	[Ideas a Realizar]
-	-Sistema de recordar contraseña, poddria ser con un email
-	
+	-Sistema de recordar contraseña, poddria ser con un email o enviar un mensaje al admin para que eeste cambie la contraseña
+	-Los ususarios se eliminan, sacar el inactivo a los usuarios
+
+´Sistema auditoria..
+	cada accion de un moderador se guardaria en la base de datos, se podria hacer cada vezx que se hace algo en el modelo agregar a
+	una tabla en la bd
+
+

@@ -8,17 +8,6 @@
 	<link rel="stylesheet" type="text/css" href="css/styleEditores34.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
-<<<<<<< HEAD
-	<?php //<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script -->  ?>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-
-=======
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<?php //<!-- Fuente usada para la introduccion sobre la imagen --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,7 +59,7 @@
 		}elseif($_SESSION['perfil'] == 'moderador'){	
 		?>	
 		<div id="contenedor-sesion">	
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 
 	    </div>
 		<?php } ?>
@@ -171,7 +160,7 @@
 						<select name="idnivel" required>
 							<option value="">Seleccione un nivel</option>
 							<?php foreach($vernivel as $Ponernivelcombo){ ?>
-							<option value="<?php echo $Ponernivelcombo['id'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
+							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['numero']." || ".$Ponernivelcombo['nombre'] ?></option>
 							<?php } ?>
 						</select>
 
@@ -231,11 +220,7 @@
 						<select name="nivelcurso" required>
 							<option value="">Seleccione un nivel</option>
 							<?php foreach($vernivel as $Ponernivelcombo){ ?>
-<<<<<<< HEAD
-							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
-=======
 							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['numero']."->".$Ponernivelcombo['nombre']?></option>
->>>>>>> b958538 (Hasta Cursos arreglado)
 							<?php } ?>
 						</select>
 
@@ -304,7 +289,7 @@
 						<select name="nivelcursoedit" required>
 							<option value="">Seleccione un nivel</option>
 							<?php foreach($vernivel as $Ponernivelcombo){ ?>
-							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['nombre'] ?></option>
+							<option value="<?php echo $Ponernivelcombo['numero'] ?>"><?php echo $Ponernivelcombo['numero']."->".$Ponernivelcombo['nombre'] ?></option>
 							<?php } ?>
 						</select>
 
@@ -314,12 +299,12 @@
 
 						<h3 id="imagenCurso2">Imagen del curso <span>(edición)</span><i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-						<input type="file" name="imagencursoedit">
+						<input accept="image/png,image/jpeg" type="file" name="imagencursoedit">
 
 						<div class="contenedor-informacion-imagen">
 		  					<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>
-
+								
 						<h3 id="enlaceCurso2">Enlace relacionado <span>(edición)</span><i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
 
 						<input type="text" name="enlacecursoedit" placeholder="https://ejemplo-curso.com" required>
@@ -373,57 +358,10 @@
   		</section>
   	</footer>
 
-<<<<<<< HEAD
-  	<script>
-	    BalloonEditor
-	        .create( document.querySelector( '#editor1' ) )
-	        .catch( error => {
-	            console.error( error );
-	        } );
-
-	    BalloonEditor
-	        .create( document.querySelector( '#editor2' ) )
-	        .catch( error => {
-	            console.error( error );
-	        } );
-
-        BalloonEditor
-	        .create( document.querySelector( '#editor3' ) )
-	        .catch( error => {
-	            console.error( error );
-	        } );
-
-        BalloonEditor
-	        .create( document.querySelector( '#editor4' ) )
-	        .catch( error => {
-	            console.error( error );
-	        } );
-
-	    BalloonEditor
-	        .create( document.querySelector( '#editor5' ) )
-	        .catch( error => {
-	            console.error( error );
-	        } );
-
-	    BalloonEditor
-			.create( document.querySelector( '#editor6' ) )
-			.catch( error => {
-			    console.error( error );
-			} );
-	</script>
-
-	<script src="js/animaciones.js"></script>
-
-	<script src="js/menu.js"></script>
-	
-	<script src="js/irArriba.js"></script>
-
-=======
-	<script src="js/validaciones"></script>
+	<script src="js/validaciones.js"></script>
 	<script src="js/loaderScreen.js"></script>
 	<script src="js/menu.js"></script>	
 	<script src="js/irArriba.js"></script>
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

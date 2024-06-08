@@ -15,7 +15,7 @@ const expresiones = {
 	telefono: /^\d{7,14}$/, // 7 a 14 numeros.
 	enlaceNoSeguro: /^(http:[//]+[//]+)/, //el enlace debe tener http://
 	enlaceSeguro: /^(https:[//]+[//]+)/, //el enlace debe tener http://
-	palabrasNoAdmitidas: /(\bidiota\b)|(\bestupido\b)|(\bestúpido\b)|(\bgil\b)|(\bputa\b)/
+	palabrasNoAdmitidas: /(\bidiota\b)|(\bestupido\b)|(\bestúpido\b)|(\bgil\b)|(\bputa\b)|(\bmongolico\b)|(\bputo\b)|(\bimbecil\b)|(\bchupapija\b)|(\bPuto\b)|(\bMongolico\b)|(\bImbecil\b)/
 }
 
 // campos que tenemos que validar
@@ -27,8 +27,8 @@ const selects = document.querySelectorAll('#formulario select');
 const dates = document.querySelectorAll('#formulario input[type="datetime-local"]');
 const textareas = document.querySelectorAll('#formulario textarea');
 
-const enlaceNovedades1 = document.querySelector('.grupo__enlaces input[name="url"]');
-const enlaceNovedades2 = document.querySelector('.grupo__enlaces input[name="url2"]');
+const enlaceNovedades1 = document.querySelector('.grupo__enlaces input[name="url[]"]');
+const enlaceNovedades2 = document.querySelector('.grupo__enlacess input[name="urlagr[]"]');
 const enlaceNovedades3 = document.querySelector('.grupo__enlaces input[name="url3"]');
 const enlaceNovedades4 = document.querySelector('.grupo__enlaces input[name="url4"]'		);
 const enlaceNovedades5 = document.querySelector('.grupo__enlaces input[name="url5"]');
@@ -38,7 +38,6 @@ const enlaceNovedades5 = document.querySelector('.grupo__enlaces input[name="url
 let aprobadoTitulo = false;
 let aprobadoArea = false;
 let aprobadoDescripcion = false;
-let aprobadoMiniatura = true;
 let aprobadoContenido1 = false;
 let aprobadoFecha = false;
 let aprobadoEstado = false;
@@ -51,10 +50,8 @@ let aprobadoContenido5 = true;
 
 // vamos a aprobar uno por uno cada enlace
 let aprobadoEnlace1 = true;
-let aprobadoEnlace2 = true;
-let aprobadoEnlace3 = true;
-let aprobadoEnlace4 = true;
-let aprobadoEnlace5 = true;
+let aprobadoEnlaceEdit = true;
+
 
 
 // funcion para validar que los campos tengan los caracteres que deben tener
@@ -69,12 +66,13 @@ const validarFormulario = (e) => {
 				let cantCaracteresTitulo = e.target.value.length;
 
 				// limite de caracteres para el titulo
-				const limiteTitulo = 100;
+				const limiteTitulo = 100;	
 
 				
 				const hijosTitulo = document.querySelector('.grupo__titulo .contenedor-informacion').children;
+				
 				const iconoTitulo = document.querySelector('.grupo__titulo h3 i');
-
+				
 				// En caso de que se cumpla la expresion
 				if(expresiones.titulo.test(e.target.value)){
 					
@@ -167,8 +165,19 @@ const validarFormulario = (e) => {
 							hijo.textContent = "Límite de caracteres alcanzado";
 							hijo.classList.add('activo');
 						}
+					}	
+				/*		
+					iconoTitulo.classList.remove('fa-circle-check');
+					iconoTitulo.classList.remove('fa-triangle-exclamation');
+					iconoTitulo.classList.remove('completo');
+					iconoTitulo.classList.add('error')
+					iconoTitulo.classList.add('fa-circle-xmark');
+					iconoTitulo.title = "Campo incompleto";
 
-					}
+					// NO aprobamos el campo
+					aprobadoTitulo = false;
+				*/
+					//}
 				
 				} else {
 
@@ -179,8 +188,21 @@ const validarFormulario = (e) => {
 						}
 
 					}
-
 				}
+
+				/*
+					iconoTitulo.classList.remove('fa-triangle-exclamation');
+								iconoTitulo.classList.remove('fa-circle-xmark');
+								iconoTitulo.classList.remove('error');
+								iconoTitulo.classList.add('completo')
+								iconoTitulo.classList.add('fa-circle-check');
+								iconoTitulo.title = "Campo completado";
+
+								// Aprobamos el campo       
+								aprobadoTitulo = true;
+				*/
+
+				//}
 
 
 				// mostrar la cantidad de caracteres que fueron ingresados
@@ -305,7 +327,7 @@ const validarFormulario = (e) => {
 							aprobadoDescripcion = true;
 
 						}
-					}
+					}	
 
 				}
 
@@ -404,7 +426,6 @@ const validarFormulario = (e) => {
 				iconoMiniatura.classList.add('fa-circle-xmark');
 				iconoMiniatura.title = "Campo incompleto";
 				
-				aprobadoMiniatura = false;
 				
 			}else{
 						for(hijo of hijosMiniatura){
@@ -591,7 +612,7 @@ const validarFormulario = (e) => {
 			archivosCargadosImagen1 = parseInt(archivosCargadosImagen1, 10)
 
 			if(archivosCargadosImagen1 == 1){
-
+				
 				for(hijo of hijosImagen1){
 
 					if(hijo.classList.item(0) == "textoInfo"){
@@ -610,10 +631,10 @@ const validarFormulario = (e) => {
 				iconoImagen1.classList.add('completo')
 				iconoImagen1.classList.add('fa-circle-check');
 				iconoImagen1.title = "Campo completado";
-
+				
 				// el campo no es obligatorio
 				// su valor ya es true
-
+				
 			} else {
 
 				for (hijo of hijosImagen1){
@@ -631,7 +652,7 @@ const validarFormulario = (e) => {
 				iconoImagen1.classList.remove('completo');
 				iconoImagen1.classList.add('fa-triangle-exclamation');
 				iconoImagen1.title = "Campo vacío";
-
+				
 			}
 			break;      
 
@@ -782,7 +803,7 @@ const validarFormulario = (e) => {
 			
 
 			// En caso de que una imagen sea cargada
-			if(archivosCargadosImagen2 =>1){
+			if(archivosCargadosImagen2 == 1){
 
 				for(hijo of hijosImagen2){
 
@@ -1500,100 +1521,132 @@ const validarFormulario = (e) => {
 
 
 
-		case "url":
+		case "url[]":
 
+		const hijosEnlacesNovedades = document.querySelector('.grupo__enlaces .contenedor-informacion').children;
+		const iconoEnlacesNovedades = document.querySelector('.grupo__enlaces h3 i');
 			// El campo solo será aprobado en caso de que cumpla con la expresion de enlaces
 			// o que el campo esté vacío
 			if(expresiones.enlaceNoSeguro.test(e.target.value) ||
 			   expresiones.enlaceSeguro.test(e.target.value) ||
 			   enlaceNovedades1.value == ""){
+				
+
+					for (hijo of hijosEnlacesNovedades){
+						if(hijo.classList.item(0) == "textoInfo"){
+							hijo.classList.remove("textoError");
+							hijo.classList.add("textoValido");
+							hijo.textContent = "Completado";
+						}
+	
+					}
+	
+	
+					iconoEnlacesNovedades.classList.remove('fa-circle-xmark');
+					iconoEnlacesNovedades.classList.remove('error');
+					iconoEnlacesNovedades.classList.remove('advertencia');
+					iconoEnlacesNovedades.classList.remove('fa-triangle-exclamation');
+
+					iconoEnlacesNovedades.classList.add('fa-circle-check'),
+					iconoEnlacesNovedades.classList.add('completo');
+					iconoEnlacesNovedades.title = "Campo completado";
+	
+					// aprobamos el campo para que se pueda activar el btn submit
+					aprobadoEnlace1 = true;
+					
+
+			
+			
+				}else{
+
+				
+				for (hijo of hijosEnlacesNovedades){
+
+					hijo.classList.remove('textoValido');
+					hijo.classList.add('textoError');
+					hijo.textContent = "Ingrese el enlace correspondiente";
+
+				}
 
 
-				aprobadoEnlace1 = true;
+				iconoEnlacesNovedades.classList.remove('fa-circle-check');
+				iconoEnlacesNovedades.classList.remove('completo');
+				iconoEnlacesNovedades.classList.add('fa-circle-xmark');
+				iconoEnlacesNovedades.classList.add('error'),
+				iconoEnlacesNovedades.title = "Campo incompleto";
 
-			}else{
-
+				// NO aprobamos el campo, el btn submit sigue desactivado
 				aprobadoEnlace1 = false;
+
 
 			}
 
 		break;
 
 
-		case "url2":
 
+
+		case "urlagr[]":
+
+		const hijosEnlacesNovedadesEditar = document.querySelector('.grupo__enlacess .contenedor-informacion').children;
+		const iconoEnlacesNovedadesEditar = document.querySelector('.grupo__enlacess h3 i');
 			// El campo solo será aprobado en caso de que cumpla con la expresion de enlaces
 			// o que el campo esté vacío
 			if(expresiones.enlaceNoSeguro.test(e.target.value) ||
 			   expresiones.enlaceSeguro.test(e.target.value) ||
 			   enlaceNovedades2.value == ""){
+				
 
-				aprobadoEnlace2 = true;
+				for (hijo of hijosEnlacesNovedadesEditar){
+					if(hijo.classList.item(0) == "textoInfo"){
+						hijo.classList.remove("textoError");
+						hijo.classList.add("textoValido");
+						hijo.textContent = "Completado";
+					}
 
-			}else{
+				}
+	
+	
+					iconoEnlacesNovedadesEditar.classList.remove('fa-circle-xmark');
+					iconoEnlacesNovedadesEditar.classList.remove('error');
+					iconoEnlacesNovedadesEditar.classList.remove('advertencia');
+					iconoEnlacesNovedadesEditar.classList.remove('fa-triangle-exclamation');
 
-				aprobadoEnlace2 = false;
+					iconoEnlacesNovedadesEditar.classList.add('fa-circle-check'),
+					iconoEnlacesNovedadesEditar.classList.add('completo');
+					iconoEnlacesNovedadesEditar.title = "Campo completado";
+	
+					// aprobamos el campo para que se pueda activar el btn submit
+					aprobadoEnlaceEdit = true;
+					
 
-			}
+			
+			
+				}else{
 
-		break;
+				
+				for (hijo of hijosEnlacesNovedadesEditar){
 
+					hijo.classList.remove('textoValido');
+					hijo.classList.add('textoError');
+					hijo.textContent = "Ingrese el enlace correspondiente";
 
-		case "url3":
-
-			// El campo solo será aprobado en caso de que cumpla con la expresion de enlaces
-			// o que el campo esté vacío
-			if(expresiones.enlaceNoSeguro.test(e.target.value) ||
-			   expresiones.enlaceSeguro.test(e.target.value) ||
-			   enlaceNovedades3.value == ""){
-
-				aprobadoEnlace3 = true;
-
-			}else{
-
-				aprobadoEnlace3 = false;
-
-			}
-
-		break;
+				}
 
 
-		case "url4":
+				iconoEnlacesNovedadesEditar.classList.remove('fa-circle-check');
+				iconoEnlacesNovedadesEditar.classList.remove('completo');
+				iconoEnlacesNovedadesEditar.classList.add('fa-circle-xmark');
+				iconoEnlacesNovedadesEditar.classList.add('error'),
+				iconoEnlacesNovedadesEditar.title = "Campo incompleto";
 
-			// El campo solo será aprobado en caso de que cumpla con la expresion de enlaces
-			// o que el campo esté vacío
-			if(expresiones.enlaceNoSeguro.test(e.target.value) ||
-			   expresiones.enlaceSeguro.test(e.target.value) ||
-			   enlaceNovedades4.value == ""){
+				// NO aprobamos el campo, el btn submit sigue desactivado
+				aprobadoEnlaceEdit = false;
 
-				aprobadoEnlace4 = true;
-
-			}else{
-
-				aprobadoEnlace4 = false;
-
-			}
-
-		break;
-
-		case "url5":
-
-			// El campo solo será aprobado en caso de que cumpla con la expresion de enlaces
-			// o que el campo esté vacío
-			if(expresiones.enlaceNoSeguro.test(e.target.value) ||
-			   expresiones.enlaceSeguro.test(e.target.value) ||
-			   enlaceNovedades5.value == ""){
-
-				aprobadoEnlace5 = true;
-
-			}else{
-
-				aprobadoEnlace5 = false;
 
 			}
 
-		break;
-
+		break;	
 
 
 
@@ -1657,24 +1710,15 @@ const validarFormulario = (e) => {
 // En caso de que el campo este vacio mostramos advertencia
 const aprobadoEnlacesNovedades = (e) => {
 
-	const hijosEnlacesNovedades = document.querySelector('.grupo__enlaces .contenedor-informacion').children;
-	const iconoEnlacesNovedades = document.querySelector('.grupo__enlaces h3 i');
+	
 
 	// en caso de que todos los enlaces sean aprobados, definimos la variable que los 
 	// representa a todos como aprobada
-	if(aprobadoEnlace1 == true &&
-	   aprobadoEnlace2 == true &&
-	   aprobadoEnlace3 == true &&
-	   aprobadoEnlace4 == true &&
-	   aprobadoEnlace5 == true){
+	if(aprobadoEnlace1 == true){
 
 		// en caso de que los campos este todos vacios solo mostramos 
 		// mensaje de advertencia
-		if(enlaceNovedades1.value == "" &&
-		   enlaceNovedades2.value == "" &&
-		   enlaceNovedades3.value == "" &&
-		   enlaceNovedades4.value == "" &&
-		   enlaceNovedades5.value == ""){
+		if(enlaceNovedades1.value == ""){
 
 		   	for(hijo of hijosEnlacesNovedades){
 
@@ -1722,6 +1766,7 @@ const aprobadoEnlacesNovedades = (e) => {
 			iconoEnlacesNovedades.classList.add('completo');
 			iconoEnlacesNovedades.title = "Campo completado";
 
+			
 
 		}
 
@@ -1761,18 +1806,14 @@ const formularioAprobado = (e) => {
 	if(aprobadoTitulo == false ||
 		aprobadoArea == false ||
 		aprobadoDescripcion == false ||
-		aprobadoMiniatura == false ||
-		aprobadoContenido1 == false ||
+		aprobadoContenido1 == false ||	
 		aprobadoContenido2 == false ||
 		aprobadoContenido3 == false ||
 		aprobadoContenido4 == false ||
 		aprobadoContenido5 == false ||
 		aprobadoFecha == false ||
 		aprobadoEnlace1 == false ||
-		aprobadoEnlace2 == false ||
-		aprobadoEnlace3 == false ||
-		aprobadoEnlace4 == false ||
-		aprobadoEnlace5 == false ||
+		aprobadoEnlaceEdit == false ||
 		aprobadoEstado == false){
 
 		// si alguno de los campos necesarios es false, sigue desactivado
@@ -3459,8 +3500,8 @@ const expresionesNosotros = {
 
 // campos que tenemos que validar o necesitamos del formulario en cuestion
 /*AGREGAR IMAGENES*/
-const inputsFileNosotrosImagen = document.querySelectorAll('#grupo__nosotrosImagen1 input[type="file"]');
-const submitAgregar = document.querySelector('#grupo__nosotrosImagen1 .btns-submit .submit');
+const inputsFileNosotrosImagen = document.querySelectorAll('#grupo__nosotrosImagen1 input');
+const submitAgregar = document.querySelector('#grupo__nosotrosImagen1 .submit');
 
 
 /*ELIMINAR IMAGENES*/
@@ -5198,7 +5239,6 @@ const expresionesAdmin = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{2,40}$/, // Letras y espacios, pueden llevar acentos
 	cedula: /\d{8}/,
 	contraseña: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&/()=?¡¿'°¬^`~.,{}+´*+<>{}\]\\[;:_¨-])([A-Za-z\d!"#$%&/()=?¡¿'°¬^`~.,{}+´*+<>{}\]\\[;:_¨-]){8,120}$/, // Letras en mayuscula y en minuscula, simbolos y numeros
-	rol: /^[a-zA-ZÀ-ÿ\s]{2,40}$/,
 	numeros: /\d+/,
 	simbolos: /[!"#$%&/()=?¡¿'°¬^`~.,{}+´*+<>{}\]\\[;:_¨-]+/,
 	letras: /[a-zA-ZÀ-ÿ]+/,
@@ -5210,13 +5250,14 @@ const expresionesAdmin = {
 // Campos para validar y usar
 // AGREGAR
 const adminUsuariosAgregarInputs = document.querySelectorAll('.formularioUsuariosAgregar input');
+const adminUsuariosAgregarSelect = document.querySelectorAll('.formularioUsuariosAgregar select');
 const adminUsuariosAgregarSubmit = document.querySelector('.formularioUsuariosAgregar input[type="submit"]');
 
 // EDITAR/ELIMINAR
 const adminUsuariosEditarInputs = document.querySelectorAll('.formularioUsuariosEditar input');
 const adminUsuariosEditarSelect = document.querySelectorAll('.formularioUsuariosEditar select');
 const adminUsuariosEditarSubmit = document.querySelector('.formularioUsuariosEditar input[name="editarusuario"]');
-const adminUsuariosEditarDelete = document.querySelector('.formularioUsuariosEditar input[name="eliminarUsuario"]');
+const adminUsuariosEditarDelete = document.querySelector('.formularioUsuariosEditar input[name="eliminarusuario"]');
 
 
 // Aprobar campos
@@ -5224,6 +5265,7 @@ const adminUsuariosEditarDelete = document.querySelector('.formularioUsuariosEdi
 let aprobadoAdminAgregarNombre = false;
 let aprobadoAdminAgregarCedula = false;
 let aprobadoAdminAgregarContra = false;
+let aprobadoAdminAgregarContraRep = false;
 let aprobadoAdminAgregarRol = false;
 
 
@@ -5231,6 +5273,7 @@ let aprobadoAdminAgregarRol = false;
 let aprobadoAdminEditarID = false;
 let aprobadoAdminEditarNombre = false;
 let aprobadoAdminEditarContra = false;
+let aprobadoAdminEditarContraRep = false;
 let aprobadoAdminEditarRol = false;
 
 
@@ -5487,7 +5530,7 @@ const validarFormularioAdmin = (e) => {
 
 			const hijosAdminAgregarContra = document.querySelector('.formularioUsuariosAgregar .contenedor-informacion-contra').children;
 			const iconoAdminAgregarContra = document.querySelector('.formularioUsuariosAgregar .contraseña h3 i');
-
+			//const contra1 = document.querySelector('input[name ="contraUsuario"]').value;
 			if(expresionesAdmin.contraseña.test(e.target.value)){
 
 				for(hijo of hijosAdminAgregarContra){
@@ -5586,72 +5629,121 @@ const validarFormularioAdmin = (e) => {
 		break;
 
 
+		case "contraUsuarioRep":
+
+		const caracteresContraAdminRep = e.target.value.substring(0,120);
+		e.target.value = caracteresContraAdminRep;
+
+		let cantCaracteresContraAdminRep = e.target.value.length;
+		canCaracteresContraAdminRep = parseInt(cantCaracteresContraAdminRep, 10);
+
+		const limiteContraAdminRep = 120;
+
+		const hijosAdminAgregarContraRep = document.querySelector('.formularioUsuariosAgregar .contenedor-informacion-contraRep').children;
+		const iconoAdminAgregarContraRep = document.querySelector('.formularioUsuariosAgregar .contraseñaRep h3 i');
+		const contra2 = document.querySelector('input[name ="contraUsuarioRep"]').value;	
+		const contra1 = document.querySelector('input[name ="contraUsuario"]').value;	
+	
+
+
+			
+		if(contra1 == contra2){
+
+			for(hijo of hijosAdminAgregarContraRep){
+
+				if(hijo.classList.item(0) == "textoInfo"){
+
+					// Mostramos mensaje de exito
+					hijo.classList.remove('textoError');
+					hijo.classList.add('textoValido');
+					hijo.textContent = "Completado";
+
+				}
+
+			}
+
+
+			// Mostramos icono de exito
+			iconoAdminAgregarContraRep.classList.remove('fa-circle-xmark');
+			iconoAdminAgregarContraRep.classList.remove('error');
+			iconoAdminAgregarContraRep.classList.add('fa-circle-check');
+			iconoAdminAgregarContraRep.classList.add('completo');
+			iconoAdminAgregarContraRep.title = "Campo completado";
+
+			// Aprobamos el campo
+			aprobadoAdminAgregarContraRep = true;
+
+
+			}else{
+
+			for(hijo of hijosAdminAgregarContraRep){
+
+				if(hijo.classList.item(0) == "textoInfo"){
+
+					// Mostramos mensaje de error
+					hijo.classList.remove('textoValido');
+					hijo.classList.add('textoError');
+					hijo.textContent = "Las contraseñas no coinciden";
+
+				}
+
+			}
+
+
+			// Mostramos icono de error
+			iconoAdminAgregarContraRep.classList.remove('fa-circle-check');
+			iconoAdminAgregarContraRep.classList.remove('completo');
+			iconoAdminAgregarContraRep.classList.add('fa-circle-xmark');
+			iconoAdminAgregarContraRep.classList.add('error');
+			iconoAdminAgregarContraRep.title = "Campo incompleto";
+
+			// NO aprobamos el campo
+			aprobadoAdminAgregarContraRep = false;
+
+		}
+
+
+		
+
+	break;
+
+
+
 		case "rolUsuario":
 
-			const caracteresRolAdmin = e.target.value.substring(0,30);
-			e.target.value = caracteresRolAdmin;
-
-			let canCaracteresRolAdmin = e.target.value.length;
-			canCaracteresRolAdmin = parseInt(canCaracteresRolAdmin, 10);
-
-			const limiteRolAdmin = 30;
+		
 
 			const hijosAdminAgregarRol = document.querySelector('.formularioUsuariosAgregar .contenedor-informacion-rol').children;
 			const iconoAdminAgregarRol = document.querySelector('.formularioUsuariosAgregar .rol h3 i');
 
-			// En caso de que el campo cumpla con la expresion
-			if(expresionesAdmin.rol.test(e.target.value)){
+	
+			if(e.target.value !== ""){
 
 				for(hijo of hijosAdminAgregarRol){
 
 					if(hijo.classList.item(0) == "textoInfo"){
 
-						// En caso de que se ingresen palabras inapropiadas en el campo
-						if(expresionesAdmin.palabrasNoAdmitidas.test(e.target.value)){
-
-							// Mostramos mensaje de error
-							hijo.classList.remove('textoValido');
-							hijo.classList.add('textoError');
-							hijo.textContent = "Se encontraron palabras inapropiadas";
-
-							// Mostramos icono de error
-							iconoAdminAgregarRol.classList.remove('fa-circle-check');
-							iconoAdminAgregarRol.classList.remove('completo');
-							iconoAdminAgregarRol.classList.add('fa-circle-xmark');
-							iconoAdminAgregarRol.classList.add('error');
-							iconoAdminAgregarRol.title = "Campo incompleto";
-
-							// NO aprobamos el campo
-							aprobadoAdminAgregarRol = false;
-
-						}else{
-						// En caso de que no se encuentren palabras inapropiadas
-
-							// Mostramos mensaje de exito
-							hijo.classList.remove('textoError');
-							hijo.classList.add('textoValido');
-							hijo.textContent = "Completado";
-
-							// Mostramos icono de exito
-							iconoAdminAgregarRol.classList.remove('fa-circle-xmark');
-							iconoAdminAgregarRol.classList.remove('error');
-							iconoAdminAgregarRol.classList.add('fa-circle-check');
-							iconoAdminAgregarRol.classList.add('completo');
-							iconoAdminAgregarRol.title = "Campo completado";
-
-							// Aprobamos el campo
-							aprobadoAdminAgregarRol = true;
-
-						}
-
-						
+						// Mostramos mensaje de exito
+						hijo.classList.remove('textoError');
+						hijo.classList.add('textoValido');
+						hijo.textContent = "Completado";
 
 					}
 
 				}
 
+				// Mostramos icono de exito
+				iconoAdminAgregarRol.classList.remove('fa-circle-xmark');
+				iconoAdminAgregarRol.classList.remove('error');
+				iconoAdminAgregarRol.classList.add('fa-circle-check');
+				iconoAdminAgregarRol.classList.add('completo');
+				iconoAdminAgregarRol.title = "Campo completado";
+
+				// Aprobamos el campo
+				aprobadoAdminAgregarRol = true;
+
 			}else{
-			// En caso de que el campo no cumpla con la expresion
+			// En caso de que el campo este vacío
 
 				for(hijo of hijosAdminAgregarRol){
 
@@ -5660,23 +5752,7 @@ const validarFormularioAdmin = (e) => {
 						// Mostramos mensaje de error
 						hijo.classList.remove('textoValido');
 						hijo.classList.add('textoError');
-						hijo.textContent = "Mínimo 2 caracteres";
-
-						// En caso de que se ingresen numeros
-						if(expresionesAdmin.numeros.test(e.target.value)){
-
-							// Mostramos mensaje de error
-							hijo.textContent = "Números no tolerados";
-
-						}
-
-						// En caso de que se ingresen simbolos
-						if(expresionesAdmin.simbolos.test(e.target.value)){
-
-							// Mostramos mensaje de error
-							hijo.textContent = "Símbolos no tolerados";
-
-						}
+						hijo.textContent = "Seleccione un rol";
 
 					}
 
@@ -5695,47 +5771,9 @@ const validarFormularioAdmin = (e) => {
 			}
 
 
-			// Mostramos cantidad de caracteres ingresados
-			for(hijo of hijosAdminAgregarRol){
-
-				if(hijo.classList.item(0) == "cantCaracteres"){
-
-					hijo.textContent = `${canCaracteresRolAdmin}/${limiteRolAdmin}`;
-
-				}
-
-			}
 
 
-			// Mostramos limite de caracteres alcanzado
-			if(canCaracteresRolAdmin >= limiteRolAdmin){
-
-				for(hijo of hijosAdminAgregarRol){
-
-					if(hijo.classList.item(0) == "textoLimite"){
-
-						hijo.classList.add('activo');
-						hijo.textContent = "Límite de caracteres alcanzado";
-
-					}
-
-				}
-
-			}else{
-
-				for(hijo of hijosAdminAgregarRol){
-
-					if(hijo.classList.item(0) == "textoLimite"){
-
-						hijo.classList.remove('activo');
-
-					}
-
-				}
-
-			}
 			
-
 		break;
 
 
@@ -6047,140 +6085,148 @@ const validarFormularioAdmin = (e) => {
 
 		break;
 
+		case "contUsuarioRep":
+/*
+		const caracteresContraAdminEditarRep = e.target.value.substring(0,120);
+		e.target.value = caracteresContraAdminEditarRep;
 
-		case "rolUsuarioEditar":
+		let cantCaracteresContraAdminEditarRep = e.target.value.length;
+		canCaracteresContraAdminEditarRep= parseInt(cantCaracteresContraAdminEditarRep, 10);
 
-			const caracteresRolAdminEditar = e.target.value.substring(0,30);
-			e.target.value = caracteresRolAdminEditar;
-
-			let canCaracteresRolAdminEditar = e.target.value.length;
-			canCaracteresRolAdminEditar = parseInt(canCaracteresRolAdminEditar, 10);
-
-			const limiteRolAdminEditar = 30;
-
-			const hijosAdminEditarRol = document.querySelector('.formularioUsuariosEditar .contenedor-informacion-rol').children;
-			const iconoAdminEditarRol = document.querySelector('.formularioUsuariosEditar .rol h3 i');
-
-			if(expresionesAdmin.rol.test(e.target.value)){
-
-				for(hijo of hijosAdminEditarRol){
-
-					if(hijo.classList.item(0) == "textoInfo"){
+		const limiteContraAdminEditarRep = 120;
+*/
+		const hijosAdminEditarContraRep = document.querySelector('.formularioUsuariosEditar .contenedor-informacion-contraRep').children;
+		const iconoAdminEditarContraRep = document.querySelector('.formularioUsuariosEditar .contraseñaRep h3 i');
+		const contraedit2 = document.querySelector('input[name ="contUsuarioRep"]').value;	
+		const contraedit1 = document.querySelector('input[name ="contUsuario"]').value;	
+	
 
 
-						if(expresionesAdmin.palabrasNoAdmitidas.test(e.target.value)){
+			
+		if(contraedit1 == contraedit2){
 
-							hijo.classList.remove('textoValido');
-							hijo.classList.add('textoError');
-							hijo.textContent = "Se encontraron palabras inapropiadas";
+			for(hijo of hijosAdminEditarContraRep){
 
-							iconoAdminEditarRol.classList.remove('fa-circle-check');
-							iconoAdminEditarRol.classList.remove('completo');
-							iconoAdminEditarRol.classList.add('fa-circle-xmark');
-							iconoAdminEditarRol.classList.add('error');
-							iconoAdminEditarRol.title = "Campo incompleto";
+				if(hijo.classList.item(0) == "textoInfo"){
 
-							aprobadoAdminEditarRol = false;
-
-						}else{
-
-							hijo.classList.remove('textoError');
-							hijo.classList.add('textoValido');
-							hijo.textContent = "Completado";
-
-							iconoAdminEditarRol.classList.remove('fa-circle-xmark');
-							iconoAdminEditarRol.classList.remove('error');
-							iconoAdminEditarRol.classList.add('fa-circle-check');
-							iconoAdminEditarRol.classList.add('completo');
-							iconoAdminEditarRol.title = "Campo completado";
-
-							aprobadoAdminEditarRol = true;
-
-						}
-
-					}
+					// Mostramos mensaje de exito
+					hijo.classList.remove('textoError');
+					hijo.classList.add('textoValido');
+					hijo.textContent = "Completado";
 
 				}
+
+			}
+
+
+			// Mostramos icono de exito
+			iconoAdminEditarContraRep.classList.remove('fa-circle-xmark');
+			iconoAdminEditarContraRep.classList.remove('error');
+			iconoAdminEditarContraRep.classList.add('fa-circle-check');
+			iconoAdminEditarContraRep.classList.add('completo');
+			iconoAdminEditarContraRep.title = "Campo completado";
+
+			// Aprobamos el campo
+			aprobadoAdminEditarContraRep = true;
+
 
 			}else{
 
+			for(hijo of hijosAdminEditarContraRep){
+
+				if(hijo.classList.item(0) == "textoInfo"){
+
+					// Mostramos mensaje de error
+					hijo.classList.remove('textoValido');
+					hijo.classList.add('textoError');
+					hijo.textContent = "Las contraseñas no coinciden";
+
+				}
+
+			}
+
+
+			// Mostramos icono de error
+			iconoAdminEditarContraRep.classList.remove('fa-circle-check');
+			iconoAdminEditarContraRep.classList.remove('completo');
+			iconoAdminEditarContraRep.classList.add('fa-circle-xmark');
+			iconoAdminEditarContraRep.classList.add('error');
+			iconoAdminEditarContraRep.title = "Campo incompleto";
+
+			// NO aprobamos el campo
+			aprobadoAdminEditarContraRep = false;
+
+		}
+
+	
+
+		break;
+
+		
+		case "rolUsuarioEditar":
+
+		const hijosAdminEditarRol = document.querySelector('.formularioUsuariosEditar .contenedor-informacion-rol').children;
+			const iconoAdminEditarRol = document.querySelector('.formularioUsuariosEditar .rol h3 i');
+
+	
+			if(e.target.value !== ""){
+
 				for(hijo of hijosAdminEditarRol){
 
 					if(hijo.classList.item(0) == "textoInfo"){
 
-						hijo.classList.remove('textoValido');
-						hijo.classList.add('textoError');
-						hijo.textContent = "Mínimo 2 caracteres";
-
-						if(expresionesAdmin.numeros.test(e.target.value)){
-
-							hijo.textContent = "Números no tolerados";
-
-						}
-
-
-						if(expresionesAdmin.simbolos.test(e.target.value)){
-
-							hijo.textContent = "Símbolos no tolerados";
-
-						}
+						// Mostramos mensaje de exito
+						hijo.classList.remove('textoError');
+						hijo.classList.add('textoValido');
+						hijo.textContent = "Completado";
 
 					}
 
 				}
 
+				// Mostramos icono de exito
+				iconoAdminEditarRol.classList.remove('fa-circle-xmark');
+				iconoAdminEditarRol.classList.remove('error');
+				iconoAdminEditarRol.classList.add('fa-circle-check');
+				iconoAdminEditarRol.classList.add('completo');
+				iconoAdminEditarRol.title = "Campo completado";
 
+				// Aprobamos el campo
+				aprobadoAdminEditarRol = true;
+
+			}else{
+			// En caso de que el campo este vacío
+
+				for(hijo of hijosAdminEditarRol){
+
+					if(hijo.classList.item(0) == "textoInfo"){
+
+						// Mostramos mensaje de error
+						hijo.classList.remove('textoValido');
+						hijo.classList.add('textoError');
+						hijo.textContent = "Seleccione un rol";
+
+					}
+
+				}
+
+				// Mostramos icono de error
 				iconoAdminEditarRol.classList.remove('fa-circle-check');
 				iconoAdminEditarRol.classList.remove('completo');
 				iconoAdminEditarRol.classList.add('fa-circle-xmark');
 				iconoAdminEditarRol.classList.add('error');
 				iconoAdminEditarRol.title = "Campo incompleto";
 
+				// NO aprobamos el campo
 				aprobadoAdminEditarRol = false;
 
 			}
 
 
-			// Mostramos cantidad de caracteres ingresados
-			for(hijo of hijosAdminEditarRol){
-
-				if(hijo.classList.item(0) == "cantCaracteres"){
-
-					hijo.textContent = `${canCaracteresRolAdminEditar}/${limiteRolAdminEditar}`;
-
-				}
-
-			}
 
 
-			// Mostramos mensaje de limite de caracteres
-			if(canCaracteresRolAdminEditar >= limiteRolAdminEditar){
 
-				for(hijo of hijosAdminEditarRol){
-
-					if(hijo.classList.item(0) == "textoLimite"){
-
-						hijo.classList.add('activo');
-						hijo.textContent = "Límite de caracteres alcanzado";
-
-					}
-
-				}
-
-			}else{
-
-				for(hijo of hijosAdminEditarRol){
-
-					if(hijo.classList.item(0) == "textoLimite"){
-
-						hijo.classList.remove('activo');
-
-					}
-
-				}
-
-			}
-
+			
 		break;
 
 	}
@@ -6215,7 +6261,8 @@ const aprobarFormularioAdminAgregar = (e) => {
 	// Comprobamos que ninguno de los campos este vacio, si alguno esta vacio
 	if(aprobadoAdminAgregarNombre == false ||
 	   aprobadoAdminAgregarCedula == false ||
-	   aprobadoAdminAgregarContra == false ||
+	   aprobadoAdminAgregarContra == false ||                        
+	   aprobadoAdminAgregarContraRep == false ||                        
 	   aprobadoAdminAgregarRol == false){
 
 	   	adminUsuariosAgregarSubmit.disabled = true;
@@ -6244,6 +6291,7 @@ const aprobarFormularioAdminEditar = (e) => {
 	if(aprobadoAdminEditarID == false ||
 	   aprobadoAdminEditarNombre == false ||
 	   aprobadoAdminEditarContra == false ||
+	   aprobadoAdminEditarContraRep == false ||
 	   aprobadoAdminEditarRol == false){
 
 		adminUsuariosEditarSubmit.disabled = true;
@@ -6279,11 +6327,14 @@ const aprobarFormularioAdminEliminar = (e) => {
 		adminUsuariosEditarInputs.forEach((input) =>{
 			input.required = false;
 		});
-
+		adminUsuariosEditarSelect.forEach((select) =>{
+			select.required = false;
+		});
+		
 		adminUsuariosEditarDelete.disabled = false;
 		adminUsuariosEditarDelete.classList.remove('cursorInactivo');
 		adminUsuariosEditarDelete.title = "Eliminar usuario";
-
+		
 	}
 
 
@@ -6307,6 +6358,23 @@ adminUsuariosAgregarInputs.forEach((input) => {
 	input.addEventListener('focus', aprobarFormularioAdminAgregar)
 	input.addEventListener('change', aprobarFormularioAdminAgregar)
 });
+
+adminUsuariosAgregarSelect.forEach((select) => {
+	//
+	select.addEventListener('keyup', validarFormularioAdmin)
+	select.addEventListener('keydow', validarFormularioAdmin)
+	select.addEventListener('focus', validarFormularioAdmin)
+	select.addEventListener('change', validarFormularioAdmin)
+
+	//
+	select.addEventListener('keyup', aprobarFormularioAdminAgregar)
+	select.addEventListener('keydow', aprobarFormularioAdminAgregar)
+	select.addEventListener('focus', aprobarFormularioAdminAgregar)
+	select.addEventListener('change', aprobarFormularioAdminAgregar)
+
+	
+});
+
 
 
 // Event Listener de los iconos de contraseña en validacionesContactoExtra.js

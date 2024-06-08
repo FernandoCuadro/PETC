@@ -64,7 +64,7 @@
 		?>	
 		<div id="contenedor-sesion">	
 	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor --> ?>
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 
 	    </div>
 		<?php } ?>

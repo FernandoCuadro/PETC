@@ -1,6 +1,6 @@
 <?php 
 session_start();
-if(empty($_SESSION['usuario'])){
+if(empty($_SESSION['usuario']) || $_SESSION['perfil'] == 'moderador'){
 
     echo "<script>window.location='not-found.php'</script>";
 

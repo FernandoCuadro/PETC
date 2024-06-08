@@ -18,24 +18,16 @@
 <p style="visibility: hidden;">hola</p>
 <?php
 session_start();
-if(empty($_SESSION['usuario']) || $_SESSION['perfil'] == 'moderador'){
-    echo "<script>window.location='../not-found.php'</script>";
-	}else{
+if($_SESSION['perfil'] == 'administrador'){
+   
+	
 
-if(!empty($_GET)){
+
 
 		include("../conexion/conexion.php");
 		$conexion = projectoinovacion::conexion();
-		$idBorrar = $_GET['idNotEli'];
 
-		//$cosa1 = new projectoinovacion();
-        $sqlver = "SELECT id_not FROM noticias WHERE `id_not` = '$idBorrar';";
-        $sqlerror = $conexion->query($sqlver);
-        $contarint = mysqli_num_rows($sqlerror);
-        
-        if($contarint == 1){
-
-		$sqlBorrar = "DELETE FROM noticias WHERE (`id_not` = '$idBorrar');";
+		$sqlBorrar = "DELETE FROM noticias;";
 		$borrar =  $conexion->query($sqlBorrar);
 	//	$sqlBorrarNoticia = $cosa1->conexion($conexion->query($sqlBorrar));
    
@@ -45,7 +37,7 @@ if(!empty($_GET)){
             $fecha_actual = date("Y-m-d H:i:s");
 			$ci = $_SESSION['ci'];
 			$nombreusuario = $_SESSION['usuario'];
-			$consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a eliminado una noticia: $idBorrar', '$fecha_actual')";
+			$consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a eliminado todas las noticias', '$fecha_actual')";
 			$sqlauditoria = $conexion->query($consauditoria); 
 
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
@@ -79,28 +71,12 @@ if(!empty($_GET)){
 
     }else{
             
-        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
-        echo "<script>
-                swal({
-                title:'Noticias',
-                text:'La noticia que desea eliminar no existe',
-                icon:'error'
-                
-                })
-                .then((value) => {
-                    window.location='../noticias.php';
-                    window.location='../noticias.php';
-                    
-                })</script>";           
-
-
-    }
-	}elseif(empty($_GET)){
         echo "<script>window.location='../not-found.php'</script>";
+
     }
-    }   
+
+       
 ?>
 
 </body>
 </html>
-

@@ -33,12 +33,26 @@ if(!empty($_GET)){
         $contarint = mysqli_num_rows($sqlerror);
         
         if($contarint == 1){
+            
+            $sqlurl = "SELECT fotoint FROM integrantes where idintegrantes = '$idBorrar';";
+            $sqlEnlace = $conexion->query($sqlurl);
+            while($filas=$sqlEnlace->fetch_assoc()){
+                $nosotros2[]=$filas;
+                }  
+                
+           foreach($nosotros2 as $Poner){
+            if($Poner['fotoint'] != "img/integrante.png"){
+            unlink('../'.$Poner['fotoint']); 
+            }
+            //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
+           }    
 
 		$sqlBorrar = "DELETE FROM integrantes WHERE (`idintegrantes` = '$idBorrar');";
 		$borrar =  $conexion->query($sqlBorrar);
 	//	$sqlBorrarNoticia = $cosa1->conexion($conexion->query($sqlBorrar));
 
 		if($borrar!=null){
+            
             echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
             echo "<script>
                     swal({

@@ -149,10 +149,10 @@
   						</div>
 
   						<div class="contenido-edicion">
-  							<a href="activoNoticias.php?idAcNot=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-eye"></i></a>
-  							<a href="inactivoNoticias.php?idInNot=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-eye-slash"></i></a>
+  							<a href="modelo/activoNoticias.php?idAcNot=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-eye"></i></a>
+  							<a href="modelo/inactivoNoticias.php?idInNot=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-eye-slash"></i></a>
   							<a href="editor-noticias.php?idNot=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-pen"></i></a>
-  							<a href="eliminarNoticia.php?idNotEli=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+  							<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerNovedad['id'] ?>"><i class="fa-solid fa-trash-can"></i></a>
   						</div>
   						
   					</div>
@@ -163,9 +163,24 @@
   			</div>
 
   		</section>
-
-
-
+		  <h2 id="ir-seccion-auditoria">Auditorias</h2> 
+		<center>
+		<div id="tablascroll">
+		  <table id="auditoriatabla">
+				<tr> <th>Cedula</th> <th>Nombre</th> <th>Antecedente</th>
+				<th>Fecha</th> 
+				</tr>
+				<?php foreach($obtenerauditoria as $Ponerauditoria){ ?>
+				<tr> 
+					<td><?php echo $Ponerauditoria['ciusuario']; ?></td> 
+					<td><?php echo $Ponerauditoria['nombreusuario']; ?></td> 
+					<td><?php echo $Ponerauditoria['antecedente'] ?></td>
+					<td><?php echo $Ponerauditoria['fecha']; ?></td>
+				</tr>
+				<?php } ?>
+			</table>
+		</div>						  
+		</center>
   		<!--EMPIEZA SECCION DE USUARIOS-->
   		<section id="contenedor-usuarios">
 		  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">
@@ -206,16 +221,30 @@
 								<p class="cantCaracteres">0/120</p>
 								<p class="textoLimite">.</p>
 							</div>
+						</div>	
+
+						<div class="contraseñaRep">
+							<h3>Repetir contraseña<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
+							<input type="password" name="contraUsuarioRep" minlength="8" maxlength="120" placeholder="Gime25!#" title="Ingrese una contraseña" required>
+							<i class="passwordIconRep fa-solid fa-eye" title="Ver contraseña"></i>
+
+							<div class="contenedor-informacion-contraRep">
+								<p class="textoInfo">Mínimo 8 caracteres, debe incluir mayúsculas, minúsculas, números y símbolos. Tildes no admitidos</p>
+								<p class="cantCaracteres">0/120</p>
+								<p class="textoLimite">.</p>
+							</div>
 						</div>
 
 						<div class="rol">
 							<h3>Rol<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
-							<input type="text" name="rolUsuario" placeholder="Administrador" title="Ingrese un rol" required>
+							<select name="rolUsuario" title="Seleccione un rol" required>
+								<option value="">Seleccione rol</option>
+								<option value="administrador">Administrador</option>
+								<option value="moderador">Moderador</option>
+							</select>
 
 							<div class="contenedor-informacion-rol">
-								<p class="textoInfo">Mínimo 2 caracteres</p>
-								<p class="cantCaracteres">0/30</p>
-								<p class="textoLimite">.</p>
+								<p class="textoInfo">Seleccione un rol</p>
 							</div>
 						</div>
 
@@ -276,15 +305,27 @@
 								<p class="textoLimite">.</p>
 							</div>
 						</div>
+						<div class="contraseñaRep">
+							<h3>Repetir Contraseña <span>(edición)</span><i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
+							<input type="password" name="contUsuarioRep" minlength="8" maxlength="120" placeholder="Gime25!#" title="Ingrese una contraseña" required>
+							<i class="passwordIconRep fa-solid fa-eye" title="Ver contraseña"></i>
+
+							<div class="contenedor-informacion-contraRep">
+								<p class="textoInfo">Mínimo 8 caracteres, debe incluir mayúsculas, minúsculas, números y símbolos. Tildes no admitidos</p>
+								<p class="cantCaracteres">0/120</p>
+								<p class="textoLimite">.</p>
+							</div>
+						</div>
 
 						<div class="rol">
 							<h3>Rol <span>(edición)</span><i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>
-							<input type="text" name="rolUsuarioEditar" minlength="2" maxlength="30" placeholder="Administrador" title="Ingrese un rol" required>
-
+							<select name="rolUsuarioEditar" title="Seleccione un rol" required>
+								<option value="">Seleccione rol</option>
+								<option value="administrador">Administrador</option>
+								<option value="moderador">Moderador</option>
+							</select>
 							<div class="contenedor-informacion-rol">
-								<p class="textoInfo">Mínimo 2 caracteres</p>
-								<p class="cantCaracteres">0/30</p>
-								<p class="textoLimite">.</p>
+								<p class="textoInfo">Seleccione un rol</p>
 							</div>
 						</div>
 
@@ -318,7 +359,7 @@
 	  			<!--Eliminar Novedades-->
 	  			<article>
 	  				<div class="btnEliminar-definitivo">
-	  					<a href="#"><i class="fa-solid fa-trash"></i> Eliminar todas las novedades</a>
+	  					<a href="modelo/eliminartodasNot.php"><i class="fa-solid fa-trash"></i> Eliminar todas las novedades</a>
 	  				</div>
 	  			</article>
 
@@ -348,7 +389,7 @@
   	</main>
 
   	<footer>
-  		<section>
+  		<section>	
 	  		<div>
 	  			<p>E-mail: <a href="https://www.gmail.com" target="__blank">poloeducativocerro@gmail.com</a></p>
 	  			<p>© 2022 Polo Educativo Tecnológico Cerro, todos los derechos reservados.</p>

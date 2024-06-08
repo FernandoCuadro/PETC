@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="spanish">
 <head>
-<<<<<<< HEAD
-
-	<?php //<!--Meta tags--> ?>
-	<meta charset="utf-8">	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="Content-Type" content="text/html; utf-8">
-
-=======
 	
-	<?php //<!--Meta tags--> ?>
+	<!--Meta tags-->
 	<meta charset="utf-8">	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; utf-8">
 
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<meta name="description" content="Conocé al Polo Esucativo Tecnológico Cerro en todos sus aspectos, desde su hisotria, su infraestructura y equipo.">
 
 	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
@@ -23,7 +14,7 @@
 	<meta name="Revisit-after" content="7 days">
 	<meta name="robots" content="all">
 
-	<?php //<!--Link a icono y hojas de estilo--> ?>
+	<!--Link a icono y hojas de estilo-->
 	<link rel="icon" type="image/jpg" href="img/Logo.png"/>
 	<link rel="stylesheet" type="text/css" href="css/styleSliderIntegrantes.css">
 	<link rel="stylesheet" type="text/css" href="css/styleNosotros11.css">
@@ -34,20 +25,20 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">  
 
-	<?php //<!-- Link usado para el Slider galeria de fotos--> ?>
+<!-- Link usado para el Slider galeria de fotos-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-	<?php //<!-- Fuente usada para los titulos --> ?>
+	<!-- Fuente usada para los titulos -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
 
-	<?php //<!-- Fuente usada para la descripcion --> ?>
+	<!-- Fuente usada para la descripcion --> 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
 
-	<?php //<!-- Script para redes sociales --> ?>
+	<!-- Script para redes sociales -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<title>Nosotros</title>
 </head>
@@ -77,7 +68,7 @@
 		}elseif($_SESSION['perfil'] == 'moderador'){
 		?>
 			<div id="contenedor-sesion">	
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 			</div>
 		<?php } ?>
 
@@ -85,7 +76,7 @@
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
 
-	    <?php //<!-- Empieza menu responsive --> ?>
+	    <!-- Empieza menu responsive -->
 	    <nav>
 
 	    	<div id="logo-responsive">
@@ -111,9 +102,9 @@
 		            <li><a href="contacto.php"><i class="fa-solid fa-phone"></i>Contacto</a></li>
 		        </ul>
 		    </div>
-		    <?php //<!-- Termina el menu responsive --> ?>
+		    <!-- Termina el menu responsive -->
 
-		    <?php //<!-- Empieza menu normal --> ?>
+		    <!-- Empieza menu normal -->
 		    <div id="menu-normal-size">
 		    	<ul>
 		            <li><a href="index.php"><i class="fa-solid fa-house"></i>Home</a></li>
@@ -126,10 +117,10 @@
 		        </ul>
 		    </div>
 		</nav>
-	    <?php //<!-- Termina menu --> ?>
+	    <!-- Termina menu -->
   	</header>
   	
-  	<?php //<!-- Empieza contenido de la pagina --> ?>
+  	<!-- Empieza contenido de la pagina -->
   	<main>
 
   		<section>
@@ -294,7 +285,6 @@
 
 						<div class="swiper-wrapper">
 							<?php foreach($MostrarIntegrantes as $PonerIntegrantes){ ?>
-							<?php //<!-- Es lo que se repite por cada persona --> ?>
 							<div class="swiper-slide">
 
 								<div class="integrante">
@@ -309,13 +299,7 @@
 										
 										<ul class="integrante-edicion-menu">
 											<li><a href="editor-nosotros.php?idInt=<?php echo $PonerIntegrantes['id'] ?>#seccion-integrantes"><i class="fa-solid fa-pencil"></i></a></li>
-<<<<<<< HEAD
-											<!-- <li><a href="#"><i class="fa-solid fa-eye-slash"></i></a></li>
-											<li><a href="#"><i class="fa-solid fa-eye"></i></a></li> -->
-											<li><a href="eliminarIntegrante.php?idint=<?php echo $PonerIntegrantes['id']?>"><i class="fa-solid fa-trash-can"></i></a></li>
-=======
 											<li><a href="modelo/eliminarintegrante.php?idint=<?php echo $PonerIntegrantes['id']?>"><i class="fa-solid fa-trash-can"></i></a></li>
->>>>>>> b958538 (Hasta Cursos arreglado)
 										</ul>
 									</div>
 								<?php }	?>
@@ -381,21 +365,6 @@
   	</footer>
 
 
-<<<<<<< HEAD
-  <?php //	<!-- Script necesario para pantalla de carga --> ?>
-  	<script src="js/animaciones.js"></script>
-
-  	<?php //<!-- Script necesario para que funcione el menu --> ?>
-	<script src="js/menu.js"></script>
-	
-	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
-	<script src="js/irArriba.js"></script>
-
-	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
-	<script src="js/redesSociales.js"></script>
-
-	<?php //<!-- Script necesario para slider --> ?>
-=======
   	<script src="js/reproductorVideoNosotros.js"></script>
   	<!--Slider integrantes-->
   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -407,7 +376,6 @@
 	<script src="js/redesSociales.js"></script>
 
 	<!--Slider imagenes-->
->>>>>>> b958538 (Hasta Cursos arreglado)
   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

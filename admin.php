@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(empty($_SESSION['usuario'])){
-		echo "<script>alert(\"Acceso Denegado...\");window.location='index.php';</script>";
+if(empty($_SESSION['usuario']) || $_SESSION['perfil'] == 'moderador'){
+		echo "<script>window.location='not-found.php';</script>";
 
 	}else{
 require_once("conexion/conexion.php");

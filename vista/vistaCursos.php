@@ -16,11 +16,7 @@
 
 	<?php //<!--Link a icono y hojas de estilo--> ?>
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-<<<<<<< HEAD
-	<link rel="stylesheet" type="text/css" href="css/styleCursos2.css">
-=======
 	<link rel="stylesheet" type="text/css" href="css/styleCursos3.css">
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css"> 
 
 	<?php //<!-- Fuente usada para los titulos --> ?>
@@ -62,7 +58,7 @@
 		}elseif($_SESSION['perfil'] == 'moderador'){
 	?>	
 		<div id="contenedor-sesion">			
-	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 		</div>
 	<?php } ?>	
 
@@ -169,18 +165,9 @@
 							}else{	
 						?>
 	  					<?php //<!--Esto es lo que se repite por cada nuevo curso--> ?>
-<<<<<<< HEAD
-	  					<a class="curso-enlace" href="<?php echo $PonerAreas['enlace'] ?>" target="__blank">
-	  						<article>
-	  						
-
-	  							
-	  							<p class="curso-nivel"><?php echo $PonerNiveles['numero'];?></p>
-=======
 	  					<a class="curso-enlace" href="<?php echo $PonerAreas['enlace']; ?>" target="_blank">
 	  						<article>
 								
->>>>>>> b958538 (Hasta Cursos arreglado)
 
 	  							<?php
 									if($_SESSION['perfil'] == 'administrador'){
@@ -236,30 +223,10 @@
   		</section>
   	</footer>
 
-<<<<<<< HEAD
-  	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-  	
-  	<script src="js/animaciones.js"></script>
-
-  	
-	<script src="js/menu.js"></script>
-	
-	
-	<script src="js/irArriba.js"></script>
-
-	
-	<script src="js/redesSociales.js"></script>
-
-	
-  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-=======
   	<script src="js/loaderScreen.js"></script>
 	<script src="js/menu.js"></script>
 	<script src="js/irArriba.js"></script>
 	<script src="js/redesSociales.js"></script>
 
->>>>>>> b958538 (Hasta Cursos arreglado)
 </body>
 </html>

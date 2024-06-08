@@ -494,6 +494,41 @@ nav{
 scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__paginacion-barraDesplazamiento2);
 }
 
+#ir-seccion-auditoria{
+    margin: 3vh auto;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+    font-family: var(--titulos);
+    font-size: 1.5rem;
+}
+#tablascroll{
+    width: 817px;
+    height: 300px;
+    overflow-y: scroll; 
+}
+
+#auditoriatabla{ 
+    
+    align-content: center;
+    color: #333; 
+    font-family: Helvetica, Arial, sans-serif; 
+    width: 800px; border-collapse: collapse;
+}
+
+td, th{ border: 1px solid transparent; height: 30px; }
+
+th{ background: #D3D3D3; font-weight: bold; }
+
+td{ background: #FAFAFA; text-align: center; }
+
+tr:nth-child(even) td{ background: #F1F1F1; }  
+
+tr:nth-child(odd) td{ background: #FEFEFE; } 
+
+tr td:hover{ background: #666; color: #FFF; }
+
+
 .novedad{
     margin: 10px;
     padding: 20px;
@@ -698,6 +733,7 @@ scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__pagina
 .nombre, 
 .cedula,
 .contraseña,
+.contraseñaRep,
 .dato-existente,
 .rol{
     margin: 1vh auto;
@@ -709,7 +745,10 @@ scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__pagina
     width: 100%;
 }
 
+
 .contraseña .fa-eye,
+.contraseñaRep .fa-eye,
+.contraseñaRep .fa-eye-slash,
 .contraseña .fa-eye-slash{
     margin: 0 auto 2rem auto;
     padding: .2rem;
@@ -726,14 +765,23 @@ scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__pagina
     /*color: #27a240;*/
     color: var(--main__agregarEditarUsuarios-verContraseñaHover);
 }
+.contraseñaRep .fa-eye:hover{
+    /*color: #27a240;*/
+    color: var(--main__agregarEditarUsuarios-verContraseñaHover);
+}
 
 .contraseña .fa-eye-slash:hover{
+    /*color: #fc4545;*/
+    color: var(--main__agregarEditarUsuarios-noVerContraseñaHover);
+}
+.contraseñaRep .fa-eye-slash:hover{
     /*color: #fc4545;*/
     color: var(--main__agregarEditarUsuarios-noVerContraseñaHover);
 }
 
 .contenedor-informacion-nombre,
 .contenedor-informacion-contra,
+.contenedor-informacion-contraRep,
 .contenedor-informacion-rol{
     display: flex;
     justify-content: space-around;
@@ -895,6 +943,7 @@ scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__pagina
 .nombre h3, 
 .cedula h3,
 .contraseña h3,
+.contraseñaRep h3,
 .dato-existente h3,
 .rol h3{
     margin: 1vh auto;
@@ -908,17 +957,19 @@ scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__pagina
 
 .nombre h3 span,
 .contraseña h3 span,
+.contraseñaRep h3 span,
 .rol h3 span{
     /*color: #27a240;*/
     color: var(--main__formulario__nombre__titulo-aclaracion);
     font-size: .9rem;
 }
-
+    
 .nombre input,
 .cedula input,
 .contraseña input,
+.contraseñaRep input,
 .dato-existente select,
-.rol input{
+.rol select{
     margin: 1vh auto;
     padding: 5px;
     width: calc(99% - 10px);

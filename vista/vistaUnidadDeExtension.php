@@ -56,7 +56,7 @@
 		}elseif($_SESSION['perfil'] == 'moderador'){
 		?>
 			<div id="contenedor-sesion">	
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 			</div>
 		<?php } ?>
 		<div id="logo-normal-size">

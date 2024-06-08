@@ -6,6 +6,7 @@ $areas = new modeloAdmin();
 $noticias = new modeloAdmin();
 $etiquetas = new modeloAdmin();
 $usuario = new modeloAdmin();
+$auditoria = new modeloAdmin();
 
 $obtenerAreas = $areas->obtenerAreasMenu();
 
@@ -14,6 +15,8 @@ $obtenerNoticias = $noticias->obtenerNoticia();
 $obtenerEtiquetas = $etiquetas->obtenerEtiquetas();
 
 $obtenerUsuarios = $usuario->obtenerUsuarios();
+
+$obtenerauditoria = $auditoria->obtenerauditoria();
 
 require_once("vista/vistaAdmin.php");
 if(isset($_POST['crearUsuario'])){
@@ -54,5 +57,7 @@ if(isset($_POST['eliminarusuario'])){
         $ciUsuario = $_POST['seleccionarCIUsuario']
     );
 }
+
+
 
 ?>

@@ -17,11 +17,7 @@
 
 	<!--Link a icono y hojas de estilo-->
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-<<<<<<< HEAD
-	<link rel="stylesheet" type="text/css" href="css/styleArticulos4.css">
-=======
 	<link rel="stylesheet" type="text/css" href="css/styleArticulos11.css">
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Fuente usada para la introduccion sobre la imagen -->
@@ -70,7 +66,7 @@
 			}elseif($_SESSION['perfil'] == 'moderador'){
 	?>			
 		<div id="contenedor-sesion"> 
-	    	 <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p> 
+	    	 <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p> 
 	    </div>
 	<?php } ?>		
 
@@ -129,50 +125,83 @@
 		  <?php
 			if(empty($_SESSION['usuario'])){
 					  
-				}elseif($_SESSION['perfil'] == 'administrador'){
+				}elseif($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
 		?>		  
   			<a href="editor-noticias.php">Agregar artículo</a>
-<<<<<<< HEAD
-=======
 			  <form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">
-  				<select name="listaver">
+  			<!--	<input type="month" name="añomes"> -->
+				<select name="listaver">
   					<option value="reciente">Más recientes</option>
   					<option value="antiguo">Más antiguos</option>
   					<option value="visible">Visibles</option>
   					<option value="novisible">No visibles</option>	
   				</select>
+			
   				<input type="submit" name="ver" value="Ver">	
   			</form>
->>>>>>> b958538 (Hasta Cursos arreglado)
 			<?php } ?>
   		</div>
 
-
+		  <?php  
+					if(empty($_GET['lista2'])){
+									
+				if(empty($listaNoticias)){
+					$nohayNot = $_SESSION['NotNot'];
+					
+					?>
+					
+						<p id="noNot"><?php echo $nohayNot ?></p>
+					 	
+			<?php 
+				
+				}else{
+					if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
+				?>
   		<!-- Articulo/noticia independiente -->
   		<article id="articulo">
   			<div class="contenedor-articulo">
-			<?php  
-					if(empty($_SESSION['usuario'])){	
-						foreach($listaNoticias as $colocarNoticia){		
-
+			<?php  			
+				foreach($listaNoticias as $colocarNoticia){		
 			?>				
   				<!-- Esto será lo que se tiene que replicar por cada noticia que exista -->
 	  			<div class="contenedor-articulo__contenido">
+					
 				<?php
                 /*Si el articulo no tiene miniatura cargada la imagen por defecto será la que definamos*/
 				  if(empty($colocarNoticia['miniatura'])){
                 ?>  
                     <!--Imagen por defecto-->
                     <img src="img/pti.jpg">
+					
                 <?php
                     }else{
                 ?>  
 	  				<img src="<?php echo $colocarNoticia['miniatura']?>">
-				<?php } ?>	
+				<?php 
+				} 
+				if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
+				
+				?>	
+				
+					<div class="contenedor-articulo__contenido__edicion">
+					  <a href="modelo/inactivoNoticias.php?idInNot=<?php echo $colocarNoticia['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
+	  					<a href="modelo/activoNoticias.php?idAcNot=<?php echo $colocarNoticia['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
+  						<a href="editor-noticias.php?idNot=<?php echo $colocarNoticia['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
+  						<?php if($_SESSION['perfil'] == 'moderador'){}else{ ?>
+						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $colocarNoticia['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
+						<?php } ?>
+						
+	  				</div>	
+					  <?php 
+					  }
+					  if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){ 
+					  ?>
 
-	  				<div class="contenedor-articulo__contenido__info">
-	  				
-					  	<a href="noticias.php?idarea=<?php echo $colocarNoticia['idarea']; ?>" class="articulo-area-btn"><?php echo $colocarNoticia['area'] ?></a>
+					  <p class="articulo-id"><?php echo $colocarNoticia['id']?></p>
+					<?php } ?>
+					<div class="contenedor-articulo__contenido__info">						
+					<a href="noticias.php?idarea=<?php echo $colocarNoticia['idarea']; ?>" class="articulo-area-btn"><?php echo $colocarNoticia['area'] ?></a>
+						
 	  					<div class="articulo-titulo">
 					  		<h2><?php echo $colocarNoticia['titulo'] ?></h2>
 					  	</div>
@@ -185,72 +214,10 @@
 	  				<div class="contenedor-articulo__contenido__read-more">
 	  					<a href="noticiaCompleta.php?idNot=<?php echo $colocarNoticia['id'] ?>">LEER MÁS</a>
 	  				</div>
-	  			</div>
-				<?php
-				}
-				
-				
-				}elseif($_SESSION['perfil'] == 'administrador' & $_SESSION['listaVer'] == 'novisible'){
-					foreach($NoticiaVer as $PonerVer){
-				?>
-				
-				<div class="contenedor-articulo__contenido">
-				<?php	  
-				  if(empty($PonerVer['miniatura'])){
-                ?>  
-                                        
-                    <img src="img/pti.jpg">
-                <?php
-                    }else{	
-                ?>  
-	  				<img src="<?php echo $PonerVer['miniatura']?>">	
 					
-				<?php } ?>			
-				
-				<div class="contenedor-articulo__contenido__edicion">
-	  					<a href="inactivoNoticias.php?idInNot=<?php echo $PonerVer['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
-	  					<a href="activoNoticias.php?idAcNot=<?php echo $PonerVer['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
-  						<a href="editor-noticias.php?idNot=<?php echo $PonerVer['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
-	  			</div>
-
-	  				<div class="contenedor-articulo__contenido__info">
-<<<<<<< HEAD
-	  					<!-- El ID solo se muestra al admin -->
-	  					<p class="articulo-id"><?php echo $ColocarTodo['id'] ?></p>
-	  					<p class="articulo-area"><?php echo $ColocarTodo['area'] ?></p>
-
-	  					<!-- 
-						Boton hecho en caso de que se pueda filtrar por area
-	  					<a href="#" class="articulo-area-btn"><?php echo $ColocarTodo['area'] ?></a> -->
-	  					<h2><?php echo $ColocarTodo['titulo'] ?></h2>
-	  					<p class="articulo-descripcion"><?php echo nl2br($ColocarTodo['descripcion']) ?></p>
-	  					<p class="articulo-fecha"><?php echo $ColocarTodo['fecha'] ?></p>
-	  				</div>
-	  				<div class="contenedor-articulo__contenido__read-more">
-	  					<a href="noticiaCompleta.php?idNot=<?php echo $ColocarTodo['id'] ?>">LEER MÁS</a>
-=======
-	  					
-	  					<p class="articulo-id"><?php echo $PonerVer['id'] ?></p>
-	  					
-
-						
-	  					<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
-	  					<div class="articulo-titulo">
-					  		<h2><?php echo $colocarNoticia['titulo'] ?></h2>
-					  	</div>
-	  					<div class="articulo-descripcion">
-	  						<p><?php echo nl2br($PonerVer['descripcion']) ?></p>
-	  					</div>
-	  					
-	  					<p class="articulo-fecha"><?php echo substr($PonerVer['fecha'], 0, 16); ?></p>
-	  				</div>		
-					  <div class="contenedor-articulo__contenido__read-more">
-	  					<a href="noticiaCompleta.php?idNot=<?php echo $PonerVer['id'] ?>">LEER MÁS</a>
->>>>>>> b958538 (Hasta Cursos arreglado)
-	  				</div>
-					<?php
-					 	if($PonerVer['estado'] == 'inactivo') {
+					  <?php
+					  if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
+					 	if($colocarNoticia['estado'] == 'inactivo') {
 					?> 	
 	  				<div class="contenedor-articulo__contenido__estado-articulo">
 	  					<i class="fa-solid fa-eye-slash no-view-end">
@@ -258,176 +225,116 @@
 	  					</i>
 					</div>
 					<?php
-						}elseif($PonerVer['estado'] == 'activo') {
+						}elseif($colocarNoticia['estado'] == 'activo') {
 					?> 
 					<div class="contenedor-articulo__contenido__estado-articulo">		
 	  					<i class="fa-solid fa-eye view-end">
 	  						<span class="bubble-view"><i class="fa-solid fa-check"></i>Artículo actualmente visible</span>
 	  					</i>
 	  				</div>
-					  <?php } ?>	
-				</div>		
-				<?php } ?>
-
-				<?php		  			 
-				}elseif($_SESSION['perfil'] == 'administrador' & $_SESSION['listaVer'] == 'visible'){
-					foreach($NoticiaVer as $PonerVer){
+				<?php
+					 }
+					} 
 				?>
-				<div class="contenedor-articulo__contenido">
-				<?php	  
-				  if(empty($PonerVer['miniatura'])){
-                ?>  
-                                        
-                    <img src="img/pti.jpg">
-                <?php
-                    }else{	
-                ?>  
-	  				<img src="<?php echo $PonerVer['miniatura']?>">
-				<?php } ?>			
-				
-				<div class="contenedor-articulo__contenido__edicion">
-						<a href="modelo/inactivoNoticias.php?idInNot=<?php echo $PonerVer['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
-	  					<a href="modelo/activoNoticias.php?idAcNot=<?php echo $PonerVer['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
-  						<a href="editor-noticias.php?idNot=<?php echo $PonerVer['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
 	  			</div>
+				  
+				  <?php } ?>
+			</div>
+  		</article>
+			<?php
+					}else{
 
-	  				<div class="contenedor-articulo__contenido__info">
-	  					
-	  					<p class="articulo-id"><?php echo $PonerVer['id'] ?></p>
-	  					
+			?>			<!-- Articulo/noticia independiente -->
+						<article id="articulo">
+							<div class="contenedor-articulo">
+						  <?php  			
+							  foreach($listanoadmin as $listanoadmins){		
+						  ?>				
+								<!-- Esto será lo que se tiene que replicar por cada noticia que exista -->
+								<div class="contenedor-articulo__contenido">
+								  
+							  <?php
+							  /*Si el articulo no tiene miniatura cargada la imagen por defecto será la que definamos*/
+								if(empty($listanoadmins['miniatura'])){
+							  ?>  
+								  <!--Imagen por defecto-->
+								  <img src="img/pti.jpg">
+								  
+							  <?php
+								  }else{
+							  ?>  
+									<img src="<?php echo $listanoadmins['miniatura']?>">
+							  <?php } ?>	
+								  <div class="contenedor-articulo__contenido__info">						
+								  <a href="noticias.php?idarea=<?php echo $listanoadmins['idarea']; ?>" class="articulo-area-btn"><?php echo $listanoadmins['area'] ?></a>
+									  
+										<div class="articulo-titulo">
+											<h2><?php echo $listanoadmins['titulo'] ?></h2>
+										</div>
+										<div class="articulo-descripcion">
+											<p><?php echo nl2br($listanoadmins['descripcion']) ?></p>
+										</div>
+										
+										<p class="articulo-fecha"><?php echo substr($listanoadmins['fecha'], 0, 16); ?></p>
+									</div>
+									<div class="contenedor-articulo__contenido__read-more">
+										<a href="noticiaCompleta.php?idNot=<?php echo $listanoadmins['id'] ?>">LEER MÁS</a>
+									</div>
+								</div>
+								
+								<?php } ?>
+						  </div>
+						</article>		
+			<?php					  
+					}
+			}			
+			}else{ 	
+				if(empty($NoticiaVer)){
+					$nohayNot = $_SESSION['NoNot'];
+					
+					?>
+					
+						<p id="noNot"><?php echo $nohayNot ?></p>
+					 	
+			<?php }else{ ?>
+			
+			<article id="articulo">
+  			<div class="contenedor-articulo">
+			<?php	
+				foreach($NoticiaVer as $PonerVer){
+		
+			?>
 
-	  					
-						
-	  					<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
-	  					<div class="articulo-titulo">
-					  		<h2><?php echo $colocarNoticia['titulo'] ?></h2>
-					  	</div>
-	  					<div class="articulo-descripcion">
-	  						<p><?php echo nl2br($PonerVer['descripcion']) ?></p>
-	  					</div>
-	  					
-	  					<p class="articulo-fecha"><?php echo substr($PonerVer['fecha'], 0, 16); ?></p>
-	  				</div>		
-					  <div class="contenedor-articulo__contenido__read-more">
-	  					<a href="noticiaCompleta.php?idNot=<?php echo $PonerVer['id'] ?>">LEER MÁS</a>
-	  				</div>
-					<?php
-					 	if($PonerVer['estado'] == 'inactivo') {
-					?> 	
-	  				<div class="contenedor-articulo__contenido__estado-articulo">
-	  					<i class="fa-solid fa-eye-slash no-view-end">
-	  						<span class="bubble-no-view"><i class="fa-solid fa-triangle-exclamation"></i>Artículo actualmente oculto</span>
-	  					</i>
-					</div>
-					<?php
-						}elseif($PonerVer['estado'] == 'activo') {
-					?> 
-					<div class="contenedor-articulo__contenido__estado-articulo">		
-	  					<i class="fa-solid fa-eye view-end">
-	  						<span class="bubble-view"><i class="fa-solid fa-check"></i>Artículo actualmente visible</span>
-	  					</i>
-	  				</div>
-					  <?php } ?>	
-				</div>		
-				<?php } ?>	
-				
-
-				<?php		  			 
-				}elseif($_SESSION['perfil'] == 'administrador' & $_SESSION['listaVer'] == 'antiguo'){
-					foreach($NoticiaVer as $PonerVer){
-				?>
-				<div class="contenedor-articulo__contenido">
-				<?php	  
+		<!-- Esto será lo que se tiene que replicar por cada noticia que exista -->
+		<div class="contenedor-articulo__contenido">
+				<?php
+                /*Si el articulo no tiene miniatura cargada la imagen por defecto será la que definamos*/
 				  if(empty($PonerVer['miniatura'])){
                 ?>  
-                                        
+                    <!--Imagen por defecto-->
                     <img src="img/pti.jpg">
                 <?php
-                    }else{	
+                    }else{
                 ?>  
 	  				<img src="<?php echo $PonerVer['miniatura']?>">
-				<?php } ?>			
+				<?php 
+				} 
+				if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
 				
-				<div class="contenedor-articulo__contenido__edicion">
-	  					<a href="modelo/inactivoNoticias.php?idInNot=<?php echo $PonerVer['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
-	  					<a href="modelo/activoNoticias.php?idAcNot=<?php echo $PonerVer['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
-  						<a href="editor-noticias.php?idNot=<?php echo $PonerVer['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
-	  			</div>
-
-	  				<div class="contenedor-articulo__contenido__info">
-	  					
-	  					<p class="articulo-id"><?php echo $PonerVer['id'] ?></p>
-	  					
-
-	  					
-	  					<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
-	  					<div class="articulo-titulo">
-					  		<h2><?php echo $colocarNoticia['titulo'] ?></h2>
-					  	</div>
-	  					<div class="articulo-descripcion">
-	  						<p><?php echo nl2br($PonerVer['descripcion']) ?></p>
-	  					</div>
-	  					
-	  					<p class="articulo-fecha"><?php echo substr($PonerVer['fecha'], 0, 16); ?></p>
-	  				</div>		
-					  <div class="contenedor-articulo__contenido__read-more">
-	  					<a href="noticiaCompleta.php?idNot=<?php echo $PonerVer['id'] ?>">LEER MÁS</a>
-	  				</div>
-					<?php
-					 	if($PonerVer['estado'] == 'inactivo') {
-					?> 	
-	  				<div class="contenedor-articulo__contenido__estado-articulo">
-	  					<i class="fa-solid fa-eye-slash no-view-end">
-	  						<span class="bubble-no-view"><i class="fa-solid fa-triangle-exclamation"></i>Artículo actualmente oculto</span>
-	  					</i>
-					</div>
-					<?php
-						}elseif($PonerVer['estado'] == 'activo') {
-					?> 
-					<div class="contenedor-articulo__contenido__estado-articulo">		
-	  					<i class="fa-solid fa-eye view-end">
-	  						<span class="bubble-view"><i class="fa-solid fa-check"></i>Artículo actualmente visible</span>
-	  					</i>
-	  				</div>
-					  <?php } ?>	
-				</div>		
-				<?php } ?>	
+				?>	
 				
-				
-				<?php	
-				}elseif($_SESSION['perfil'] == 'administrador' & $_SESSION['listaVer'] == 'reciente'){
-					foreach($NoticiaVer as $PonerVer){ 
-		  		?>
-
-	  			<div class="contenedor-articulo__contenido">
-				<?php	  
-				  if(empty($PonerVer['miniatura'])){
-                ?>  
-                                        
-                    <img src="img/pti.jpg">
-                <?php
-                    }else{	
-                ?>  
-	  				<img src="<?php echo $PonerVer['miniatura']?>">
-				<?php } ?>	
-
-	  				<!-- Esto se oculta si hay un usuario iniciado -->
-	  				<div class="contenedor-articulo__contenido__edicion">
+					<div class="contenedor-articulo__contenido__edicion">
 					  <a href="modelo/inactivoNoticias.php?idInNot=<?php echo $PonerVer['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
 	  					<a href="modelo/activoNoticias.php?idAcNot=<?php echo $PonerVer['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
   						<a href="editor-noticias.php?idNot=<?php echo $PonerVer['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
-	  				</div>
-
-	  				<div class="contenedor-articulo__contenido__info">
-	  					<!-- El ID solo se muestra al admin -->
-	  					<p class="articulo-id"><?php echo $PonerVer['id'] ?></p>
-	  					
-
+  						<?php if($_SESSION['perfil'] == 'moderador'){}else{ ?>
+						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
+						<?php } ?>
+	  				</div>	
+					  <?php } ?>		
+					<div class="contenedor-articulo__contenido__info">
 	  				
-	  					<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
+					  	<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
 	  					<div class="articulo-titulo">
 					  		<h2><?php echo $PonerVer['titulo'] ?></h2>
 					  	</div>
@@ -440,13 +347,15 @@
 	  				<div class="contenedor-articulo__contenido__read-more">
 	  					<a href="noticiaCompleta.php?idNot=<?php echo $PonerVer['id'] ?>">LEER MÁS</a>
 	  				</div>
-					<?php
+					  <?php
+					  if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){
 					 	if($PonerVer['estado'] == 'inactivo') {
 					?> 	
 	  				<div class="contenedor-articulo__contenido__estado-articulo">
 	  					<i class="fa-solid fa-eye-slash no-view-end">
 	  						<span class="bubble-no-view"><i class="fa-solid fa-triangle-exclamation"></i>Artículo actualmente oculto</span>
 	  					</i>
+					</div>
 					</div>
 					<?php
 						}elseif($PonerVer['estado'] == 'activo') {
@@ -456,120 +365,64 @@
 	  						<span class="bubble-view"><i class="fa-solid fa-check"></i>Artículo actualmente visible</span>
 	  					</i>
 	  				</div>
-					<?php } ?>
-	  			</div>
-			<?php
-					 	
-				} 
-				}elseif($_SESSION['perfil'] == 'administrador'){
+				</div>	
+				<?php
+					 }
+					} 
 					
-					foreach($NoticiaVer as $PonerVer){ 
-		  		?>
-
-	  			<div class="contenedor-articulo__contenido">
-				<?php	  
-				  if(empty($PonerVer['miniatura'])){
-                ?>  
-                                        
-                    <img src="img/pti.jpg">
-                <?php
-                    }else{	
-                ?>  
-	  				<img src="<?php echo $PonerVer['miniatura']?>">
-				<?php } ?>	
-
-	  				<!-- Esto se oculta si hay un usuario iniciado -->
-	  				<div class="contenedor-articulo__contenido__edicion">
-					  <a href="modelo/inactivoNoticias.php?idInNot=<?php echo $PonerVer['id'] ?>" class="no-view"><i class="fa-solid fa-eye-slash"></i></a>
-	  					<a href="modelo/activoNoticias.php?idAcNot=<?php echo $PonerVer['id'] ?>" class="view"><i class="fa-solid fa-eye"></i></a>
-  						<a href="editor-noticias.php?idNot=<?php echo $PonerVer['id'] ?>" class="edit"><i class="fa-solid fa-pen"></i></a>
-  						<a href="modelo/eliminarnoticia.php?idNotEli=<?php echo $PonerVer['id'] ?>" class="remove"><i class="fa-solid fa-trash-can"></i></a>
-	  				</div>
-							
-	  				<div class="contenedor-articulo__contenido__info">
-	  					<!-- El ID solo se muestra al admin -->
-	  					<p class="articulo-id"><?php echo $PonerVer['id'] ?></p>
-	  					
-
-	  				
-	  					<a href="noticias.php?idarea=<?php echo $PonerVer['idarea']; ?>" class="articulo-area-btn"><?php echo $PonerVer['area'] ?></a>
-	  					<div class="articulo-titulo">
-					  		<h2><?php echo $PonerVer['titulo']?></h2>
-					  	</div>
-	  					<div class="articulo-descripcion">
-	  						<p><?php echo nl2br($PonerVer['descripcion']) ?></p>
-	  					</div>
-	  					
-	  					<p class="articulo-fecha"><?php echo substr($PonerVer['fecha'], 0, 16); ?></p>
-	  				</div>
-	  				<div class="contenedor-articulo__contenido__read-more">
-	  					<a href="noticiaCompleta.php?idNot=<?php echo $PonerVer['id'] ?>">LEER MÁS</a>
-	  				</div>
-					<?php
-					 	if($PonerVer['estado'] == 'inactivo') {
-					?> 	
-	  				<div class="contenedor-articulo__contenido__estado-articulo">
-	  					<i class="fa-solid fa-eye-slash no-view-end">
-	  						<span class="bubble-no-view"><i class="fa-solid fa-triangle-exclamation"></i>Artículo actualmente oculto</span>
-	  					</i>
-					</div>
-					<?php
-						}elseif($PonerVer['estado'] == 'activo') {
-					?> 
-					<div class="contenedor-articulo__contenido__estado-articulo">		
-	  					<i class="fa-solid fa-eye view-end">
-	  						<span class="bubble-view"><i class="fa-solid fa-check"></i>Artículo actualmente visible</span>
-	  					</i>
-	  				</div>
-					<?php } ?>
-	  			</div>
-			<?php 	
-				}	
-			}
+				}
 				?>
-
-			
-  		</div>
+			</div>
   		</article>
 		<?php 
-			if($_GET['lista2'] != ''){
+			}
+	}	?>		
+		
+  	
+		<?php
+
+			if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){	
+						
+				if($_GET['lista2'] != ''){
 				$list = $_GET['lista2'];
 		
 		?>	
 			<!--Aparece la paginacion de los articulos, segun lo hecho en el modelo, en este caso aparecen 6 articulos maximo por pagina-->
 			<div id="contenedor-paginacion">
             <div id="contenido-paginacion">
+					<div class="btns-prev-next prev">
                 <?php
+				
                 $url = "noticias.php";
                       
-                      if ($_SESSION['TPag'] > 1) {
+                      if ($_SESSION['TPagVer'] > 1) {
                           if ($_SESSION['Pag'] != 1)
-                              echo '<a id='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.($_SESSION['Pag']-1).'"> <span>Anterior</span> </a>';
+                              echo '<a class='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.($_SESSION['Pag']-1).'"> <span>Anterior</span> </a>';
 
                           	?>
-
+					</div>
                           	<div class="paginasTotales">
 
                           	<?php
 
-                              for ($i=1;$i<=$_SESSION['TPag'];$i++) {
+                              for ($i=1;$i<=$_SESSION['TPagVer'];$i++) {
                                   if ($_SESSION['Pag'] == $i){
                                       // Si se muestra el índice de la página actual, no se coloca enlace.
                                       echo '<p class="paginaActiva">'.$_SESSION['Pag'].'</p>';
                                   }else{
                                       // Si el índice no corresponde con la página mostrada actualmente, 
                                       // se coloca el enlace para ir a esa página.
-                                      echo '<a id='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.$i.'">'.$i.'</a> ';
+                                      echo '<a class='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.$i.'">'.$i.'</a> ';
                                   }
                               }
                             ?>
 
                         	</div>
-
+							<div class="btns-prev-next next">
                         	<?php
 
-                          if ($_SESSION['Pag'] != $_SESSION['TPag'])
-                              echo '<a id='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.($_SESSION['Pag']+1).'"> <span>Siguiente</span> </a>';
+                          if ($_SESSION['Pag'] != $_SESSION['TPagVer'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?lista2='.$list.'&pagina='.($_SESSION['Pag']+1).'"> <span>Siguiente</span> </a>';
                       }
 
                       if ($_SESSION['Pag'] == 1){
@@ -585,7 +438,7 @@
 
                   ?>
             </div>
-
+				</div>		  
         </div>
 
 
@@ -604,23 +457,24 @@
                 <?php
                 $url = "noticias.php";
                       
-                      if ($_SESSION['TPag'] > 1) {
-                          if ($_SESSION['Pag'] != 1)
-                              echo '<a id='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['Pag']-1).'"> <span>Anterior</span> </a>';
+                      if ($_SESSION['TPagAreAdmin'] > 1) {
+                          if ($_SESSION['PagAreAdmin'] != 1)
+						  
+                              echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['PagAreAdmin']-1).'"> <span>Anterior</span> </a>';
                           ?>
                 </div>
                         <div class="paginasTotales">
 
                           <?php
 
-                              for ($i=1;$i<=$_SESSION['TPag'];$i++) {
-                                  if ($_SESSION['Pag'] == $i){
+                              for ($i=1;$i<=$_SESSION['TPagAreAdmin'];$i++) {
+                                  if ($_SESSION['PagAreAdmin'] == $i){
                                       // Si se muestra el índice de la página actual, no se coloca enlace.
-                                      echo '<p class="paginaActiva">'.$_SESSION['Pag'].'</p>';
+                                      echo '<p class="paginaActiva">'.$_SESSION['PagAreAdmin'].'</p>';
                                   }else{
                                       // Si el índice no corresponde con la página mostrada actualmente, 
                                       // se coloca el enlace para ir a esa página.
-                                      echo '<a id='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.$i.'">'.$i.'</a> ';
+                                      echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.$i.'">'.$i.'</a> ';
                                   }
                               }
 
@@ -629,16 +483,16 @@
                       	</div>
                 <div class="btns-prev-next next">
                       	<?php
-                          if ($_SESSION['Pag'] != $_SESSION['TPag'])
-                              echo '<a id='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['Pag']+1).'"> <span>Siguiente</span> </a>';
+                          if ($_SESSION['PagAreAdmin'] != $_SESSION['TPagAreAdmin'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['PagAreAdmin']+1).'"> <span>Siguiente</span> </a>';
                       }
 
-                      if ($_SESSION['Pag'] == 1){
+                      if ($_SESSION['PagAreAdmin'] == 1){
                 ?>
 
                 <?php
 
-                      }elseif($_SESSION['Pag'] == 2){
+                      }elseif($_SESSION['PagAreAdmin'] == 2){
                 ?>       
 
                 <?php
@@ -661,25 +515,25 @@
                 <?php
                 $url = "noticias.php";
                       
-                  if ($_SESSION['TPag'] > 1) {
-                      if ($_SESSION['Pag'] != 1)
-                          echo '<a id='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['Pag']-1).'"> <span>Anterior</span> </a>';
+                  if ($_SESSION['TPagEtiAdmin'] > 1) {
+                      if ($_SESSION['PagEtiAdmin'] != 1)
+                          echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['PagEtiAdmin']-1).'"> <span>Anterior</span> </a>';
 
                       	?>
                 </div>
-                          	<div class="paginasTotales">
+                          	<div class="paginasTotales">	
 
                           	<?php
                           	
 
-                              for ($i=1;$i<=$_SESSION['TPag'];$i++) {
-                                  if ($_SESSION['Pag'] == $i){
+                              for ($i=1;$i<=$_SESSION['TPagEtiAdmin'];$i++) {
+                                  if ($_SESSION['PagEtiAdmin'] == $i){
                                       // Si se muestra el índice de la página actual, no se coloca enlace.
-                                      echo '<p class="paginaActiva">'.$_SESSION['Pag'].'</p>';
+                                      echo '<p class="paginaActiva">'.$_SESSION['PagEtiAdmin'].'</p>';
                                   }else{
                                       // Si el índice no corresponde con la página mostrada actualmente, 
                                       // se coloca el enlace para ir a esa página.
-                                      echo '<a id='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.$i.'">'.$i.'</a> ';
+                                      echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.$i.'">'.$i.'</a> ';
                                   }
                               }
 
@@ -690,16 +544,16 @@
                 <div class="btns-prev-next next">
 
                             <?php
-                          if ($_SESSION['Pag'] != $_SESSION['TPag'])
-                              echo '<a id='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['Pag']+1).'"> <span>Siguiente</span> </a>';
+                          if ($_SESSION['PagEtiAdmin'] != $_SESSION['TPagEtiAdmin'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['PagEtiAdmin']+1).'"> <span>Siguiente</span> </a>';
                       }
 
-                      if ($_SESSION['Pag'] == 1){
+                      if ($_SESSION['PagEtiAdmin'] == 1){
                 ?>
 
                 <?php
 
-                      }elseif($_SESSION['Pag'] == 2){
+                      }elseif($_SESSION['PagEtiAdmin'] == 2){
                 ?>
 
                     
@@ -717,24 +571,25 @@
 
             	<div class="btns-prev-next prev">
                 <?php
-                $url = "noticias.php";
+                $url = "noticias.php";	
                       
-                      if ($_SESSION['TPag'] > 1) {
-                          if ($_SESSION['Pag'] != 1)
-                              echo '<a id='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['Pag']-1).'"> <span>Anterior</span> </a>';
+                      if ($_SESSION['TPagNovAdmin'] > 1) {
+                          if ($_SESSION['PagAdmin'] != 1)
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['PagAdmin']-1).'"> <span>Anterior</span> </a>';
                           ?>
                 </div>
                 <div class="paginasTotales">
 
                   <?php
-                      for ($i=1;$i<=$_SESSION['TPag'];$i++) {
-                          if ($_SESSION['Pag'] == $i){
+                      for ($i=1;$i<=$_SESSION['TPagNovAdmin'];$i++) {
+						
+                          if ($_SESSION['PagAdmin'] == $i){
                               // Si se muestra el índice de la página actual, no se coloca enlace.
-                             echo '<p class="paginaActiva">'.$_SESSION['Pag'].'</p>';
+                             echo '<p class="paginaActiva">'.$_SESSION['PagAdmin'].'</p>';
                           }else{
                               // Si el índice no corresponde con la página mostrada actualmente, 
                               // se coloca el enlace para ir a esa página.
-                              echo '<a id='.'paginas'.' href="'.$url.'?pagina='.$i.'">'.$i.'</a> ';
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.$i.'">'.$i.'</a> ';
                           }
                       }
                   ?>
@@ -742,16 +597,18 @@
 
               	<div class="btns-prev-next next">
                       	<?php
-                          if ($_SESSION['Pag'] != $_SESSION['TPag'])
-                              echo '<a id='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['Pag']+1).'"> <span>Siguiente</span> </a>';
-                      }
+                          if ($_SESSION['Pag'] != $_SESSION['TPagNovAdmin'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['PagAdmin']+1).'"> <span>Siguiente</span> </a>';
+							 // echo $_SESSION['TPagNov'];
+                   
+					  }
 
-                      if ($_SESSION['Pag'] == 1){
+                      if ($_SESSION['PagAdmin'] == 1){
                 ?>
 
                 <?php
 
-                      }elseif($_SESSION['Pag'] == 2){
+                      }elseif($_SESSION['PagAdmin'] == 2){
                 ?>
 
                     
@@ -761,8 +618,201 @@
             </div>
 
         </div>
-		<?php } ?>
+		
+	<?php 
+		} 
+	
+	}else{
+	
+	if($_GET['idEti'] != ''){ 
+		$idEti = $_GET['idEti'];
+	?>	
+	<!--Aparece la paginacion de los articulos, segun lo hecho en el modelo, en este caso aparecen 6 articulos maximo por pagina-->
+	<div id="contenedor-paginacion">
+            <div id="contenido-paginacion">
+
+            	<div class="btns-prev-next prev">
+                <?php
+                $url = "noticias.php";
+                      
+                  if ($_SESSION['TPagEti'] > 1) {
+                      if ($_SESSION['PagEti'] != 1)
+                          echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['PagEti']-1).'"> <span>Anterior</span> </a>';
+
+                      	?>
+                </div>
+                          	<div class="paginasTotales">	
+
+                          	<?php
+                          	
+
+                              for ($i=1;$i<=$_SESSION['TPagEti'];$i++) {
+                                  if ($_SESSION['PagEti'] == $i){
+                                      // Si se muestra el índice de la página actual, no se coloca enlace.
+                                      echo '<p class="paginaActiva">'.$_SESSION['PagEti'].'</p>';
+                                  }else{
+                                      // Si el índice no corresponde con la página mostrada actualmente, 
+                                      // se coloca el enlace para ir a esa página.
+                                      echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.$i.'">'.$i.'</a> ';
+                                  }
+                              }
+
+                            ?>
+
+                            </div>
+
+                <div class="btns-prev-next next">
+
+                            <?php
+                          if ($_SESSION['PagEti'] != $_SESSION['TPagEti'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?idEti='.$idEti.'&pagina='.($_SESSION['PagEti']+1).'"> <span>Siguiente</span> </a>';
+                      }
+
+                      if ($_SESSION['PagEti'] == 1){
+                ?>
+
+                <?php
+
+                      }elseif($_SESSION['PagEti'] == 2){
+                ?>
+
+                    
+
+					<?php } ?>
+
+				</div>
+            </div>
+<?php
+		}elseif($_GET['idarea'] != ''){
+	$idarea = $_GET['idarea'];
+
+?>
+	
+<!--Aparece la paginacion de los articulos, segun lo hecho en el modelo, en este caso aparecen 6 articulos maximo por pagina-->
+<div id="contenedor-paginacion">
+<div id="contenido-paginacion">
+
+	<div class="btns-prev-next prev">
+	<?php
+	$url = "noticias.php";
+		  
+		  if ($_SESSION['TPagAre'] > 1) {
+			  if ($_SESSION['PagAre'] != 1)
+			  
+				  echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['PagAre']-1).'"> <span>Anterior</span> </a>';
+			  ?>
+	</div>
+			<div class="paginasTotales">
+
+			  <?php
+
+				  for ($i=1;$i<=$_SESSION['TPagAre'];$i++) {
+					  if ($_SESSION['PagAre'] == $i){
+						  // Si se muestra el índice de la página actual, no se coloca enlace.
+						  echo '<p class="paginaActiva">'.$_SESSION['PagAre'].'</p>';
+					  }else{
+						  // Si el índice no corresponde con la página mostrada actualmente, 
+						  // se coloca el enlace para ir a esa página.
+						  echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.$i.'">'.$i.'</a> ';
+					  }
+				  }
+
+			  ?>
+
+			  </div>
+	<div class="btns-prev-next next">
+			  <?php
+			  if ($_SESSION['PagAre'] != $_SESSION['TPagAre'])
+				  echo '<a class='.'paginas'.' href="'.$url.'?idarea='.$idarea.'&pagina='.($_SESSION['PagAre']+1).'"> <span>Siguiente</span> </a>';
+		  }
+
+		  if ($_SESSION['PagAre'] == 1){
+	?>
+
+	<?php
+
+		  }elseif($_SESSION['PagAre'] == 2){
+	?>       
+
+	<?php
+		  }
+
+	  ?>
+  </div>
+</div>
+
+</div>
+<?php 
+		}else{
+		
+?>
+
+			<div id="contenedor-paginacion">
+            <div id="contenido-paginacion">
+
+            	<div class="btns-prev-next prev">
+                <?php
+                $url = "noticias.php";	
+                      
+                      if ($_SESSION['TPagNov'] > 1) {
+                          if ($_SESSION['PagNov'] != 1)
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['PagNov']-1).'"> <span>Anterior</span> </a>';
+                          ?>
+                </div>
+                <div class="paginasTotales">
+
+                  <?php
+                      for ($i=1;$i<=$_SESSION['TPagNov'];$i++) {
+						
+                          if ($_SESSION['PagNov'] == $i){
+                              // Si se muestra el índice de la página actual, no se coloca enlace.
+                             echo '<p class="paginaActiva">'.$_SESSION['PagNov'].'</p>';
+                          }else{
+                              // Si el índice no corresponde con la página mostrada actualmente, 
+                              // se coloca el enlace para ir a esa página.
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.$i.'">'.$i.'</a> ';
+                          }
+                      }
+                  ?>
+              	</div>
+
+              	<div class="btns-prev-next next">
+                      	<?php
+                          if ($_SESSION['PagNov'] != $_SESSION['TPagNov'])
+                              echo '<a class='.'paginas'.' href="'.$url.'?pagina='.($_SESSION['PagNov']+1).'"> <span>Siguiente</span> </a>';
+							 // echo $_SESSION['TPagNov'];
+                   
+					  }
+
+                      if ($_SESSION['PagNov'] == 1){
+                ?>
+
+                <?php
+
+                      }elseif($_SESSION['PagNov'] == 2){
+                ?>
+
+                    
+
+					<?php } ?>
+				</div>
+            </div>
+
+        </div>
+		
+	
+
+
+<?php 
+	}
+		 
+	}	
+?>
+
+
   		<!-- Btn para redes sociales -->
+	
+
   		<aside>
   			<div class="share">
 			  <i class="fa fa-plus"></i>

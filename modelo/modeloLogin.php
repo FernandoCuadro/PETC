@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("America/Montevideo");
 
 class modeloLogin{
 
@@ -37,7 +37,7 @@ class modeloLogin{
 			echo "<script>
 					swal({
 					title:'Login',
-					text:'No existe es1e usuario',
+					text:'Usuario no valido',
 					icon:'error'
 					})</script>";
         }else{
@@ -51,17 +51,16 @@ class modeloLogin{
             del usuario en cuestión*/
             $resultadoSesion = $this->conexion->query($consultaIniciarSesion);
             $datosUsuario = $resultadoSesion->fetch_assoc();
+          
 
             if($datosUsuario['estado'] == "activo"){      
        
                 if ($datosUsuario['rol'] == "administrador"){
-              //      header('location:index.php'); 
-<<<<<<< HEAD
-        echo"<script language='javascript'>window.location='index.php'</script>";
-                }elseif($datosUsuario['rol'] == "moderador"){
-                    echo"<script language='javascript'>window.location='index.php'</script>";
-                }
-=======
+                    $fecha_actual = date("Y-m-d H:i:s");
+                    $nombreusuario = $datosUsuario['nombre'];
+                    $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a iniciado sesión', '$fecha_actual')";
+                    $sqlauditoria = $this->conexion->query($consauditoria);
+
               echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
               echo "<script>
                       swal({
@@ -74,6 +73,11 @@ class modeloLogin{
                           window.location='index.php';    
                       })</script>";                
                     }elseif($datosUsuario['rol'] == "moderador"){
+
+                        $fecha_actual = date("Y-m-d H:i:s");
+                        $nombreusuario = $datosUsuario['nombre'];
+                        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a iniciado sesión', '$fecha_actual')";
+                        $sqlauditoria = $this->conexion->query($consauditoria);
                         echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
                         echo "<script>
                                 swal({
@@ -85,7 +89,6 @@ class modeloLogin{
                                 .then((value) => {
                                     window.location='index.php';   
                                 })</script>";                }
->>>>>>> b958538 (Hasta Cursos arreglado)
       
             }elseif($datosUsuario['estado'] == "Inactivo"){
                 echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
@@ -93,7 +96,7 @@ class modeloLogin{
                         swal({
                         title:'Login',
                         text:'Este usuario no esta habilitado',
-                        icon:'success'
+                        icon:'error'
                           
                         })</script>";               
             }

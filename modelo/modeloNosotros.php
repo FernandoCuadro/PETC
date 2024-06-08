@@ -2,11 +2,7 @@
 
     class modeloNosotros{
 
-<<<<<<< HEAD
-        private $conexion;  
-=======
         private $conexion;      
->>>>>>> b958538 (Hasta Cursos arreglado)
         private $nosotros;
 
       
@@ -143,7 +139,7 @@
                 })</script>";
     }else{
             
-        $sqlAgregarIntegrantes = "INSERT INTO integrantes values (0, '$nombreint', '$cargoint', 'img/integrante.png')";
+        $sqlAgregarIntegrantes = "INSERT INTO integrantes values (0, '$nombreint', '$cargoint', 'img/imagenpordefecto/integrante.png')";
                 
         $sqlAgregarIntegrante = $this->conexion->query($sqlAgregarIntegrantes);
        
@@ -170,7 +166,24 @@
     public function editarIntegrantes($idint, $nombreint, $cargoint, $imagenint){
 
     if(!empty($imagenint)){
+         
+        $sqlurl = "SELECT fotoint FROM integrantes where idintegrantes = '$idint';";
+        $sqlEnlace = $this->conexion->query($sqlurl);
+        while($filas=$sqlEnlace->fetch_assoc()){
+            $nosotros2[]=$filas;
+            }  
             
+       foreach($nosotros2 as $Poner){
+        if($Poner['fotoint'] != "img/integrante.png"){
+        unlink($Poner['fotoint']); 
+        }
+        //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
+       }    
+       
+    }elseif(empty($imagenint)){
+        $imagenint = "img/integrante.png";
+    }
+
         $sqlEditarIntegrantes = "UPDATE integrantes SET nombreint = '$nombreint', cargoint = '$cargoint', fotoint = '$imagenint' WHERE (`idintegrantes` = '$idint');";
                 
         $sqlEditarIntegrante = $this->conexion->query($sqlEditarIntegrantes);
@@ -189,40 +202,82 @@
                     
                 })</script>";
 
-     }else{
-        $sqlEditarIntegrantes = "UPDATE integrantes SET nombreint = '$nombreint', cargoint = '$cargoint', fotoint = 'img/integrante.png' WHERE (`idintegrantes` = '$idint');";
-       
-        $sqlEditarIntegrante = $this->conexion->query($sqlEditarIntegrantes);
-
-        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
-        echo "<script>
-                swal({
-                title:'Integrantes PETC',
-                text:'Se ha editado correctamente',
-                icon:'success'
-                
-                })
-                .then((value) => {
-                    window.location='nosotros.php';
-                    window.location='editor-nosotros.php';
-                    
-                })</script>";
-        }
+    
         }    
 
-<<<<<<< HEAD
-        public function eliminarIntegrante($idINT){
+    public function eliminarintegrante($idint){
+        $sqlver = "SELECT idintegrantes FROM integrantes where idintegrantes = '$idint';";
+        $sqlerror = $this->conexion->query($sqlver);
+        $contarint = mysqli_num_rows($sqlerror);
 
-            $sqlEliminarIntegrantes = "DELETE FROM integrantes WHERE (`idintegrantes` = '$idINT')";
-            $sqlEliminarIntegrante= $this->conexion->multi_query($sqlEliminarIntegrantes);
-                                  
-             echo "<script>window.alert('Integrante eliminado de forma exitosa');window.location='editor-nosotros.php';</script>";
-                                  
-             }              
+        if($contarint == 1){
 
+            $sqlurl = "SELECT fotoint FROM integrantes where idintegrantes = '$idint';";
+            $sqlEnlace = $this->conexion->query($sqlurl);
+            while($filas=$sqlEnlace->fetch_assoc()){
+                $nosotros2[]=$filas;
+                }  
+                
+           foreach($nosotros2 as $Poner){
+            if($Poner['fotoint'] != "img/integrante.png"){
+            unlink($Poner['fotoint']); 
+            }
+            //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
+           }    
+           
+           
+            $sqleliminarintegrantes = "DELETE FROM integrantes where (idintegrantes = '$idint');";
+            $borrar = $this->conexion->query($sqleliminarintegrantes);
+            if($borrar!=null){
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+                echo "<script>
+                        swal({
+                        title:'Imagenes',
+                        text:'Se ah eliminado correctamente',
+                        icon:'success'
+                        
+                        })
+                        .then((value) => {
+                            window.location='nosotros.php';
+                            window.location='editor-nosotros.php';
+                            
+                        })</script>";
+            }else{
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+                echo "<script>
+                        swal({
+                        title:'Imagenes',
+                        text:'No se ah podido eliminar',
+                        icon:'error'
+                        
+                        })
+                        .then((value) => {
+                            window.location='nosotros.php';
+                            window.location='editor-nosotros.php';
+                            
+                        })</script>";           
+            }
+    
+        }else{
 
-=======
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+            echo "<script>
+                    swal({
+                    title:'Imagenes',
+                    text:'La imagen que desea eliminar no existe',
+                    icon:'error'
+                    
+                    })
+                    .then((value) => {
+                        window.location='nosotros.php';
+                        window.location='editor-nosotros.php';
+                        
+                    })</script>";           
+    
+    
+        }
         
->>>>>>> b958538 (Hasta Cursos arreglado)
+    }    
+        
 
     }   

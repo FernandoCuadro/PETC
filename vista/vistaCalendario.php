@@ -25,11 +25,7 @@
 
   <!--Link a icono y hojas de estilo-->
   <link rel="icon" type="image/jpg" href="img/Logo.png"/>
-<<<<<<< HEAD
-  <link rel="stylesheet" type="text/css" href="css/styleCalendario6.css">
-=======
   <link rel="stylesheet" type="text/css" href="css/styleCalendario7.css">
->>>>>>> b958538 (Hasta Cursos arreglado)
   <link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
 
 	<!-- Fuente usada para la descripcion -->
@@ -66,7 +62,7 @@
 		}elseif($_SESSION['perfil'] == 'moderador'){
 	?>
 		<div id="contenedor-sesion">	
-	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 		</div>
 	<?php } ?>
 		<div id="logo-normal-size">
@@ -120,7 +116,7 @@
   	<!-- Empieza contenido de la pagina -->
   	<main>
 	  <?php
-			  if($_SESSION['perfil'] == 'administrador'){ 
+			  if($_SESSION['perfil'] == 'administrador' || $_SESSION['perfil'] == 'moderador'){ 
 					?>
 		<article>
 	<!-- mensajes -->

@@ -39,24 +39,19 @@
 
 				<p>Bienvenido al sitio web del Polo Educativo Tecnológico Cerro</p>
 
-				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+				<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" id="formulario2">
 					<input type="text" name="ci" placeholder="Ingrese su usuario" autofocus required>
 					<input type="password" name="contraseña" placeholder="Ingrese su contraseña" autofocus required>
 					<input type="submit" name="login" value="Iniciar sesión">
-					<a href="index.php" id="volverIni">Volver al Inicio</a>
-
+					<!--<a href="index.php" id="volverIni">Volver al Inicio</a>-->
+			
 				</form>
-
+		
 			</div>
 		</div>
 
 	</main>
 
-<<<<<<< HEAD
-	<?php //<!--Script necesario para pantalla de carga--> ?>
-	<script src="js/animaciones.js"></script>
-=======
 	<script src="js/loaderScreen.js"></script>
->>>>>>> b958538 (Hasta Cursos arreglado)
 </body>
 </html>

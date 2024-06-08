@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if(empty($_SESSION['usuario'])){
+    echo "<script>window.location='../not-found.php'</script>";
+	}else{
 
 include("conexion/conexion.php");
                         
@@ -17,5 +20,5 @@ $UpdateProd = ("UPDATE eventoscalendar
 
     WHERE id='".$idEvento."' ");
 $result = mysqli_query($con, $UpdateProd);
-
+    }
 ?>

@@ -540,7 +540,7 @@ nav{
 
 #contenedor-agregar-ver-articulo input{
     padding: 10px;
-    width: 20%;
+    width: 30%;
     color: var(--agregarVerArticulo-input);
     font-size: 1rem;
     background: var(--agregarVerArticulo-input-background);
@@ -598,6 +598,25 @@ nav{
     object-fit: cover;
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
+}
+
+#noNot{
+    font-size: 2rem;
+    text-align: center;
+    margin: 89px;
+   
+
+}
+
+@media screen and (max-width: 600px){
+    /*body{
+        background: blue;
+    }*/
+    #noNot{
+        font-size: 2rem;
+        text-align: center;
+
+    }
 }
 
 
@@ -884,7 +903,7 @@ nav{
     background-color: var(--main__paginacion-btnsPrevNextHoverBackground);
 }
 
-.btns-prev-next:hover #paginas span{
+.btns-prev-next:hover .paginas span{
     color: var(--main__paginacion-btnsPrevNextHover-texto);
 }
 
@@ -902,19 +921,19 @@ nav{
     scrollbar-color: var(--main__paginacion-barraDesplazamiento1) var(--main__paginacion-barraDesplazamiento2);
 }
 
-.paginasTotales #paginas,
-.btns-prev-next #paginas{
+.paginasTotales .paginas,
+.btns-prev-next .paginas{
     padding: .2rem .5rem;
     color: var(--main__paginacion-paginas);
     text-decoration: none;
     border-radius: 5px;
 }
 
-.btns-prev-next #paginas span{
+.btns-prev-next .paginas span{
     color: var(--main__paginacion-btnPrevNext);
 }
 
-.paginasTotales #paginas:hover, .paginasTotales #paginas:focus{
+.paginasTotales .paginas:hover, .paginasTotales .paginas:focus{
     background-color: var(--main__paginacion-paginasHoverBackground);
     color: var(--main__paginacion-paginasHover);
 }
@@ -1018,6 +1037,14 @@ nav{
 
 
 /*Empieza footer*/
+/*footer{
+    position: fixed;
+   
+   bottom: 0px;
+    width: 100%;
+    border: 2px solid green;
+}
+*/
 
 footer div{
     padding: 20px 0 5px 0;
@@ -1070,11 +1097,7 @@ footer div p a:hover{
 
 
 
-@media screen and (min-width: 565px){
-    /*body{
-        background: blue;
-    }*/
-}
+
 
 
 @media screen and (min-width: 630px){

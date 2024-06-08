@@ -17,6 +17,7 @@
 
 <p style="visibility: hidden;">hola</p>
 <?php
+date_default_timezone_set("America/Montevideo");
 session_start();
 if(empty($_SESSION['usuario'])){
     echo "<script>window.location='../not-found.php'</script>";
@@ -25,6 +26,7 @@ if(!empty($_GET)){
 
 		include("../conexion/conexion.php");
 		$conexion = projectoinovacion::conexion();
+        
 		$idBorrar = $_GET['idimagen'];
 
 		//$cosa1 = new projectoinovacion();
@@ -33,7 +35,15 @@ if(!empty($_GET)){
         $contarimg = mysqli_num_rows($sqlerror);
         
         if($contarimg == 1){
-
+            $sqlurl = "SELECT imagen FROM nosotrosimg WHERE `idnosotrosimg` = '$idBorrar';";
+            $sqlEnlace = $conexion->query($sqlurl);
+            while($filas=$sqlEnlace->fetch_assoc()){
+                $enlaces[]=$filas;
+                }  
+              
+           foreach($enlaces as $Poner){
+            unlink('../'.$Poner['imagen']);
+           }        
 		$sqlBorrar = "DELETE FROM nosotrosimg WHERE (`idnosotrosimg` = '$idBorrar');";
 		$borrar =  $conexion->query($sqlBorrar);
 	//	$sqlBorrarNoticia = $cosa1->conexion($conexion->query($sqlBorrar));

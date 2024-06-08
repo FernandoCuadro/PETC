@@ -7,17 +7,6 @@
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
 	<link rel="stylesheet" type="text/css" href="css/styleEditores34.css">
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css">
-<<<<<<< HEAD
- 
-	<?php //<!-- Usado para el editor, por cada cantidad de editores, es la cantidad de veces que usamos el script --> ?>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-	<script type="text/javascript" src="js/ckeditor.js"></script>
-=======
->>>>>>> b958538 (Hasta Cursos arreglado)
 
 	<?php //<!-- Fuente usada para la introduccion sobre la imagen --> ?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +25,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<title>Editor | Nosotros</title>
-</head>
+</head>	
 <body>
 	<a href="javascript:void(0);" id="scroll" title="Volver arriba">Top<span></span></a>
 
@@ -54,18 +43,12 @@
         	session_start();
         	if(empty($_SESSION['usuario'])){       			
     	?>
-		<div id="contenedor-sesion">
-
-	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin --> ?>
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
-		</div>
     	<?php
         	}elseif($_SESSION['perfil'] == 'administrador'){
     	?>  
 		<?php //<!-- Importante que el div tampoco aparezca cuando el usuario no está iniciado, ocupa espacio demás --> ?>
 	    <div id="contenedor-sesion">
-
-	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin --> ?>
+	    <?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Admin --> ?>
 	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
 		</div>
 		<?php
@@ -73,7 +56,7 @@
 		?>	
 		<div id="contenedor-sesion">	
 	    	<?php //<!-- Esto se muestra en caso de que la sesion iniciada sea de Editor --> ?>
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
+	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p>
 
 	    </div>
 		<?php } ?>
@@ -135,44 +118,50 @@
   				
   				<!-- <div id="wrapper-container">	 -->
   				
-<<<<<<< HEAD
-					<div class="contenedor-titulos-cajas" id="seccion-imagenes">
-						<h3>Imágenes actuales</h3>
-	  					
-	  					<div id="contenedor-imagenes-actuales">
-							<?php foreach($PonerImagen as $ColocarImagen){ 
-								if($rowcount = 0){
-								?>
-	  						<?php //<!--Esto aparece en caso de que no haya imágenes cargadas--> ?>
-	  						
-							<div id="sin-imagen">
-	  							<p>No hay imágenes cargadas. 
-	  								<a href="#agregar-imagenes">Subir imagen</a>
-	  							</p>
-								<input type="button" value="aa">
-	  						</div>
-								
-							<?php }else{ ?>
-=======
 				<div class="contenedor-titulos-cajas" id="seccion-imagenes">
-					<h3>Imágenes actuales</h3>
-  					
+					
+  			
+					<div class="wrapper-container2">
+					
+					<div id="grupo__nosotrosImagen1" class="contenedor-titulos-cajas">
+						
+						<h3 id="agregar-imagenes">Agregar imágenes<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>						
+		  				
+		  				<input type="file" name="imagengaleria[]" multiple="multiple" accept="image/png,image/jpeg">
+		  				<div class="contenedor-informacion-agregarImagenes">
+		  					<p class="textoInfo">Seleccione las imagenes que va a agregar</p>
+		  				</div>
+						<div class="btns-submit2">	
+		  					<input class="submit cursorInactivo" type="submit" name="agregarimagenes" value="Agregar imágenes" disabled title="Cargue por lo menos una imagen para habilitar esta acción">
+		  				</div>
+
+		  				
+
+		  							  			
+					</div>
+				</div>  		
+				
+				<h3>Imágenes actuales</h3>
   					<div id="contenedor-imagenes-actuales">
 						<?php foreach($PonerImagen as $ColocarImagen){ 
 							if($rowcount = 0){
 							?>
-  						<?php //<!--Esto aparece en caso de que no haya imágenes cargadas--> ?>
+  						
   						
 						<div id="sin-imagen">
   							<p>No hay imágenes cargadas. 
-  								<a href="#agregar-imagenes">Subir imagen</a>
-  							</p>
-							<input type="button" value="aa">
+							  <input type="file" name="imagengaleria[]" multiple="multiple" accept="image/png,image/jpeg">
+		  				<div class="contenedor-informacion-agregarImagenes">
+		  					<p class="textoInfo">Seleccione las imagenes que va a agregar</p>
+		  				</div>
+						<div class="btns-submit2">	
+		  					<input class="submit cursorInactivo" type="submit" name="agregarimagenes" value="Agregar imágenes" disabled title="Cargue por lo menos una imagen para habilitar esta acción">
+		  				</div>
+
   						</div>
 							
 						<?php }else{ ?>
->>>>>>> b958538 (Hasta Cursos arreglado)
-
+							
   						<div class="imagen">
   							<p><?php echo $ColocarImagen['id'] ?></p>
 							  <div class="contenedor-articulo__contenido__edicion">
@@ -183,27 +172,10 @@
   						<?php 	}
 							}
 						?>					
-  					</div>
-				</div>	
+  					</div>	
+				</div>		
 
-				<div class="wrapper-container">
-					
-					<div id="grupo__nosotrosImagen1" class="contenedor-titulos-cajas">
-						
-						<h3 id="agregar-imagenes">Agregar imágenes<i class="fa-solid fa-circle-xmark error" title="Campo incompleto"></i></h3>						
-		  				
-		  				<input type="file" name="imagengaleria[]" multiple="multiple">
-		  				
-
-		  				<div class="contenedor-informacion-agregarImagenes">
-		  					<p class="textoInfo">Seleccione las imagenes que va a agregar</p>
-		  				</div>
-
-		  				<div class="btns-submit">
-		  					<input class="submit cursorInactivo" type="submit" name="agregarimagenes" value="Agregar imágenes" disabled title="Cargue por lo menos una imagen para habilitar esta acción">
-		  				</div>			  			
-					</div>
-				</div>  	
+			
 			</form>
 
 									
@@ -216,82 +188,6 @@
 							
 					<div class="wrapper-container">
 						
-<<<<<<< HEAD
-						<div class="contenedor-titulos-cajas">
-							<h3 id="agregar-imagenes">Agregar imágenes</h3>						
-			  				<input type="file" name="imagen1" id="subir-nueva-imagen">
-			  				<input type="file" name="imagen2">
-			  				<input type="file" name="imagen3">
-			  				<input type="file" name="imagen4">
-			  				<input type="file" name="imagen5">
-
-			  				<div class="btns-submit">
-			  					<input type="reset" name="" value="Cancelar">
-			  					<input type="submit" name="agregarimagenes" value="Agregar seleccionadas">
-			  				</div>			  			
-						</div>
-		</form>
-		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">						
-						<div class="contenedor-titulos-cajas">
-							<h3>Eliminar imágenes</h3>						
-			  				<select name="idimagen1">
-			  					<option value="">Seleccione una imagen</option>
-								  <?php foreach($PonerImagen as $ColocarImagenCombo1){ ?>
-			  					<option value="<?php echo $ColocarImagenCombo1['id']?>"><?php echo $ColocarImagenCombo1['id']?></option>
-								<?php } ?>	
-			  				</select>
-
-			  				<select name="idimagen2">
-			  					<option value="">Seleccione una imagen</option>
-								  <?php foreach($PonerImagen as $ColocarImagenCombo2){ ?>
-			  					<option value="<?php echo $ColocarImagenCombo2['id']?>"><?php echo $ColocarImagenCombo2['id']?></option>
-								<?php } ?>	
-			  				</select>
-
-			  				<select name="idimagen3">
-			  					<option value="">Seleccione una imagen</option>
-								  <?php foreach($PonerImagen as $ColocarImagenCombo3){ ?>
-			  					<option value="<?php echo $ColocarImagenCombo3['id']?>"><?php echo $ColocarImagenCombo3['id']?></option>
-								<?php } ?>	
-			  				</select>
-
-			  				<select name="idimagen4">
-			  					<option value="">Seleccione una imagen</option>
-								  <?php foreach($PonerImagen as $ColocarImagenCombo4){ ?>
-			  					<option value="<?php echo $ColocarImagenCombo4['id']?>"><?php echo $ColocarImagenCombo4['id']?></option>
-								<?php } ?>	
-			  				</select>
-
-			  				<select name="idimagen5">
-			  					<option value="">Seleccione una imagen</option>
-								  <?php foreach($PonerImagen as $ColocarImagenCombo5){ ?>
-			  					<option value="<?php echo $ColocarImagenCombo5['id']?>"><?php echo $ColocarImagenCombo5['id']?></option>
-								<?php } ?>	
-			  				</select>
-
-			  				<div class="btns-submit">
-			  					<input type="reset" name="" value="Cancelar">
-			  					<input type="submit" name="eliminarintegrantes" value="Eliminar seleccionadas">
-			  				</div>			  				
-						</div>
-		</form>
-					</div>  
-		<form action="<?php echo $_SERVER['PHP_SELF'] ?>" enctype="multipart/form-data" method="post">
-							
-					<div class="wrapper-container">
-						
-						<div class="contenedor-titulos-cajas" id="seccion-integrantes">
-							<h3 class="integrante-titulo">Crear integrante</h3>
-
-							<h3>Nombre</h3>
-							<input type="text" name="nombreint" placeholder="Ingrese un Nombre" required="yes">
-
-							<h3>Rol</h3>
-							<input type="text" name="cargoint" placeholder="Ingrese un Rol" required="yes">
-
-							<h3>Foto de perfil</h3>
-							<input type="file" name="fotoint" required="yes">
-=======
 						<div class="contenedor-titulos-cajas grupo__nosotrosIntegrantes1" id="seccion-integrantes">
 							<h3 class="integrante-titulo">Crear integrante</h3>
 
@@ -317,8 +213,7 @@
 
 							<h3 id="imagenAgregarIntegrante">Foto de perfil<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-							<input type="file" name="fotoint">
->>>>>>> b958538 (Hasta Cursos arreglado)
+							<input type="file" name="fotoint" accept="image/png,image/jpeg">
 
 							<div class="contenedor-informacion-agregarImagen">
 								<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -337,65 +232,6 @@
 						foreach($MostrarEditar as $ColocarCampo){
 							if($idInt == $ColocarCampo['id']){	 	
 				?>			
-<<<<<<< HEAD
-						<div class="contenedor-titulos-cajas">
-							<h3 class="integrante-titulo">Editar/eliminar integrante</h3>
-							<h3>ID integrante</h3>
-							
-							<select name="idint">
-								<option value="<?php echo $ColocarCampo['id']?>"><?php echo "ID: ".$ColocarCampo['id']." || ".$ColocarCampo['nombreint']?></option>		
-							</select>
-
-							<h3>Nombre</h3>
-							<input type="text" name="nombreintedit" value="<?php echo $ColocarCampo['nombreint']?>" placeholder="Ingrese Nombre">	
-							
-							<h3>Rol</h3>
-							<input type="text" name="cargointedit" value="<?php echo $ColocarCampo['cargoint']?>" placeholder="Ingrese Rol">
-								
-							<h3>Foto de perfil</h3>
-							<input type="file" name="fotointedit">
-
-							<div class="btns-submit">
-								<input type="submit" name="eliminarintegrante" value="Eliminar">
-			  					<input type="reset" name="" value="Cancelar">
-			  					<input type="submit" name="editarintegrante" value="Editar integrante">
-			  				</div>
-						</div>	
-				<?php //}else{ 
-					//echo "<script>window.alert('No puede editar integrantes que no existen');window.location='editor-nosotros.php#seccion-integrantes';</script>";
-			
-				
-						}
-					}	 
-				?>
-						</div>
-						<?php  
-							}else{
-						?>
-						<div class="contenedor-titulos-cajas">
-							<h3 class="integrante-titulo">Editar/eliminar integrante</h3>
-							<h3>ID integrante</h3>
-							<select name="idint" required="yes">
-								<option value="">Seleccione un integrante</option>
-								<?php foreach($PonerIntegrantes as $ColocarIntegrante){ ?>
-								<option value="<?php echo $ColocarIntegrante['id']?>"><?php echo "ID: ".$ColocarIntegrante['id']." || ".$ColocarIntegrante['nombreint']?></option>
-								<?php } ?>
-							</select>
-									
-							<h3>Nombre</h3>
-							<input type="text" name="nombreintedit" placeholder="Ingrese Nombre">
-
-							<h3>Rol</h3>
-							<input type="text" name="cargointedit" placeholder="Ingrese Rol">
-								
-							<h3>Foto de perfil</h3>
-							<input type="file" name="fotointedit">
-										
-							<div class="btns-submit">
-								<input type="submit" name="eliminarintegrante" value="Eliminar">
-			  					<input type="reset" name="" value="Cancelar">
-			  					<input type="submit" name="editarintegrante" value="Editar integrante">
-=======
 						<div class="contenedor-titulos-cajas grupo__nosotrosIntegrantes2">
 							<h3 class="integrante-titulo">Editar/eliminar integrante</h3>
 
@@ -431,7 +267,7 @@
 								
 							<h3 id="imagenEditarIntegrante">Foto de perfil <span>(edición)</span><i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-							<input type="file" name="fotointedit">
+							<input type="file" name="fotointedit" accept="image/png,image/jpeg">
 
 							<div class="contenedor-informacion-editarImagen">
 								<p class="textoInfo">Ninguna imagen fue cargada</p>
@@ -502,7 +338,6 @@
 							<div class="btns-submit">
 								<input class="delete cursorInactivo" type="submit" name="eliminarintegrante" value="Eliminar integrante" disabled title="Seleccione uno de los integrantes para habilitar esta acción">
 			  					<input class="submit cursorInactivo" type="submit" name="editarintegrante" value="Editar integrante" disabled title="Complete el formulario para habilitar esta acción">
->>>>>>> b958538 (Hasta Cursos arreglado)
 			  				</div>
 
 						</div>
@@ -510,12 +345,6 @@
 		</form>				
 					</div>
 
-<<<<<<< HEAD
-  				<?php //<!--Dependiendo de si se va a editar o no el articulo--> ?>
-  				<!-- <input type="submit" name="" value="Editar artículo"> -->
-
-=======
->>>>>>> b958538 (Hasta Cursos arreglado)
   			
   		</div>
 
@@ -555,22 +384,9 @@
 
 	<script src="js/validaciones.js"></script>
 	<script src="js/animacionesEditores.js"></script>
-<<<<<<< HEAD
-
-	<script src="js/animaciones.js"></script>
-
-  	<?php //<!-- Script necesario para que funcione el menu --> ?>
-	<script src="js/menu.js"></script>
-	
-	<?php //<!-- Script necesario para que funcione el btn de volver arriba --> ?>
-	<script src="js/irArriba.js"></script>
-
-	<?php //<!-- Script necesario para que funcione el btn de redes sociales --> ?>
-=======
 	<script src="js/loaderScreen.js"></script>
 	<script src="js/menu.js"></script>
 	<script src="js/irArriba.js"></script>
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<script src="js/redesSociales.js"></script>
 </body>
 </html>

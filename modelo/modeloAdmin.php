@@ -103,24 +103,102 @@ class modeloAdmin{
 
     }
 
+ public function obtenerauditoria(){
+    $sqlobtenerauditoria = "SELECT idauditoria as id, 
+    ciusuario, 
+    nombreusuario, 
+    antecedente, 
+    fecha 
+    FROM auditoria 
+    order by fecha desc;";
+
+    
+$sqlResultadoaudi = $this->conexion->query($sqlobtenerauditoria);
+
+while($filas=$sqlResultadoaudi->fetch_assoc()){
+    $this->admin[]=$filas;
+}
+   return $this->admin; 
+
+ }   
+
     //AGREGAR EDITAR USUARIOS
     public function crearUsuario($nombreUsu, $cedulaUsu, $contraseñaUsu, $rolUsuario){
+
+
+        $sqlChequeoci = "SELECT * from usuarios  WHERE ci = $cedulaUsu";
+        $sqlmismaci = $this->conexion->query($sqlChequeoci);
+        if(mysqli_num_rows($sqlmismaci) > 0){
+           echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+        echo "<script>
+                swal({
+                title:'Error Usuario',
+                text:'Ya existe ese usuario',
+                icon:'error'
+                
+                })
+                .then((value) => {
+                    window.location='admin.php';
+                    
+                    
+                })</script>";
+
+      }else{
 
         $sqlAgregarUsuarios = "INSERT INTO  usuarios values ($cedulaUsu, '$nombreUsu', '$contraseñaUsu', '$rolUsuario', 'activo')";
 
         $sqlAgregarUsuario = $this->conexion->query($sqlAgregarUsuarios);
 
-          echo "<script>window.location='avisoUsuario.php';</script>";
+        $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Se creó a creado al usuario: $nombreUsu', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
+
+        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+        echo "<script>
+                swal({
+                title:'Usuarios',
+                text:'Usuario creado correctamente',
+                icon:'success'
+                
+                })
+                .then((value) => {
+                    window.location='index.php';
+                    window.location='admin.php';
+                    
+                })</script>";
+            }
       
 }
 
 public function editarUsuario($ciUsuario, $nombreUsuario, $contrUsuario, $rolUsuario){
 
+    
+
     $sqlEditarUsuarios = "UPDATE usuarios SET nombre = '$nombreUsuario', contraseña = '$contrUsuario', rol = '$rolUsuario' WHERE (ci = '$ciUsuario');";
 
     $sqlEditarUsuario = $this->conexion->query($sqlEditarUsuarios);
 
-    echo "<script>window.location='avisoUsuario.php';</script>";
+    $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Edito al usuario: $nombreUsu', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
+
+    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+    echo "<script>
+            swal({
+            title:'Usuarios',
+            text:'Usuario editado correctamente',
+            icon:'success'
+            
+            })
+            .then((value) => {
+                window.location='index.php';
+                window.location='admin.php';
+                
+            })</script>";
 
 }
 
@@ -132,16 +210,68 @@ public function eliminarUsuario($ciUsuario){
 		$sqlBorrarUsuarios = "DELETE FROM usuarios WHERE (`ci` = '$ciUsuario');";
 
 
-		$borrar =  $conexion->query($sqlBorrarUsuarios);
+		$borrar =  $this->conexion->query($sqlBorrarUsuarios);
 	//	$sqlBorrarNoticia = $cosa1->conexion($conexion->query($sqlBorrar));
 
+
 		if($borrar!=null){
-			print "<script>window.location='avisoUsuario.php';</script>";
+            $fecha_actual = date("Y-m-d H:i:s");
+            $ci = $_SESSION['ci'];
+            $nombreusuario = $_SESSION['usuario'];
+            $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a sido eliminado: $ciUsuario', '$fecha_actual')";
+            $sqlauditoria = $this->conexion->query($consauditoria);
+
+           if($ci != $ciUsuario){
+
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+            echo "<script>
+                    swal({
+                    title:'Usuarios',
+                    text:'Usuario eliminado correctamente',
+                    icon:'success'
+                    
+                    })
+                    .then((value) => {
+                        window.location='index.php';
+                        window.location='admin.php';
+                        
+                    })</script>";
+                }else{
+                    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+                    echo "<script>
+                            swal({
+                            title:'Usuarios',
+                            text:'Ah eliminado el usuario actual',
+                            icon:'success'
+                            
+                            })
+                            .then((value) => {
+                                window.location='logout.php';
+                                
+                                
+                            })</script>";
+                }
 		}else{
-			print "<script>window.location='avisoUsuarioError.php';</script>";
-	
+            echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+            echo "<script>
+                    swal({
+                    title:'Usuarios',
+                    text:'Usuario no se ah podido eliminar',
+                    icon:'error'
+                    
+                    })
+                    .then((value) => {
+                        window.location='index.php';
+                        window.location='admin.php';
+                        
+                    })</script>";
+            
 		}
 	}  
+
+
+
+    
 	
 
 

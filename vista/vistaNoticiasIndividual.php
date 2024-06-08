@@ -7,12 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; utf-8">
 
-<<<<<<< HEAD
-	<meta name="description" content="Conocé las novedades del Polo Educativo Tecnológico Cerro en todas sus áreas, Informática, Diseño, Construcción, y más.
-	Enterate de todo lo que pasa en el Polo Educativo Cerro.">
-=======
 	<meta name="description" content="Conocé las novedades del Polo Educativo Tecnológico Cerro en todas sus áreas.">
->>>>>>> b958538 (Hasta Cursos arreglado)
 
 	<meta name="keywords" content="informática,diseño,construcción,bachillerato,novedades,noticias,polo,educativo,tecnológico,cerro,información,montevideo,utu,petc,tecnicatura,logística,steel,framing,wood,framing,prevencionista,técnico,terciario,ingeniero,EMT,tecnólogo,bachiller,utu cerro,cursos,universidad de trabajo">
 
@@ -21,11 +16,7 @@
 
 	<!--Link a icono y hojas de estilo-->
 	<link rel="icon" type="image/jpg" href="img/Logo.png">
-<<<<<<< HEAD
-	<link rel="stylesheet" type="text/css" href="css/styleArticulosIndividual2.css">
-=======
 	<link rel="stylesheet" type="text/css" href="css/styleArticulosIndividual3.css">
->>>>>>> b958538 (Hasta Cursos arreglado)
 	<link rel="stylesheet" type="text/css" href="fontawesome-free-6.0.0-web/css/all.css"> 
 
 	<!-- Fuente usada para los titulos -->
@@ -39,13 +30,9 @@
 	<link href="https://fonts.googleapis.com/css2?family=Overpass:wght@300&display=swap" rel="stylesheet">  
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<<<<<<< HEAD
-	<title>Titulo de la noticia | Novedades</title>
-=======
 	<?php foreach($PonerNoticia as $ColocarNotTitle){ ?>
 	<title><?php echo $ColocarNotTitle['titulo'] ?></title>
 	<?php } ?>
->>>>>>> b958538 (Hasta Cursos arreglado)
 </head>
 <body>
 	<a href="javascript:void(0);" id="scroll" title="Volver arriba">Top<span></span></a>
@@ -58,23 +45,24 @@
 	<header>
 
 		<img id="img-header" src="img/banner.png">
-		<?php	
-			//session_start();
-        	if(empty($_SESSION['usuario'])){       			
-    	?>
-    	<?php
-        	}elseif($_SESSION['perfil'] == 'administrador'){
-    	?>  
-	     	<div id="contenedor-sesion">
-			<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>
-			</div>
-		<?php
+		<?php   
+        session_start();
+		
+        if(empty($_SESSION['usuario'])){       			
+    ?>
+    <?php
+        }elseif($_SESSION['perfil'] == 'administrador'){
+    ?>  
+	     <div id="contenedor-sesion"> 
+	    	 <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <a href="admin.php" id="modo-admin">Administrador</a></p>		
+		</div>	 
+	<?php 	
 			}elseif($_SESSION['perfil'] == 'moderador'){
-		?>		
-	    	<div id="contenedor-sesion">
-	    	<p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Editor</span></p>
-	    	</div>
-		<?php } ?>
+	?>			
+		<div id="contenedor-sesion"> 
+	    	 <p><i class="fa-solid fa-user"></i><a href="logout.php" class="btn-cerrar-sesion">Cerrar sesión</a> | <span id="modo-editor">Moderador</span></p> 
+	    </div>
+	<?php } ?>		
 		<div id="logo-normal-size">
 	    	<h1><a href="index.php"><img src="img/Logo.png"></a></h1>
 	    </div>
@@ -163,12 +151,6 @@
 						</div>
 						<?php } ?>
 					
-<<<<<<< HEAD
-						imegen 2-->
-					<div class="contenido">
-						<a href="<?php echo $ColocarNot['enlace'] ?>" target="__blank"><?php echo $ColocarNot['enlace'] ?> </a>
-					</div>
-=======
 						<div class="contenido">
 							<p><?php echo nl2br($ColocarNot['contenido3']) ?></p>
 						</div>
@@ -196,50 +178,79 @@
 						</div>
 						<?php } ?>
 
->>>>>>> b958538 (Hasta Cursos arreglado)
 					<div id="fecha">
 						<p>Noticia publicada <?php echo $ColocarNot['fecha']?></p>
 					</div>
 					<?php } ?>
-					<?php foreach($PonerEnlace as $ColocarEnlaces){	
-								if($ColocarEnlaces['nombre'] != ""){
-									
-							?>
+					<?php if (count($PonerEnlace) < 1){}else{?>
 					<div id="temas-relacionados2">
-						<h3>Para más información</h3>	
+						<h3>Para más información</h3>
 						<ul>
+					<?php 
+					$contador = 0;	
+					foreach($PonerEnlace as $ColocarEnlaces){	
+							if($ColocarEnlaces['nombre'] != ""){
+								
+					?>		
+						
 							
 							<a href="<?php echo $ColocarEnlaces['nombre']?>" target="_blank"><li><?php echo $ColocarEnlaces['nombre']?></li></a>	
 							
-						</ul>
 						
-					</div>
-					<?php
-										
-								}	
-							} 
+					
+								
 							
-							?>
+					<?php	
+						$contador++;
+						if($contador >= 2){
+							
+							echo '</ul>';
+							echo '<ul>';
+							$contador = 0;
+						}
+									
+							}	
+						} 
+					?>
+						</ul>
+					</div>
+					<?php } ?>
+					<?php if (count($PonerEtiqueta) < 1){}else{?>
+					<div id="temas-relacionados">
+						<h3>Temas relacionados</h3>
+						<ul>
 					<?php 
+						$contadorEti = 0;
 							foreach($PonerEtiqueta as $ColocarEtiquetas){	
 								if($ColocarEtiquetas['nombre'] != ""){
 							
 					?>						
-					<div id="temas-relacionados">
-						<h3>Temas relacionados</h3>
-						<ul>
+					
+				
+						
 							
 							<a href="noticias.php?idEti=<?php echo $ColocarEtiquetas['nombre'];?>"><li><?php echo $ColocarEtiquetas['nombre'];?></li></a>
 							
-						</ul>
-					</div>
+						
+					
 					<?php 
+							$contadorEti++;
+							if($contadorEti >= 6){
+								echo '</ul>';
+							echo '<ul>';
+							$contadorEti = 0;
+							}
 								} 
 							}
 							?>
+							</ul>
+						</div>
+				<?php } ?>		
 				</div>
 			</div>
 		</section>
+
+		
 		<!-- Termina seccion de contenido del articulo -->
 
   		<aside>

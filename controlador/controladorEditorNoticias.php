@@ -39,34 +39,296 @@
 	//echo "<input type='text' class='esconder' name='idNot' value='".$idNot."'>";
 	/*Cuando le damos a editar articulo*/
 	if(isset($_POST['editarNoticias'])){
-		if($_POST['titulo'] == ""){
-			echo "<script>window.alert('El titulo esta vácio');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['area'] == ""){
-			echo "<script>window.alert('El área esta vacia');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['descripcion'] == ""){
-			echo "<script>window.alert('La descripción esta vácia');window.location='editor-noticias.php';</script>";
-		}elseif(strlen($_POST['descripcion']) > 490){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['contenido1'] == ""){
-			echo "<script>window.alert('El contenido 1 esta vácio');window.location='editor-noticias.php';</script>";
-		}elseif(strlen($_POST['contenido1']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido2']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido3']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido4']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido5']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['titulo']) > 150){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif($_POST['fecha'] == ""){
-			echo "<script>window.alert('No se establecio una fecha');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['estado'] == ""){
-			echo "<script>window.alert('el estado no puede estar vacio');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
+		if($_POST['titulo'] == ""){	
+			echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+            echo "<script>
+                    swal({
+                    title:'Noticias',
+                    text:'No se ah ingresado un titulo',
+                    icon:'error'                    
+                    })
+                   </script>";
+        		}elseif($_POST['area'] == ""){
+					echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+					echo "<script>
+							swal({
+							title:'Noticias',
+							text:'No se ah ingresado el area',
+							icon:'error'                    
+							})
+						   </script>";		
+						}elseif($_POST['descripcion'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'No se ah ingresado la descripcion',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['descripcion']) > 490){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'La descripcion sobrepasa el limite de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['contenido1'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'No se ah ingresado el contenido 1',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido1']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido2']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";		
+						}elseif(strlen($_POST['contenido3']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido4']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido5']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['titulo']) > 150){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El titulo sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['fecha'] == ''){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe ingresar una fecha',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['fecha'] < date("Y-m-d")){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe ingresar una fecha a partir de hoy',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['estado'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe seleccionar un estado',
+									icon:'error'                    
+									})
+								   </script>";				
+						}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
+						
+						
 
+							$directorio = 'img';
+	  
+							$archivo = $_FILES['miniatura']['tmp_name'];	
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['miniatura']['name'];
+							  $tipo_archivo = $_FILES['miniatura']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $miniaturaNombre = $directorio . '/' . $nom_archivo;
+							  }else{
+								echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";
+							  }
+							}
+						
+						if($_FILES['archivo1']['name'] == ""){
+							$imagen1Nombre = '';
+						}else{
+							$directorio = 'img';
+	 
+							$archivo = $_FILES['archivo1']['tmp_name'];
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['archivo1']['name'];
+							  $tipo_archivo = $_FILES['archivo1']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $imagen1Nombre = $directorio . '/' . $nom_archivo;
+							  }else{
+								echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";
+							  }
+							}
+						}
+						if($_FILES['archivo2']['name'] == ""){
+							$imagen2Nombre = '';
+						}else{
+							$directorio = 'img';
+	 
+							$archivo = $_FILES['archivo2']['tmp_name'];
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['archivo2']['name'];
+							  $tipo_archivo = $_FILES['archivo2']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $imagen2Nombre = $directorio . '/' . $nom_archivo;
+							  }else{
+								echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";
+							  }
+							}  
+						}
+						if($_FILES['archivo3']['name'] == ""){
+							$imagen3Nombre = '';
+						}else{
+							$directorio = 'img';
+	 
+							$archivo = $_FILES['archivo3']['tmp_name'];
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['archivo3']['name'];
+							  $tipo_archivo = $_FILES['archivo3']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $imagen3Nombre = $directorio . '/' . $nom_archivo;
+							  }else{
+								echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";
+							  }
+							}
+
+						}
+						if($_FILES['archivo4']['name'] == ""){
+							$imagen4Nombre = '';
+						}else{
+							$directorio = 'img';
+	 
+							$archivo = $_FILES['archivo4']['tmp_name'];
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['archivo4']['name'];
+							  $tipo_archivo = $_FILES['archivo4']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $imagen4Nombre = $directorio . '/' . $nom_archivo;
+							  }else{
+								echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";	
+							  }
+							}
+						}
+						if($_FILES['archivo5']['name'] == ""){
+							$imagen5Nombre = '';
+						}else{
+							$directorio = 'img';
+	 
+							$archivo = $_FILES['archivo5']['tmp_name'];
+					
+							if(is_dir($directorio) && is_uploaded_file($archivo)){
+					
+							  $nom_archivo = $_FILES['archivo5']['name'];
+							  $tipo_archivo = $_FILES['archivo5']['type'];
+					
+							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+								  $imagen5Nombre = $directorio . '/' . $nom_archivo;
+								}else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+								echo "<script>
+								swal({
+								title:'Noticias',
+								text:'Eso no es una imagen',
+								icon:'error'                    
+								})
+							   </script>";
+							  }
+							}
+						}
 		
 		$editarNoticias = $editar->editarNoticias(
 			
@@ -87,12 +349,13 @@
 			$_POST['nombreEtiquetaagr'],
 			$_POST['idurl'],
 			$_POST['url'],
-			$_POST['urlagr']
-			
-		
-			
-
-			
+			$_POST['urlagr'],
+			$miniaturaNombre,
+			$imagen1Nombre,
+			$imagen2Nombre,
+			$imagen3Nombre,
+			$imagen4Nombre,
+			$imagen5Nombre
 		);
 
 	}else{
@@ -102,35 +365,300 @@
 }
 if(isset($_POST['agregarNoticias'])){
 
-		if($_POST['titulo'] == ""){
-			echo "<script>window.alert('El titulo esta vácio');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['area'] == ""){
-			echo "<script>window.alert('El área esta vacia');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['descripcion'] == ""){
-			echo "<script>window.alert('La descripción esta vácia');window.location='editor-noticias.php';</script>";
-		}elseif(strlen($_POST['descripcion']) > 490){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['contenido1'] == ""){
-			echo "<script>window.alert('El contenido 1 esta vácio');window.location='editor-noticias.php';</script>";
-		}elseif(strlen($_POST['contenido1']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido2']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido3']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido4']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['contenido5']) > 3500){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif(strlen($_POST['titulo']) > 150){
-			echo "<script>window.alert('La descripción sobrepasa el limite de caracteres');window.location='editor-noticias.php';</script>";	
-		}elseif($_POST['fecha'] == ''){
-			echo "<script>window.alert('No se establecio una fecha');window.location='editor-noticias.php#CrearFecha';</script>";
-		}elseif($_POST['fecha'] < date("Y-m-d")){
-        	echo "<script>window.alert('Debe ingresar una fecha actual');window.location='editor-noticias.php#CrearFecha';</script>";
-		}elseif($_POST['estado'] == ""){
-			echo "<script>window.alert('el estado no puede estar vacio');window.location='editor-noticias.php';</script>";
-		}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
+		if($_POST['titulo'] == ""){	
+			echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+            echo "<script>
+                    swal({
+                    title:'Noticias',
+                    text:'No se ah ingresado un titulo',
+                    icon:'error'                    
+                    })
+                   </script>";
+        		}elseif($_POST['area'] == ""){
+					echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+					echo "<script>
+							swal({
+							title:'Noticias',
+							text:'No se ah ingresado el area',
+							icon:'error'                    
+							})
+						   </script>";		
+						}elseif($_POST['descripcion'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'No se ah ingresado la descripcion',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['descripcion']) > 490){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'La descripcion sobrepasa el limite de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['contenido1'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'No se ah ingresado el contenido 1',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido1']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido2']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";		
+						}elseif(strlen($_POST['contenido3']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido4']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['contenido5']) > 3500){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El contenido sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif(strlen($_POST['titulo']) > 150){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'El titulo sobrepasa los limites de escritura',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['fecha'] == ''){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe ingresar una fecha',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['fecha'] < date("Y-m-d")){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe ingresar una fecha a partir de hoy',
+									icon:'error'                    
+									})
+								   </script>";
+						}elseif($_POST['estado'] == ""){
+							echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+							echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Debe seleccionar un estado',
+									icon:'error'                    
+									})
+								   </script>";		
+						}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
+							if($_FILES['miniatura']['name'] == ""){
+							
+									$miniaturaNombre = 'img/pti.jpg';
+									
+							}else{
+
+								$directorio = 'img';
+          
+								$archivo = $_FILES['miniatura']['tmp_name'];	
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['miniatura']['name'];
+								  $tipo_archivo = $_FILES['miniatura']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+								   move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $miniaturaNombre = $directorio . '/' . $nom_archivo;
+								  }else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";
+								  }
+								}
+							}
+							if($_FILES['archivo1']['name'] == ""){
+								$imagen1Nombre = '';
+							}else{
+								$directorio = 'img';
+         
+								$archivo = $_FILES['archivo1']['tmp_name'];
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['archivo1']['name'];
+								  $tipo_archivo = $_FILES['archivo1']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+									move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $imagen1Nombre = $directorio . '/' . $nom_archivo;
+								  }else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";
+								  }
+								}
+							}
+							if($_FILES['archivo2']['name'] == ""){
+								$imagen2Nombre = '';
+							}else{
+								$directorio = 'img';
+         
+								$archivo = $_FILES['archivo2']['tmp_name'];
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['archivo2']['name'];
+								  $tipo_archivo = $_FILES['archivo2']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+									move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $imagen2Nombre = $directorio . '/' . $nom_archivo;
+								  }else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";
+								  }
+								}  
+							}
+							if($_FILES['archivo3']['name'] == ""){
+								$imagen3Nombre = '';
+							}else{
+								$directorio = 'img';
+         
+								$archivo = $_FILES['archivo3']['tmp_name'];
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['archivo3']['name'];
+								  $tipo_archivo = $_FILES['archivo3']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+									move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $imagen3Nombre = $directorio . '/' . $nom_archivo;
+								  }else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";
+								  }
+								}
+
+							}
+							if($_FILES['archivo4']['name'] == ""){
+								$imagen4Nombre = '';
+							}else{
+								$directorio = 'img';
+         
+								$archivo = $_FILES['archivo4']['tmp_name'];
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['archivo4']['name'];
+								  $tipo_archivo = $_FILES['archivo4']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+									move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $imagen4Nombre = $directorio . '/' . $nom_archivo;
+								  }else{
+									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";	
+								  }
+								}
+							}
+							if($_FILES['archivo5']['name'] == ""){
+								$imagen5Nombre = '';
+							}else{
+								$directorio = 'img';
+         
+								$archivo = $_FILES['archivo5']['tmp_name'];
+						
+								if(is_dir($directorio) && is_uploaded_file($archivo)){
+						
+								  $nom_archivo = $_FILES['archivo5']['name'];
+								  $tipo_archivo = $_FILES['archivo5']['type'];
+						
+								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
+									move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
+									  $imagen5Nombre = $directorio . '/' . $nom_archivo;
+									}else{
+										echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+									echo "<script>
+									swal({
+									title:'Noticias',
+									text:'Eso no es una imagen',
+									icon:'error'                    
+									})
+								   </script>";
+								  }
+								}
+							}
+								
 	$datosAgregarNoticia = $agregarNoticia->agregarNoticias(
 		$Titulo = $_POST['titulo'],
 		$Descripcion = $_POST['descripcion'],
@@ -144,14 +672,26 @@ if(isset($_POST['agregarNoticias'])){
 		$IDArea = $_POST['area'],
 		$url = $_POST['url'],
 		$nombreEtiqueta = $_POST['nombreEtiqueta'],
-		$estadoEtiqueta = $_POST['estadoEtiqueta']
+		$estadoEtiqueta = $_POST['estadoEtiqueta'],
+		$miniatura = $miniaturaNombre,
+		$imagen1 = $imagen1Nombre,
+		$imagen2 = $imagen2Nombre,
+		$imagen3 = $imagen3Nombre,
+		$imagen4 = $imagen4Nombre,
+		$imagen5 = $imagen5Nombre
 
 	);
 
 
 	}else{
-		echo "<script>window.alert('El estado solo puede ser activo o inactivo');window.location='editor-noticias.php';</script>";
-	}
+		echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+		echo "<script>
+				swal({
+				title:'Noticias',
+				text:'El estado solo puede ser activo o inactivo',
+				icon:'error'                    
+				})
+			   </script>";	}
 }
 
 

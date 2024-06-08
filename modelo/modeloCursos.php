@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("America/Montevideo");
 class modeloCursos{ 
 
     private $conexion;
@@ -9,7 +9,7 @@ class modeloCursos{
     public function __construct(){
 
       $this->conexion = projectoinovacion::conexion(); 
-      $this->cursos = array();
+      $this->cursos = array();  
 
     }   
 
@@ -44,7 +44,7 @@ class modeloCursos{
     }
 
     public function obtenerNiveles(){
-    /*  session_start();
+    /*  session_start();  
      $id_come = $_SESSION['com'];
     */  
         $sqlRespuestas = "SELECT idnivel as id, 
@@ -67,16 +67,6 @@ class modeloCursos{
 public function agregarNivel($nombrenivel, $ordennivel){
 
         $sqlAgregarNiveles = "INSERT INTO  niveles values (0, '$nombrenivel', '$ordennivel');";
-<<<<<<< HEAD
-
-        $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
-        $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
-        if(mysqli_num_rows($sqlVerificaNums) > 0){
-          echo "<script>window.alert('Ya existe ese orden ingrese otro');window.location='editor-cursos.php#CrearNivel';</script>";
-          exit();
-        }
-=======
->>>>>>> b958538 (Hasta Cursos arreglado)
 
         $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
         $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
@@ -86,7 +76,7 @@ public function agregarNivel($nombrenivel, $ordennivel){
                 swal({
                 title:'Nivel',
                 text:'Ya existe ese numero de orden',
-                icon:'Error'
+                icon:'error'
                 
                 })
                 .then((value) => {
@@ -101,11 +91,11 @@ public function agregarNivel($nombrenivel, $ordennivel){
 
         
         $sqlAgregarNivel = $this->conexion->query($sqlAgregarNiveles);
-
-<<<<<<< HEAD
-        echo "<script>window.alert('Nivel añadido de forma exitosa');window.location='editor-cursos.php';</script>";
-
-=======
+        $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a agregado un nivel', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);    
         echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
         echo "<script>
                 swal({
@@ -120,7 +110,6 @@ public function agregarNivel($nombrenivel, $ordennivel){
                     
                 })</script>";
             }
->>>>>>> b958538 (Hasta Cursos arreglado)
 }
 
 
@@ -128,27 +117,31 @@ public function agregarNivel($nombrenivel, $ordennivel){
 public function editarNivel($idnivel, $nombrenivel, $ordennivel){
 
         $sqlEditarNiveles = "UPDATE niveles SET nivelnombre = '$nombrenivel', nivelnumero = '$ordennivel' WHERE (`idnivel` = '$idnivel');";
-<<<<<<< HEAD
 
         $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
         $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
-        if(mysqli_num_rows($sqlVerificaNums) > 1){
-          echo "<script>window.alert('Ya existe ese orden ingrese otro');window.location='editor-cursos.php#CrearNivel';</script>";
-          exit();
-        }
+        if(mysqli_num_rows($sqlVerificaNums) > 0){
+           echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+        echo "<script>
+                swal({
+                title:'Nivel',
+                text:'Ya existe ese numero de orden',
+                icon:'error'
+                
+                })
+                .then((value) => {
+                    window.location='cursos.php';
+                    window.location='editor-cursos.php';
+                    
+                })</script>";
 
-=======
-/*
-        $sqlVerificaNum = "SELECT * from niveles where nivelnumero = $ordennivel;";
-        $sqlVerificaNums = $this->conexion->query($sqlVerificaNum);
-        if(mysqli_num_rows($sqlVerificaNums) > 1){
-          echo "<script>window.location='avisoCursosError.php';</script>";
-          exit();
-        }
-        usar el idlevel para verificar
-*/
->>>>>>> b958538 (Hasta Cursos arreglado)
+      }else{
         $sqlEditarNivel = $this->conexion->query($sqlEditarNiveles);
+        $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un nivel', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);    
 
         echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
         echo "<script>
@@ -163,13 +156,24 @@ public function editarNivel($idnivel, $nombrenivel, $ordennivel){
                     window.location='editor-cursos.php';
                     
                 })</script>";
+    }
 }
 
 public function eliminarNivel($idNivel){
 
+        $seleccionarlvl = "SELECT idnivel FROM niveles WHERE `idnivel` = '$idNivel';";
+        $seleccionarlvls = $this->conexion->query($seleccionarlvl);
+        $contarlvl = mysqli_num_rows($seleccionarlvls);
+        if($contarlvl == 1){
         $sqlEliminarNivel = "DELETE FROM niveles WHERE (`idnivel` = '$idNivel');";
         $sqlEliminarNiveles = $this->conexion->query($sqlEliminarNivel);
-
+    
+        $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a eliminado un nivel', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);    
+    
         echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
         echo "<script>
                 swal({
@@ -183,7 +187,21 @@ public function eliminarNivel($idNivel){
                     window.location='editor-cursos.php';
                     
                 })</script>";
-  
+            }else{
+                echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+                echo "<script>
+                        swal({
+                        title:'Nivel',
+                        text:'No se ah podido eliminar',
+                        icon:'error'
+                        
+                        })
+                        .then((value) => {
+                            window.location='../cursos.php';
+                            window.location='../editor-cursos.php';
+                            
+                        })</script>";           
+            }
     }
 
 
@@ -201,6 +219,12 @@ public function agregarCursos($nombreCurso, $nivelCurso, $imagenCurso, $enlaceCu
     $sqlAgregarCursos = "INSERT INTO area values (0, '$nombreCurso', '$nivelCurso', '$imagenCurso', '$enlaceCurso')";
 
     $sqlAgregarCurso = $this->conexion->query($sqlAgregarCursos);
+
+    $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a agregado un curso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);    
 
     echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
     echo "<script>
@@ -240,9 +264,11 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
     
   $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso' WHERE (`id_area` = '$idCurso');";
     $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-      echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+    $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
     echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
     echo "<script>
             swal({
@@ -256,14 +282,15 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                 window.location='editor-cursos.php';
                 
             })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 }elseif($nivelCurso == "" & $imagenCurso == "" & $enlaceCurso == ""){
    
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -277,15 +304,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
       
 }elseif($nombreCurso == "" & $nivelCurso == "" & $enlaceCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -299,14 +327,15 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 }elseif($nombreCurso == "" & $nivelCurso == "" & $imagenCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado el curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -320,7 +349,6 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
           
 
 
@@ -328,9 +356,11 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
 
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -344,15 +374,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 
   }elseif($nivelCurso == "" & $enlaceCurso == ""){
 
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -366,14 +397,15 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
   }elseif($nivelCurso == "" & $imagenCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>"; 
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -387,15 +419,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
   
   }elseif($nombreCurso == "" & $enlaceCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -409,15 +442,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
    
   }elseif($nombreCurso == "" & $imagenCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -431,16 +465,17 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
    
   
 }elseif($nombreCurso == "" & $nivelCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -454,15 +489,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 
 }elseif($nombreCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -476,19 +512,15 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 }elseif($nivelCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-}elseif($imagenCurso == ""){
-    
-    $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
-      $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -505,6 +537,11 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -518,14 +555,15 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 }elseif($enlaceCurso == ""){
     
     $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso' WHERE (`id_area` = '$idCurso');";
       $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-        echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+      $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
       echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
       echo "<script>
               swal({
@@ -539,14 +577,16 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                   window.location='editor-cursos.php';
                   
               })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 }else{
   
   $sqlEditarCursos = "UPDATE area SET area = '$nombreCurso', nivelnumero = '$nivelCurso', areaimagen = '$imagenCurso', areaenlace = '$enlaceCurso' WHERE (`id_area` = '$idCurso');";
     $sqlEditarCurso = $this->conexion->query($sqlEditarCursos);
-<<<<<<< HEAD
-      echo "<script>window.alert('Curso modificado de forma exitosa');window.location='editor-cursos.php';</script>";
-=======
+    $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);
+
     echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
     echo "<script>
             swal({
@@ -560,7 +600,6 @@ if($nombreCurso == "" & $imagenCurso== "" & $enlaceCurso == ""){
                 window.location='editor-cursos.php';
                 
             })</script>";
->>>>>>> b958538 (Hasta Cursos arreglado)
 
 } 
 
@@ -576,7 +615,11 @@ public function eliminarCursos($idCurso){
 
   $sqlEliminarCurso = "DELETE FROM area WHERE (`id_area` = '$idCurso');";
   $sqlEliminarCursos = $this->conexion->query($sqlEliminarCurso);
-
+  $fecha_actual = date("Y-m-d H:i:s");
+        $ci = $_SESSION['ci'];
+        $nombreusuario = $_SESSION['usuario'];
+        $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a eliminado un curso $nombreCurso', '$fecha_actual')";
+        $sqlauditoria = $this->conexion->query($consauditoria);  
   echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
   echo "<script>
           swal({

@@ -4,11 +4,6 @@ require_once("modelo/modeloNosotros.php");
 $imagen = new modeloNosotros(); 
 $integrantes = new modeloNosotros();    
 $integrantesEdit = new modeloNosotros();    
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> b958538 (Hasta Cursos arreglado)
 $PonerImagen = $imagen->imagenes();
 $PonerIntegrantes = $integrantes->integrantes();
 $MostrarEditar = $integrantesEdit->MostrarDatos($_GET['idInt']);
@@ -152,18 +147,9 @@ if(is_dir($directorio) && is_uploaded_file($imagen)){
 
 }
 }
-
-<<<<<<< HEAD
 if(isset($_POST['eliminarintegrante'])){
-  if($_POST['idint'] == ""){
-    echo "<script>window.alert('Seleccione un integrante');window.location='editor-nosotros.php#seccion-integrantes';</script>";
-  }else{  
-  $eliminarInt = $integrantes->eliminarIntegrante(
-      $idINT = $_POST['idint']
-  );
-  }
+$eliminarint = $integrantes->eliminarintegrante(
+  $idint = $_POST['idint']
+);  
 }
-=======
-
->>>>>>> b958538 (Hasta Cursos arreglado)
 ?>

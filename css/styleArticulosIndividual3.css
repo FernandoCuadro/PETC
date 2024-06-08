@@ -599,11 +599,11 @@ nav{
 #temas-relacionados ul{
     margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    justify-content: last baseline;
+    align-items: flex-end;  
     width: 100%;
     list-style: none;
+
 }
 
 #temas-relacionados ul a{
@@ -661,11 +661,10 @@ nav{
 }
 
 #temas-relacionados2 ul{
-    margin: auto;
+  margin: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    justify-content: last baseline;
+    align-items: flex-end;  
     width: 100%;
     list-style: none;
 }
