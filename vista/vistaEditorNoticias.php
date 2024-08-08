@@ -476,8 +476,7 @@
 
 				<div class="contenedor-titulos-cajas grupo__miniatura">
 						<h3>Miniatura<i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
-	  					<input type="file" accept="image/png,image/jpeg" name="miniatura" id="inputMiniatura">
-
+	  					<input type="file" accept="image/png,image/jpeg" name="miniatura" id="inputMiniatura">				
 	  					<div class="contenedor-informacion">
 	  						<p class="textoInfo">Ninguna imagen fue cargada</p>
 	  					</div>

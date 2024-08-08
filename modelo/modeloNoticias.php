@@ -296,7 +296,7 @@ class modeloNoticias{
             $_SESSION['TPagNov'] = $totalPaginas;
             $_SESSION['PagNov'] = $pagina;
 
-          return $this->admin;
+          return $this->admin;  
       
       }else{
         session_start();
@@ -1128,7 +1128,7 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
                   $EtiquetaID=(( $itemID !== false) ? $itemID : ", &nbsp;");
                   $EtiquetaNombre=(( $itemNombre !== false) ? $itemNombre : ", &nbsp;");
       
-                  $valores="etiquetasnombre = '$EtiquetaNombre', idnoticia = '$idNot', estado = 'activo' where idetiquetas = '$EtiquetaID';";
+                  $valores="etiquetasnombre = lower('$EtiquetaNombre'), idnoticia = '$idNot', estado = 'activo' where idetiquetas = '$EtiquetaID';";
       
                   $valoresQ= substr($valores, 0, -1);
       
@@ -1155,7 +1155,7 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
       
                 $EtiquetaNombre=(( $itemNombre !== false) ? $itemNombre : ", &nbsp;");
                
-                 $valores="('$EtiquetaNombre',$idNot,'activo'),";
+                 $valores="(lower('$EtiquetaNombre'),$idNot,'activo'),";
       
                 $valoresQ= substr($valores, 0, -1);
       
@@ -1188,7 +1188,7 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
       
               $itemidUrl = next( $idurl ); 
               $itemNombreUrl = next( $url ); 
-              // Check terminator
+              // Check terminator, deberia probar poniendo el nombre o id en vacio, parece que el id nunca queda falso
               if($itemidUrl === false && $itemNombreUrl === false) break;
       
             }
@@ -1315,7 +1315,7 @@ public function agregarNoticias
                      $EtiquetaNombre=(( $itemNombre !== false) ? $itemNombre : ", &nbsp;");
                      $EtiquetaEstado=(( $itemEstado !== false) ? $itemEstado : ", &nbsp;");
                     
-                      $valores="('$EtiquetaNombre',$IDNotEti,'$EtiquetaEstado'),";
+                      $valores="(lower('$EtiquetaNombre'),$IDNotEti,'$EtiquetaEstado'),";
          
                      $valoresQ= substr($valores, 0, -1);
          

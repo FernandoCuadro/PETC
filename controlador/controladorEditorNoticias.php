@@ -506,7 +506,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								  $nom_archivo = $_FILES['miniatura']['name'];
 								  $tipo_archivo = $_FILES['miniatura']['type'];
-						
+								 // $jpg = '.jpg';
+									// $a = strpos($tipo_archivo, $jpg); 
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
 								   move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
 									  $miniaturaNombre = $directorio . '/' . $nom_archivo;

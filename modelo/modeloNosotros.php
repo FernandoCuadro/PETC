@@ -67,7 +67,7 @@
             if (move_uploaded_file($archivo1, $directorio . '/' . $nom_archivo1)){                                             
             }
        }
-    }
+    }   
         $ruta1 = $directorio . '/' . $nom_archivo1;
           $sqlAgregarImagenes = "INSERT into nosotrosimg values (0, '$ruta1');";
           $sqlAgregarImagen = $this->conexion->query($sqlAgregarImagenes);           
@@ -118,8 +118,10 @@
 
     public function agregarIntegrantes($nombreint, $cargoint, $fotoint){
 
-    if(!empty($fotoint)){
 
+    if(empty($fotoint)){
+        $fotoint = "img/imagenpordefecto/integrante.png";
+    }
         $sqlAgregarIntegrantes = "INSERT INTO integrantes values (0, '$nombreint', '$cargoint', '$fotoint')";
                 
         $sqlAgregarIntegrante = $this->conexion->query($sqlAgregarIntegrantes);
@@ -137,27 +139,6 @@
                     window.location='editor-nosotros.php';
                     
                 })</script>";
-    }else{
-            
-        $sqlAgregarIntegrantes = "INSERT INTO integrantes values (0, '$nombreint', '$cargoint', 'img/imagenpordefecto/integrante.png')";
-                
-        $sqlAgregarIntegrante = $this->conexion->query($sqlAgregarIntegrantes);
-       
-        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
-        echo "<script>
-                swal({
-                title:'Integrantes PETC',
-                text:'Se han agregado correctamente',
-                icon:'success'
-                
-                })
-                .then((value) => {
-                    window.location='nosotros.php';
-                    window.location='editor-nosotros.php';
-                    
-                })</script>";
-
-        }
 
 
 
@@ -174,14 +155,14 @@
             }  
             
        foreach($nosotros2 as $Poner){
-        if($Poner['fotoint'] != "img/integrante.png"){
+        if($Poner['fotoint'] != "img/imagenpordefecto/integrante.png"){
         unlink($Poner['fotoint']); 
         }
         //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
        }    
        
     }elseif(empty($imagenint)){
-        $imagenint = "img/integrante.png";
+        $imagenint = "img/imagenpordefecto/integrante.png";
     }
 
         $sqlEditarIntegrantes = "UPDATE integrantes SET nombreint = '$nombreint', cargoint = '$cargoint', fotoint = '$imagenint' WHERE (`idintegrantes` = '$idint');";
@@ -219,7 +200,7 @@
                 }  
                 
            foreach($nosotros2 as $Poner){
-            if($Poner['fotoint'] != "img/integrante.png"){
+            if($Poner['fotoint'] != "img/imagenpordefecto/integrante.png"){
             unlink($Poner['fotoint']); 
             }
             //echo '<script>alert("'.$Poner["fotoint"].'");</script>';

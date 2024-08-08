@@ -17,10 +17,18 @@ if(isset($_POST['agregarimagenes'])){
        title:'Imagenes',
        text:'Seleccione una imagen',
        icon:'error'
-       })</script>";      
+       })</script>";
+       /*      
+  }elseif($_FILES['imagengaleria']['PATHINFO_EXTENSION'] != "jpg"){
+    echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+    echo "<script>
+       swal({
+       title:'Imagenes',
+       text:'No es una imagen',
+       icon:'error'
+       })</script>";
+       */
   }else{
-
-   
  
     $agregarImg = $imagen->agregarImagen();
   }

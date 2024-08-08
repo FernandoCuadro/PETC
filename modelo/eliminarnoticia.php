@@ -37,8 +37,19 @@ if(!empty($_GET)){
 
 		$sqlBorrar = "DELETE FROM noticias WHERE (`id_not` = '$idBorrar');";
 		$borrar =  $conexion->query($sqlBorrar);
-	//	$sqlBorrarNoticia = $cosa1->conexion($conexion->query($sqlBorrar));
-   
+	//	Al borrar la noticia borra las etiquetas en caso de tener
+         $sqlverEti = "SELECT idnoticia FROM etiquetas WHERE `idnoticia` = '$idBorrar';";
+         $sqlerrorEti = $conexion->query($sqlverEti);
+         $contarEti = mysqli_num_rows($sqlerrorEti);  
+         
+    //	Al borrar la noticia borra los enlaces en caso de tener
+        $sqlverEnl = "SELECT idNoticias FROM enlaces WHERE `idNoticias` = '$idBorrar';";
+        $sqlerrorEnl = $conexion->query($sqlverEnl);
+        $contarEnl = mysqli_num_rows($sqlerrorEnl);       
+            if($contarEnl >= 1){
+            $sqlBorrarEnl = "DELETE FROM enlaces where (`idNoticias` = '$idBorrar');";
+            $borrarEnl = $conexion->query($sqlBorrarEnl);
+            }
 
 		if($borrar!=null){
 

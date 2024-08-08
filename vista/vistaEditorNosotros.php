@@ -329,7 +329,7 @@
 								
 							<h3 id="imagenEditarIntegrante">Foto de perfil <span>(edición)</span><i class="fa-solid fa-triangle-exclamation advertencia" title="Campo vacío"></i></h3>
 
-							<input type="file" name="fotointedit">
+							<input type="file" name="fotointedit" accept="image/png,image/jpeg">
 
 							<div class="contenedor-informacion-editarImagen">
 								<p class="textoInfo">Ninguna imagen fue cargada</p>

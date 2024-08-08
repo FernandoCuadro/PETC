@@ -41,7 +41,7 @@ if(!empty($_GET)){
                 }  
                 
            foreach($nosotros2 as $Poner){
-            if($Poner['fotoint'] != "img/integrante.png"){
+            if($Poner['fotoint'] != "img/imagenpordefecto/integrante.png"){
             unlink('../'.$Poner['fotoint']); 
             }
             //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
