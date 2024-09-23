@@ -35,6 +35,26 @@ if(!empty($_GET)){
         
         if($contarint == 1){
 
+            $sqlurl = "SELECT min_not, img_not, img_not2,img_not3,img_not4,img_not5 FROM noticias where id_not = '$idBorrar';";
+            $sqlimagen = $conexion->query($sqlurl);
+            while($filas=$sqlimagen->fetch_assoc()){
+                $imagen[]=$filas;
+                }  
+
+            foreach($imagen as $Poner){
+                if($Poner['min_not'] != "img/miniatura/pti.jpg"){
+                    if($Poner['min_not'] !="") {unlink('../'.$Poner['min_not']);}
+            } 
+               if($Poner['img_not'] !="") {unlink('../'.$Poner['img_not']);} 
+               if($Poner['img_not2'] !="") {unlink('../'.$Poner['img_not2']);} 
+               if($Poner['img_not3'] !="") {unlink('../'.$Poner['img_not3']);} 
+               if($Poner['img_not4'] !="") {unlink('../'.$Poner['img_not4']);} 
+               if($Poner['img_not5'] !="") {unlink('../'.$Poner['img_not5']);} 
+                 
+                
+                //echo '<script>alert("'.$Poner["fotoint"].'");</script>';
+               }  
+
 		$sqlBorrar = "DELETE FROM noticias WHERE (`id_not` = '$idBorrar');";
 		$borrar =  $conexion->query($sqlBorrar);
 	//	Al borrar la noticia borra las etiquetas en caso de tener

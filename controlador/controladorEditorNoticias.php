@@ -193,6 +193,7 @@
 							  }
 							}
 						
+						
 						if($_FILES['archivo1']['name'] == ""){
 							$imagen1Nombre = '';
 						}else{
@@ -492,9 +493,9 @@ if(isset($_POST['agregarNoticias'])){
 									})
 								   </script>";		
 						}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
-							if($_FILES['miniatura']['name'] == ""){
+							if($_FILES['miniatura']['name'] === ""){
 							
-									$miniaturaNombre = 'img/pti.jpg';
+									$miniaturaNombre = 'img/miniatura/pti.jpg';
 									
 							}else{
 
@@ -511,6 +512,8 @@ if(isset($_POST['agregarNoticias'])){
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
 								   move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
 									  $miniaturaNombre = $directorio . '/' . $nom_archivo;
+
+									
 								  }else{
 									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
 									echo "<script>
