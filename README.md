@@ -21,9 +21,13 @@ El sitio web cuenta con diferentes caracteristicas que fueron planteadas con el 
   - Contacto: Se podra contactar con la institucion por cualquier consulta.
   - Admin: Para los administradores hay una pagina aparte donde se podran modificar las distintas caracteristicas, asi como tambien
            crear usuarios  administradores o moderadores. Cuenta tambien con una auditoria para ver las acciones de los usuarios del sistema.
-  - Moderador: Capaz de crear y modificar noticias, cursos, fechas importantes pero no podra borrar dichas caracteristicas.
+  - Moderador: Capaz de crear y modificar noticias, cursos, eventos pero no podra borrar dichas caracteristicas.
 
 ## Tecnologias utilizadas
 Al ser un proyecto realizado con los conocimientos justos se utilizo tecnologias como: 
-    - HTML:
-    - Javascript:
+
+  - HTML: Esqueleto del sitio.
+  - CSS: Diseño del sitio.
+  - Javascript: Utilizado para el frontend validacion de formulario, agregacion de etiquetas, eventos de calendario
+  - PHP: Utilizado para el Backend se utilizo el patron de diseño MVC ya que brinda una mayor prolijidad del sitio, 
+          tambien por el poco conocimiento del lenguaje y de frameworks. 
