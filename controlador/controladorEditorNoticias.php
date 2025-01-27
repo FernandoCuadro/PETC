@@ -167,7 +167,6 @@
 								   </script>";				
 						}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
 						
-						
 
 							$directorio = 'img';
 	  
@@ -175,7 +174,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['miniatura']['name'];
+							  $nom_archivoReal = basename($_FILES['miniatura']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['miniatura']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -193,6 +193,7 @@
 							  }
 							}
 						
+						
 						if($_FILES['archivo1']['name'] == ""){
 							$imagen1Nombre = '';
 						}else{
@@ -202,7 +203,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['archivo1']['name'];
+							  $nom_archivoReal = basename($_FILES['archivo1']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['archivo1']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -229,7 +231,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['archivo2']['name'];
+							  $nom_archivoReal = basename($_FILES['archivo2']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['archivo2']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -256,7 +259,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['archivo3']['name'];
+							  $nom_archivoReal = basename($_FILES['archivo3']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['archivo3']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -284,7 +288,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['archivo4']['name'];
+							  $nom_archivoReal = basename($_FILES['archivo4']['name']);
+								$nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['archivo4']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -311,7 +316,8 @@
 					
 							if(is_dir($directorio) && is_uploaded_file($archivo)){
 					
-							  $nom_archivo = $_FILES['archivo5']['name'];
+							  $nom_archivoReal = basename($_FILES['archivo5']['name']);
+							  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 							  $tipo_archivo = $_FILES['archivo5']['type'];
 					
 							  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -492,9 +498,9 @@ if(isset($_POST['agregarNoticias'])){
 									})
 								   </script>";		
 						}elseif($_POST['estado'] == 'activo' || $_POST['estado'] == 'inactivo'){
-							if($_FILES['miniatura']['name'] == ""){
+							if($_FILES['miniatura']['name'] === ""){
 							
-									$miniaturaNombre = 'img/pti.jpg';
+									$miniaturaNombre = 'img/miniatura/pti.jpg';
 									
 							}else{
 
@@ -504,13 +510,16 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['miniatura']['name'];
+								  $nom_archivoReal = basename($_FILES['miniatura']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['miniatura']['type'];
 								 // $jpg = '.jpg';
 									// $a = strpos($tipo_archivo, $jpg); 
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
 								   move_uploaded_file($archivo, $directorio . '/' . $nom_archivo);
 									  $miniaturaNombre = $directorio . '/' . $nom_archivo;
+
+									
 								  }else{
 									echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
 									echo "<script>
@@ -532,7 +541,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['archivo1']['name'];
+								  $nom_archivoReal = basename($_FILES['archivo1']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['archivo1']['type'];
 						
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -559,7 +569,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['archivo2']['name'];
+								  $nom_archivoReal = basename($_FILES['archivo2']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['archivo2']['type'];
 						
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -586,7 +597,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['archivo3']['name'];
+								  $nom_archivoReal = basename($_FILES['archivo3']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['archivo3']['type'];
 						
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -614,7 +626,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['archivo4']['name'];
+								  $nom_archivoReal = basename($_FILES['archivo4']['name']);								  
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['archivo4']['type'];
 						
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){
@@ -641,7 +654,8 @@ if(isset($_POST['agregarNoticias'])){
 						
 								if(is_dir($directorio) && is_uploaded_file($archivo)){
 						
-								  $nom_archivo = $_FILES['archivo5']['name'];
+								  $nom_archivo = basename($_FILES['archivo5']['name']);
+								  $nom_archivo = uniqid() ."_".$nom_archivoReal;
 								  $tipo_archivo = $_FILES['archivo5']['type'];
 						
 								  if (((strpos($tipo_archivo, "gif") || strpos($tipo_archivo, "jpeg") || strpos($tipo_archivo, "jpg") || strpos($tipo_archivo, "png") || strpos($tipo_archivo, "webp")))){

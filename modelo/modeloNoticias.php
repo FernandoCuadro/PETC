@@ -1092,67 +1092,109 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
   
 
             if(!empty($miniatura)){
+              $miniatura = ', min_not="'.$miniatura.'"';
+            }else{
+              $miniatura= '';
+            }
+            if(!empty($imagen1)){
+              $imagen1 = ', img_not="'.$imagen1.'"';
+            }else{
+              $imagen1= '';
+            }
+            if(!empty($imagen2)){
+              $imagen2 = ', img_not2="'.$imagen2.'"';
+            }else{
+              $imagen2= '';
+            }
+            if(!empty($imagen3)){
+              $imagen3 = ', img_not3="'.$imagen3.'"';
+            }else{
+              $imagen3= '';
+            }
+            if(!empty($imagen4)){
+              $imagen4 = ', img_not4="'.$imagen4.'"';
+            }else{
+              $imagen4= '';
+            }
+            if(!empty($imagen5)){
+              $imagen5 = ', img_not5="'.$imagen5.'"';
+            }else{
+              $imagen5= '';
+            }
+
+            /*BORRAR IMAGEN ANTERIOR EN CASO DE HABER IMAGEN*/
+            $sqlurl = "SELECT min_not, img_not, img_not2,img_not3,img_not4,img_not5 FROM noticias where id_not = '$idNot';";
+            $sqlimagen = $this->conexion->query($sqlurl);
+            while($filas=$sqlimagen->fetch_assoc()){
+                $imagenborrar[]=$filas;
+                }  
+
+
+            foreach($imagenborrar as $Poner){
+                  if($Poner['min_not'] != "img/miniatura/pti.jpg"){
+                      if($Poner['min_not'] !="") {unlink($Poner['min_not']);}
+            }
+               if($Poner['img_not'] !="") {unlink('../'.$Poner['img_not']);} 
+               if($Poner['img_not2'] !="") {unlink('../'.$Poner['img_not2']);} 
+               if($Poner['img_not3'] !="") {unlink('../'.$Poner['img_not3']);} 
+               if($Poner['img_not4'] !="") {unlink('../'.$Poner['img_not4']);} 
+               if($Poner['img_not5'] !="") {unlink('../'.$Poner['img_not5']);} 
+            }
+            /*-----------------------------------------------------------------*/
+
+
             //Se define la consulta a ejecutar
                 /*Se inserta la información antes especificada*/
             $sqlActualizarNoticia = "UPDATE noticias set fecha_not = '$Fecha', titulo_not = '$Titulo', descripcion_not = '$Descripcion',
             contenido_not = '$Contenido1', contenido_not2 = '$Contenido2', contenido_not3 = '$Contenido3', contenido_not4 = '$Contenido4', 
-            contenido_not5 = '$Contenido5', min_not = '$miniatura', img_not = '$imagen1', img_not2 = '$imagen2', 
-            img_not3 = '$imagen3', img_not4 = '$imagen4', img_not5 = '$imagen5', estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
+            contenido_not5 = '$Contenido5' $miniatura $imagen1 $imagen2 $imagen3 $imagen4 $imagen5, estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
 
             /*Se envia la consulta a la base de datos agrega el nuevo articulo*/
             $sqlActualizarNoticias = $this->conexion->query($sqlActualizarNoticia);
 
-            }else{
-                //Se define la consulta a ejecutar
-                /*Se inserta la información antes especificada*/
-                $sqlActualizarNoticia = "UPDATE noticias set fecha_not = '$Fecha', titulo_not = '$Titulo', descripcion_not = '$Descripcion',
-                contenido_not = '$Contenido1', contenido_not2 = '$Contenido2', contenido_not3 = '$Contenido3', contenido_not4 = '$Contenido4', 
-                contenido_not5 = '$Contenido5', img_not = '$imagen1', img_not2 = '$imagen2', 
-                img_not3 = '$imagen3', img_not4 = '$imagen4', img_not5 = '$imagen5', estado = '$Estado', id_area = '$Area' where id_not = '$idNot'";
-    
-                /*Se envia la consulta a la base de datos agrega el nuevo articulo*/
-                $sqlActualizarNoticias = $this->conexion->query($sqlActualizarNoticia);
-    
-            } 
+           
             //Redirecciona al usuario a la página de noticias
             if($sqlActualizarNoticias){
 
              
               if($idEtiqueta != "" and $nombreEtiqueta != ""){
-      
-                while(true){
-      
-                  $itemID = current($idEtiqueta);
+                
+                $itemID = current($idEtiqueta);
                   $itemNombre = current($nombreEtiqueta);
+                while($itemNombre !== false && $itemID !== false){
       
+                  
                   $EtiquetaID=(( $itemID !== false) ? $itemID : ", &nbsp;");
                   $EtiquetaNombre=(( $itemNombre !== false) ? $itemNombre : ", &nbsp;");
       
-                  $valores="etiquetasnombre = lower('$EtiquetaNombre'), idnoticia = '$idNot', estado = 'activo' where idetiquetas = '$EtiquetaID';";
+                  $valores="etiquetasnombre = lower('$EtiquetaNombre') where idetiquetas = '$EtiquetaID';";
       
                   $valoresQ= substr($valores, 0, -1);
       
                 $sqlActualizarEtiqueta = "UPDATE etiquetas set $valoresQ";
       
                 $sqlActualizarEtiquetas = $this->conexion->query($sqlActualizarEtiqueta);
+                  
       
                 $itemID = next( $idEtiqueta );
                 $itemNombre = next( $nombreEtiqueta );
                 
                 
                 // Check terminator
-                if($itemID === false && $itemNombre === false) break;
                 } 
       
               } 
            
-            if($nombreEtiquetaagr !== ""){
-      
-              while(true){
-      
-                $itemNombre = current($nombreEtiquetaagr);
+            if(!empty($nombreEtiquetaagr)){
+              $nombreEtiquetaagr = array_filter($nombreEtiquetaagr, function ($value) {
+                return !empty($value) && trim($value) !== '';
+            });
+              $itemNombre = current($nombreEtiquetaagr);  
+              
+              
+              while($itemNombre !== false){
+     
                 
-      
                 $EtiquetaNombre=(( $itemNombre !== false) ? $itemNombre : ", &nbsp;");
                
                  $valores="(lower('$EtiquetaNombre'),$idNot,'activo'),";
@@ -1166,7 +1208,8 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
               $itemNombre = next( $nombreEtiquetaagr );
              
               
-              
+             
+              // Al poner el primer elemento del array afuera no se va a generar infinitamente
               // Check terminator
               if($itemNombre === false) break;
               } 
@@ -1174,31 +1217,35 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
             } 
 
             if($idurl != "" and $url != ""){
-              while(true){
-      
+
               $itemidUrl = current($idurl);
               $itemNombreUrl = current($url);
+              while($itemNombitemreUrl !== false){
               $EnlaceId=(( $itemidUrl !== false) ? $itemidUrl : ", &nbsp;");
               $EnlaceNombre=(( $itemNombreUrl !== false) ? $itemNombreUrl : ", &nbsp;");
-              $valoresEnl="nombreEnlace = '$EnlaceNombre', idNoticias = '$idNot' where idenlaces = '$EnlaceId';";
+              $valoresEnl="nombreEnlace = '$EnlaceNombre' where idenlaces = '$EnlaceId';";
               $valoresQE= substr($valoresEnl, 0, -1);
       
               $sqlActualizarEnlace = "UPDATE enlaces set $valoresQE";
               $sqlActualizarEnlaces = $this->conexion->query($sqlActualizarEnlace);
-      
+      break;
               $itemidUrl = next( $idurl ); 
               $itemNombreUrl = next( $url ); 
+              
               // Check terminator, deberia probar poniendo el nombre o id en vacio, parece que el id nunca queda falso
-              if($itemidUrl === false && $itemNombreUrl === false) break;
+              if($itemNombreUrl === false) break;
       
             }
             
       
           }
 
-          if($urlagr !== ""){
-            while(true){
+          if(!empty($urlagr)){
+            $urlagr = array_filter($urlagr, function ($value) {
+              return !empty($value) && trim($value) !== '';
+          });
             $itemNombreUrl = current($urlagr);
+            while($itemNombreUrl !== false){
             $EnlaceNombre=(( $itemNombreUrl !== false) ? $itemNombreUrl : ", &nbsp;");
             $valoresEnl="('$EnlaceNombre',$idNot),";
             $valoresQE= substr($valoresEnl, 0, -1);
@@ -1212,9 +1259,12 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
       
           }
         }
+
+       
+
          
          }
-
+/*
            if($sqlActualizarEtiquetas || $sqlAgregarEtiquetas || $sqlActualizarEnlaces || $sqlAgregarEnlaces){
             $borrado = "DELETE FROM etiquetas WHERE etiquetasnombre = '' or etiquetasnombre = ', &nbsp;';";
             $borrados = $this->conexion->query($borrado);
@@ -1222,12 +1272,14 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
             $borradoEnlace = "DELETE FROM enlaces WHERE nombreEnlace = '' or nombreEnlace = ', &nbsp;';";
             $borradosEnlaces = $this->conexion->query($borradoEnlace);
            }
+            */
            $fecha_actual = date("Y-m-d H:i:s");
         $ci = $_SESSION['ci'];
         $nombreusuario = $_SESSION['usuario'];
         $consauditoria = "INSERT INTO auditoria values(0, '$ci', '$nombreusuario', 'Este usuario a editado una noticia: $idNot', '$fecha_actual')";
         $sqlauditoria = $this->conexion->query($consauditoria);     
-           echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
+        
+        echo "<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>";
            echo "<script>
               swal({
               title:'Noticias',
