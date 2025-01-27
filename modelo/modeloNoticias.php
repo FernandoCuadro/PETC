@@ -1228,7 +1228,7 @@ public function editarNoticias($idNot, $Fecha, $Titulo, $Descripcion, $Contenido
       
               $sqlActualizarEnlace = "UPDATE enlaces set $valoresQE";
               $sqlActualizarEnlaces = $this->conexion->query($sqlActualizarEnlace);
-      break;
+     
               $itemidUrl = next( $idurl ); 
               $itemNombreUrl = next( $url ); 
               
@@ -1386,13 +1386,13 @@ public function agregarNoticias
                  } 
               
               }
-              if($sqlActualizarEtiquetas || $sqlAgregarEnlaces){
+           /*   if($sqlActualizarEtiquetas || $sqlAgregarEnlaces){
                $borrado = "DELETE FROM etiquetas WHERE etiquetasnombre = '';";
                $borrados = $this->conexion->query($borrado);
 
                $borradoEnlace = "DELETE FROM enlaces WHERE nombreEnlace = '' or nombreEnlace = ', &nbsp;';";
                $borradosEnlaces = $this->conexion->query($borradoEnlace);
-              }  
+              }  */
               $fecha_actual = date("Y-m-d H:i:s");
         $ci = $_SESSION['ci'];
         $nombreusuario = $_SESSION['usuario'];
